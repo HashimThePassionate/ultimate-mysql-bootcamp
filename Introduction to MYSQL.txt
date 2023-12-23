@@ -1,0 +1,124 @@
+---------------How to Select Database-------------
+USE <Dbname> || use <Dbname>
+USE mydb || use mydb
+
+
+---------------How to Select all Table fields in Database using "*" -------------
+1.First Select Database
+2.Select table
+3.Also use semicolon ; at the end of each statement
+USE mydb;
+SELECT * FROM customer;
+
+
+---------------How to Select and filter a specific row using WHERE Clause-------------
+USE mydb;
+SELECT * 
+FROM customer
+WHERE customer_id = 5;
+
+
+---------------How to Select Table and sort using First_name with ORDER BY Clause-------------
+USE mydb;
+SELECT * 
+FROM customer
+-- WHERE customer_id = 5  "--" Double Hyphen is used to comment something
+ORDER BY first_name;
+
+
+---------------How to Select a specific fields with field name-------------
+SELECT first_name, last_name , points FROM customer;
+
+
+---------------How to Select a specific fields with field name and calculate something in run time-------------
+SELECT first_name, last_name , points, points+10 FROM customer;
+
+
+---------------Select specific field and calculate something but change calculated name in run time with AS Alias-------------
+SELECT first_name, last_name , points, (points+10)*100 AS discount_factor FROM customer;
+
+
+---------------if you want to add Space in Alias name-------------
+SELECT first_name, last_name , points, (points+10)*100 AS 'Discount Factor' FROM customer;
+
+
+---------------How to select only unique and non duplicate value ---------------
+SELECT DISTINCT city FROM customer;
+-- Make sure if you use SELECT DISTINCT first_name, city FROM customer it means both first_name and city
+must be distinct. It does not mean that only the city column should be distinct.
+
+
+---------------How to filter with WHERE Clause-------------
+SELECT * FROM customer WHERE points>1500; 
+-- filter those records whose points are greater than 1500
+-- Also you should use these operators >,<,>=,<=,!=, <> 
+
+
+---------------How to filter string matched record with WHERE Clause-------------
+SELECT * FROM customer WHERE city = 'karachi'; 
+
+
+---------------How to filter those records which does not contain string 'karachi'-------------
+SELECT * FROM customer WHERE city != 'karachi'; 
+or 
+SELECT * FROM customer WHERE city <> 'karachi';
+
+
+---------------How to filter those records whose birth_date > 2023-08-07-------------
+SELECT * FROM customer WHERE birth_date > '2023-08-07';
+
+
+---------------How to filter those records whose birth_date > 2023-08-07 and Points > 1500------------
+-- We use AND operator it return true if both condition meets true
+SELECT * FROM customer WHERE birth_date > '2023-08-07' AND points > 1500;
+
+
+---------------How to filter those records whose birth_date > 2023-08-07 OR Points > 1500------------
+-- We use OR operator it return true if at least one  condition meets true
+SELECT * FROM customer WHERE birth_date > '2023-08-07' OR points > 1500;
+
+
+---------------How to filter those records whose birth_date > 2023-08-07 is NOT Greater than ------------
+-- We use NOT operator to reverse
+SELECT * FROM customer WHERE NOT(birth_date > '2023-08-07' OR points > 1500);
+
+
+---------------How to filter those records whose birth_date > 2023-08-07 OR Points > 1500 AND city ="kohat"------------
+-- We use OR and AND both to add multiple conditions
+SELECT * FROM customer WHERE birth_date > '2023-08-07' OR (points > 1500 AND city = 'kohat');
+
+
+---------------How to select those result whose city is kohat or karachi------------
+-- We use IN operator, we can also use OR operator but IN operator is shorter and it works like OR operator 
+SELECT * FROM customer WHERE city IN ('karachi','kohat');
+
+
+---------------How to select those result whose city is not in kohat or karachi------------
+-- We use NOT IN operator
+SELECT * FROM customer WHERE city NOT IN ('karachi','kohat');
+
+
+---------------How to select those points >= 1000 and <= 1500------------
+-- We use BETWEEN operator, note we can also use >=  <= operators but BETWEEN is shorter
+SELECT * FROM customer WHERE points BETWEEN 1000 AND 1500;
+
+
+---------------How to select those rows that matched with specific string pattern using LIKE operator------------
+-- we use WHERE last_name LIKE 's%' it means last_name must be start with s but after s it contain any letters.
+SELECT * FROM customer WHERE last_name LIKE 's%';
+SELECT * FROM customer WHERE last_name LIKE 'summer%'; //start with summer ends with any letter
+
+
+-----------change the pattern in LIKE operator-----------
+SELECT * FROM customer WHERE last_name LIKE '%s';// start with any  letter but ends with s
+SELECT * FROM customer WHERE last_name LIKE '%s%';// start with any  letter and ends with any letter 
+but s contain in middle may be not if any letter does not contain s in the end
+
+
+-----------Use underscore to define how many letters end with that pattern-----------
+SELECT * FROM customer WHERE last_name LIKE '_______s'
+
+
+-----------we can also specify first and last letter and Between letters range with "__"  underscore-----------
+SELECT * FROM customer WHERE last_name LIKE 'v______s'
+
