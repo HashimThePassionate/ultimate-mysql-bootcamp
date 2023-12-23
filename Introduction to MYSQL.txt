@@ -111,8 +111,8 @@ SELECT * FROM customer WHERE last_name LIKE 'summer%'; //start with summer ends 
 
 -----------change the pattern in LIKE operator-----------
 SELECT * FROM customer WHERE last_name LIKE '%s';// start with any  letter but ends with s
-SELECT * FROM customer WHERE last_name LIKE '%s%';// start with any  letter and ends with any letter 
-but s contain in middle may be not if any letter does not contain s in the end
+SELECT * FROM customer WHERE last_name LIKE '%s%';// start with any  letter and ends with any letter but s letter can be any
+where
 
 
 -----------Use underscore to define how many letters end with that pattern-----------
@@ -122,3 +122,35 @@ SELECT * FROM customer WHERE last_name LIKE '_______s'
 -----------we can also specify first and last letter and Between letters range with "__"  underscore-----------
 SELECT * FROM customer WHERE last_name LIKE 'v______s'
 
+
+-----------use  REGEXP to use complex string pattern-----------
+-- Look we use like operator
+SELECT * FROM customer WHERE first_name LIKE '%hr%'
+--we can also use REGEXP for more complex string patterns
+SELECT * FROM customer WHERE first_name REGEXP 'hr'
+
+-----------first_name must start with hr-----------
+SELECT * FROM customer WHERE first_name REGEXP '^ch'
+
+
+-----------first_name must end with t-----------
+SELECT * FROM customer WHERE first_name REGEXP 't$'
+
+
+-----------we can also use pipe operator | in REGEXP-----------
+SELECT * FROM customer WHERE first_name REGEXP '^ch|t$'
+--it means first_name must start with ch 
+--Or first_name must end with t
+
+
+-----------we can also specify []-----------
+SELECT * FROM customer WHERE first_name REGEXP '[agc]t'
+-- first_name will be at, gt, ct anywhere
+
+-----------we can change pattern-----------
+SELECT * FROM customer WHERE first_name REGEXP 't[agc]'
+-- first_name will be ta, tg, tc anywhere
+
+-----------we can also specify range [a-h]-----------
+SELECT * FROM customer WHERE first_name REGEXP '[a-h]t'
+-- first_name will be at,bt,ct,dt,et,ft, gt, ht anywhere
