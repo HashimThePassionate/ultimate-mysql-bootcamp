@@ -221,3 +221,59 @@ INNER JOIN inventory.products p
 ON
 oi.product_id = p.product_id;
 
+---------How to Select Self join table itself -----------
+-- Suppose we have employe table we want to check who is manager in our complany
+-- But the best thing is manager is itself an employe of this complany
+SELECT *
+FROM employees m
+JOIN employees e
+ON
+ e.reports_to = m.employee_id;
+
+
+---------How to Select Self join table itself -----------
+-- only want to check the manager
+SELECT 
+e.employee_id,
+e.first_name,
+m.first_name as Manager
+FROM employees m
+JOIN employees e
+ON
+ e.reports_to = m.employee_id;
+
+
+---------How to JOIN multiple tables -----------
+-- We have three tables orders, order_status and customer we want to join
+SELECT *
+FROM orders o
+JOIN customer c
+ON
+o.customer_id = c.customer_id
+JOIN order_status os
+ON os.status_is = o.status;
+
+---------Lets Extract Beautifully-----------
+SELECT 
+o.order_id,
+o.order_date,
+c.first_name,
+c.last_name,
+os.name AS Status
+FROM orders o
+JOIN customer c
+ON
+o.customer_id = c.customer_id
+JOIN order_status os
+ON os.status_is = o.status;
+
+---------Compound Join-----------
+-- we can combine two fields to unique identify row
+SELECT * 
+FROM orders_items oi
+JOIN order_notes oin
+ON
+oi.order_id = oin.order_id
+AND
+oi.product_id = oin.product_id;
+
