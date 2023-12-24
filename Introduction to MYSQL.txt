@@ -154,3 +154,70 @@ SELECT * FROM customer WHERE first_name REGEXP 't[agc]'
 -----------we can also specify range [a-h]-----------
 SELECT * FROM customer WHERE first_name REGEXP '[a-h]t'
 -- first_name will be at,bt,ct,dt,et,ft, gt, ht anywhere
+
+-----------How to select those records whone phone no is NULL using "IS NULL" operator -----------
+SELECT * FROM customer WHERE phone IS NULL;
+
+-----------How to select and sort data by column name ----------
+-- by default every column is sorted according  to primary key column
+SELECT * FROM customer ORDER by first_name;
+
+----------We can also sort by multiple columns-----------
+SELECT * FROM customer ORDER by first_name, last_name;
+
+
+----------We can also sort by multiple columns in Descending order-----------
+SELECT * FROM customer ORDER by first_name DESC, last_name ASC;
+
+
+----------How  to Select first 10 records using "LIMIT" Clause-----------
+SELECT * FROM customer LIMIT 10;
+
+
+----------How to skip  first 10 records using "LIMIT" Clause and select 3 records before 10 records----------
+--we define offset 10 , 3
+SELECT * FROM customer LIMIT 10 , 3;
+
+----------How to select one table with relationship to another table using "INNER JOIN"----------
+-- lets we have orders table in orders table we have customer_id which is a foriegn key to customer table
+--  In Orders table we have  orders_id, customer_id, status, comments
+-- In Customer table we have customer_id, first_name, last_name, birth_date, phone, address, city and state
+-- We want to inner join with orders table and customer table
+SELECT * FROM orders INNER JOIN customerON orders.customer_id  = customer.customer_id;
+
+
+---------How to find only select first_name, city and phone from customer table -----------
+SELECT order_id, orders.customer_id first_name, phone, city 
+FROM orders 
+INNER JOIN customer
+ON 
+orders.customer_id  = customer.customer_id;
+
+
+---------We can also use alias in inner join -----------
+SELECT order_id, o.customer_id first_name, phone, city 
+FROM orders o
+INNER JOIN customer c
+ON 
+o.customer_id  = c.customer_id;
+
+
+---------We to join tables across Databases -----------
+-- suppose we have a Database name inventory
+-- In the inventory db we have products table
+-- this product table is associated with orders_items 
+-- we can easily join using db.table name
+select * 
+FROM orders_items oi
+INNER JOIN inventory.products p
+ON
+oi.product_id = p.product_id;
+
+
+---------How to select only selected name, quantity from products table -----------
+select oi.product_id, unit_price, name
+FROM orders_items oi
+INNER JOIN inventory.products p
+ON
+oi.product_id = p.product_id;
+
