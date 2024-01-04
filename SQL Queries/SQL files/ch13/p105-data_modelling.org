@@ -1,0 +1,22 @@
+#+Startup: indent content
+#+title: Data Modelling
+
+* Data Modelling
+** Understand the requirements
+** Build a Conceptual Model
+Represents the entities and their relationships.
+- Entity Relationship (ER)
+  - Microsoft Visio
+  - draw.io
+  - LucidCharts
+- Unified Modelling languages (UML)
+
+** Build a Logical Model
+- Attribute data type
+- Relationship
+- How to store data
+
+** Build a Physical Model
+- Attribute data type in specified database
+- Primary and foreign key
+- Foreign key constraints

@@ -186,6 +186,11 @@ SELECT * FROM customer LIMIT 10 , 3;
 SELECT * FROM orders INNER JOIN customerON orders.customer_id  = customer.customer_id;
 
 
+----------We can also achieve "INNER JOIN" with implicit Syntax---------
+SELECT * FROM orders o, customers c WHERE o.customer_id  = c.customer_id;
+
+
+
 ---------How to find only select first_name, city and phone from customer table -----------
 SELECT order_id, orders.customer_id first_name, phone, city 
 FROM orders 
@@ -277,3 +282,392 @@ oi.order_id = oin.order_id
 AND
 oi.product_id = oin.product_id;
 
+---------leFT Join-----------
+--Left outer join select those records which are not
+--like in our example we also select those customers who don't have any order as well as who do
+SELECT 
+c.customer_id, 
+c.first_name, 
+o.order_id 
+FROM customer c 
+LEFT JOIN orders o 
+ON c.customer_id = o.customer_id 
+ORDER BY c.customer_id 
+
+
+---------Right Join-----------
+--Right outer join select those records which satisfy the condition
+--like in our example we only select those customers who have orders
+SELECT 
+c.customer_id, 
+c.first_name, 
+o.order_id 
+FROM customer c 
+LEFT JOIN orders o 
+ON c.customer_id = o.customer_id 
+ORDER BY c.customer_id 
+
+
+---------USING Clause-----------
+-- USING Clause can replace JOIN complex steps
+-- But it can only work when both table have same column name
+SELECT 
+o.order_id,
+c.first_name
+FROM orders o 
+JOIN customer c
+-- ON o.customer_id = c.first_name
+USING (customer_id);
+
+
+
+---------Cross JOIN-----------
+-- combine every record from first table to second table
+-- WE combine every record from customer table to products table
+SELECT 
+c.first_name AS customer,
+p.name AS product 
+FROM customer c
+CROSS JOIN inventory.products p 
+ORDER BY c.first_name;
+
+
+---------Combine tables rows with UNION-----------
+SELECT 
+order_id,
+order_date,
+'Active' AS status
+FROM orders
+WHERE order_date >= '2023-11-09'
+UNION
+SELECT 
+order_id,
+order_date,
+'Archived' AS status
+FROM orders
+WHERE order_date < '2023-11-09'
+
+
+---------INSERT RECORDS-----------
+INSERT INTO customer (
+    customer_id,
+    first_name,
+    last_name,
+    birth_date,
+    phone,
+    address,
+    city,
+    state,
+    points
+) VALUES (
+    52,
+    'Ahmed',
+    'Raheem',
+    NULL,
+    NULL,
+    'Azad Chaiwala Institute',
+    'Rawalpindi',
+    'Punjab',
+    DEFAULT
+);
+
+
+---------INSERT Multiple RECORDS-----------
+INSERT INTO customer (
+    customer_id,
+    first_name,
+    last_name,
+    birth_date,
+    phone,
+    address,
+    city,
+    state,
+    points
+) VALUES (
+    53,
+    'Ishaque',
+    'Chaiwala',
+    NULL,
+    NULL,
+    'Azad Chaiwala Institute',
+    'Rawalpindi',
+    'Sindh',
+    DEFAULT
+),
+(
+    54,
+    'Muhammad',
+    'Mowahid',
+    NULL,
+    NULL,
+    'Azad Chaiwala Institute',
+    'Rawalpindi',
+    'Punjab',
+    DEFAULT
+);
+
+
+---------INSERT Hierarchical RECORDS-----------
+INSERT INTO customer(customer_id,first_name,last_name,birth_date)
+VALUES (DEFAULT,'IGI','ORIGIN','2023-12-25');
+
+INSERT INTO orders(order_id,order_date, status,c_id)
+VALUES(DEFAULT,'2023-12-25',1,LAST_INSERT_ID());
+
+INSERT INTO
+orders_items(order_items_id,order_id,product_id,unit_price,quantity)
+VALUES (DEFAULT,LAST_INSERT_ID(),9,35,3);
+
+
+---------Creating Copy of a Table-----------
+CREATE TABLE orders_archived  AS
+SELECT * FROM orders;
+
+
+
+---------Insert only data from one table to another-----------
+INSERT INTO orders_archived
+SELECT * from orders WHERE order_date > '2023-12-01';
+
+
+---------Updating Single Record-----------
+UPDATE customer 
+SET first_name="Muhammad", last_name="Hashim", birth_date="2023-12-30"
+WHERE customer_id = 1;
+
+---------Update multiple Records-----------
+UPDATE orders_items
+SET unit_price=50.57, quantity = 5
+WHERE order_id = 1;
+
+
+
+---------Using subqueries in Update-----------
+UPDATE orders
+SET comments = "Gold Customer"
+WHERE c_id IN
+                (SELECT customer_id
+                 FROM customer
+                 WHERE points > 1800);
+
+
+
+---------Using subqueries in Delete-----------
+DELETE FROM orders
+WHERE c_id = (
+			SELECT customer_id
+			FROM customer 
+			WHERE first_name = "Delano"
+			 );
+
+
+
+---------Aggregate Functions-----------
+SELECT 
+MAX(salary) AS Highest,
+MIN(salary) AS lowest,
+AVG(salary) AS average,
+SUM(salary) AS total,
+COUNT(salary) AS number_of_records
+FROM employees;
+
+
+---------The GROUP By Clause in Aggregate Functions-----------
+SELECT 
+client_id,
+SUM(invoice_total) as total_sales
+FROM invoices
+GROUP BY client_id
+ORDER BY total_sales DESC;
+
+
+---------The GROUP By Clause with WHERE Clause in Aggregate Functions-----------
+SELECT 
+client_id,
+SUM(invoice_total) as total_sales
+FROM invoices
+WHERE invoice_date >= '2019-07-01'
+GROUP BY client_id
+ORDER BY total_sales DESC;
+
+---------The GROUP By Clause with inner JOIN in Aggregate Functions-----------
+SELECT 
+name,
+state,
+city,
+SUM(invoice_total) as total_sales
+FROM invoices i
+JOIN clients c USING(client_id)
+GROUP BY state, city;
+
+
+---------The GROUP By Clause with inner JOIN in Aggregate Functions-----------
+SELECT date,
+pm.name,
+SUM(amount) AS total_amounts
+FROM payments p
+JOIN payment_methods pm
+ON p.payment_method = pm.payment_method_id
+GROUP BY date
+ORDER BY date DESC;
+
+---------Having Clause with Aggregate Functions-----------
+SELECT 
+client_id,
+COUNT(*) AS number_of_invoices,
+SUM(invoice_total) as total_sales
+FROM invoices
+GROUP BY client_id
+HAVING total_sales > 500;
+
+
+
+---------Having Clause with Aggregate Functions-----------
+SELECT 
+client_id,
+COUNT(*) AS number_of_invoices,
+SUM(invoice_total) as total_sales
+FROM invoices
+GROUP BY client_id
+HAVING total_sales > 500 AND number_of_invoices > 5;
+
+
+
+---------Aggregate functions WITH ROLLUP-----------
+SELECT 
+client_id,
+SUM(invoice_total) as total_sales
+FROM invoices
+GROUP BY client_id WITH ROLLUP;
+
+---------Aggregate functions WITH ROLLUP and JOIN-----------
+SELECT 
+state,
+city,
+SUM(invoice_total) as total_sales
+FROM invoices i
+JOIN clients c USING(client_id)
+GROUP BY state, city WITH ROLLUP;
+
+
+---------Write more about subqueries-----------
+-- find products that are more
+-- expensive than lettuce (id = 3)
+-- MySQL first execute innersubquery than pass it to out query
+SELECT * 
+FROM products 
+WHERE unit_price > (
+SELECT unit_price
+FROM products
+WHERE product_id = 3
+);
+
+---------Write more about subqueries-----------
+-- In Sql_hr database
+-- find employees who earn more than average 
+SELECT * FROM
+employees WHERE salary > (
+SELECT AVG(salary)
+    FROM employees
+);
+
+---------Write more about subqueries using IN operator-----------
+-- find that product that have never been ordered 
+SELECT * FROM products
+WHERE product_id NOT IN (
+SELECT DISTINCT product_id
+FROM order_items
+);
+
+---------Write more about subqueries using IN operator-----------
+-- find clients without invoices
+SELECT * 
+FROM clients 
+WHERE client_id NOT IN (
+SELECT DISTINCT client_id
+FROM invoices
+);
+
+---------join vs sub query-----------
+----------using subqueries-----------
+-- find customer who have ordered lettuce
+-- select customer_id , first_name, last_name
+SELECT customer_id,
+first_name,
+last_name
+FROM customers 
+WHERE customer_id IN(
+SELECT o.customer_id   
+FROM order_items oi
+JOIN orders o USING (order_id)
+    WHERE product_id = 3
+);
+
+----------using JOIN-----------
+SELECT DISTINCT customer_id,
+first_name,
+last_name
+FROM customers c 
+JOIN orders o USING(customer_id)
+JOIN order_items oi USING(order_id)
+WHERE oi.product_id = 3;
+
+----------without ALL keyword-----------
+-- select invoices larger than all invoices of client 3
+SELECT *
+FROM invoices 
+WHERE invoice_total >(
+SELECT MAX(invoice_total)
+    FROM invoices
+    WHERE client_id = 3 
+);
+
+----------ALL keyword-----------
+SELECT *
+FROM invoices 
+WHERE invoice_total > ALL(
+SELECT invoice_total
+    FROM invoices
+    WHERE client_id = 3 
+);
+
+----------Correlated subqueries-----------
+-- For each employe
+-- calculate the avg salary for employee.office
+-- return the employee if salary > avg
+SELECT * 
+FROM employees e 
+WHERE salary > (
+	SELECT AVG(salary)
+    FROM employees 
+    WHERE office_id = e.office_id
+);
+
+
+----------The EXISTS operator-----------
+-- Select client that have an invoice
+
+-- one method 
+Select *
+FROM clients
+WHERE client_id IN (
+    select DISTINCT client_id
+    FROM invoices
+);
+-- second method 
+SELECT *
+FROM clients
+INNER JOIN (
+    SELECT DISTINCT client_id
+    FROM invoices
+) AS distinct_clients
+ON clients.client_id = distinct_clients.client_id;
+
+-- third method 
+Select *
+FROM clients c
+WHERE EXISTS (
+    select client_id
+    FROM invoices
+    WHERE client_id = c.client_id
+);
