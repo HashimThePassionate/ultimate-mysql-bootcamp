@@ -671,3 +671,273 @@ WHERE EXISTS (
     FROM invoices
     WHERE client_id = c.client_id
 );
+
+----------Date Functions to check dynamically current Year orders-----------
+SELECT *
+FROM orders
+WHERE YEAR(order_date) = YEAR(NOW());
+
+----------FORMAT_DATE Function-----------
+SELECT DATE_FORMAT(order_date,'%D %M %Y')
+FROM orders;
+
+----------ADDING DATE Function-----------
+SELECT DATE_ADD(order_date, INTERVAL 1 YEAR)
+FROM orders;
+
+----------IFNULL Function-----------
+
+SELECT 
+order_id,
+shipper_id
+FROM orders;
+
+SELECT 
+order_id,
+IFNULL(shipper_id,'Not Assigned') AS shipper
+FROM orders;
+
+----------COALESCE Function-----------
+SELECT 
+order_id,
+COALESCE(shipper_id,comments,'Not Assigned') AS shipper
+FROM orders;
+
+SELECT 
+order_id,
+IFNULL(shipper_id,'...') AS shipperID,
+COALESCE(shipper_id,comments,'Not Assigned') AS shipper
+FROM orders;
+
+----------IF Function-----------
+SELECT 
+    order_id,
+    order_date,
+    IF(YEAR(order_date) = YEAR(NOW()), 'Active', 'Archived') AS order_status
+FROM orders;
+
+
+----------CASE  Operator-----------
+SELECT 
+    order_id,
+    CASE
+    WHEN YEAR(order_date) = YEAR(NOW()) THEN 'Active'
+    WHEN YEAR(order_date) = YEAR(NOW()) - 1 THEN 'Last Year'
+    WHEN YEAR(order_date) < YEAR(NOW()) - 1 THEN 'Archived'
+    ELSE 'Future'
+    END AS Category
+FROM orders;
+
+
+----------Practice-----------
+SELECT 
+CONCAT(first_name,' ',last_name) AS Customer,
+points,
+CASE
+	WHEN points > 3000 THEN 'Gold Customer'
+    WHEN points >= 2000 THEN 'Silver Customer'
+	ELSE 'Bronze Customer'
+    END AS category
+FROM customers;
+
+----------Creating View-----------
+CREATE VIEW sales_by_client AS 
+SELECT 
+c.client_id,
+c.name,
+SUM(invoice_total) AS total_sales
+FROM clients c
+JOIN invoices i USING(client_id)
+GROUP BY client_id, name;
+
+----------Drop View-----------
+DROP VIEW invoices_with_balance;
+
+----------Updatable View-----------
+-- DISTINCT
+-- Aggregate functions (MIN , MAX, SUM) etc
+-- GROUP BY / HAVING
+-- UNION
+-- If we dont have these in mention above
+-- than our view is Updatable view
+
+CREATE OR REPLACE VIEW invoices_with_balance AS
+	SELECT 
+	invoice_id,
+	number,
+	client_id,
+	invoice_total,
+	payment_total,
+	invoice_total - payment_total AS balance,
+	invoice_date,
+	payment_date,
+	due_date
+	FROM invoices
+    WHERE (invoice_total-payment_total) > 0;
+
+DELETE FROM invoices_with_balance
+WHERE invoice_id = 1;
+
+-- prevent view as only read-only 
+-- add WITH check OPTION;
+
+CREATE OR REPLACE VIEW invoices_with_balance AS
+	SELECT 
+	invoice_id,
+	number,
+	client_id,
+	invoice_total,
+	payment_total,
+	invoice_total - payment_total AS balance,
+	invoice_date,
+	payment_date,
+	due_date
+	FROM invoices
+    WHERE (invoice_total-payment_total) > 0
+    WITH check OPTION;
+
+
+----------Creating Store Procedure-----------
+DELIMITER $$
+CREATE PROCEDURE get_clients()
+BEGIN
+	SELECT * FROM clients;
+END$$
+DELIMITER ;
+
+----------Select Procedure-----------
+CALL get_clients()
+
+----------Dropping Procedure-----------
+DROP Procedure IF EXISTS get_clients;
+
+----------Parameters in Procedure-----------
+DROP PROCEDURE IF EXISTS get_clients_by_states;
+DELIMITER $$
+CREATE PROCEDURE get_clients_by_states
+	(
+        state CHAR(2)
+    )
+	BEGIN
+    SELECT * FROM clients c
+    WHERE c.state = state;
+	END$$
+DELIMITER ;
+
+
+CALL get_clients_by_states('CA');
+
+
+----------Parameters with defaults values in Procedure-----------
+DELIMITER $$
+CREATE PROCEDURE get_clients_by_default_states
+	(
+        state CHAR(2)
+    )
+	BEGIN
+    IF state IS NULL THEN
+        state = 'CA';
+    END IF;
+    SELECT * FROM clients c
+    WHERE c.state = state;
+	END$$
+DELIMITER ;
+
+
+CALL get_clients_by_default_states(NULL)
+
+
+----------Parameters with IF ELSE  in Procedure-----------
+DELIMITER $$
+CREATE PROCEDURE get_clients_by_default_states
+	(
+        state CHAR(2)
+    )
+	BEGIN
+    IF state IS NULL THEN
+        select * from clients;
+    ELSE
+            SELECT * FROM clients c
+            WHERE c.state = state;
+    END IF;
+	END$$
+DELIMITER ;
+
+
+CALL get_clients_by_default_states(NULL)
+CALL get_clients_by_default_states('CA')
+
+
+----------Practice Procedure-----------
+-- Write a stored procedure call  get_payments
+-- with two Parameters
+-- client_id => id(5)
+-- payment_method_id => TINYINT(1) 0-255
+
+DELIMITER $$
+CREATE PROCEDURE get_payments
+    (
+        client_id INT,
+        payment_method_id TINYINT(1)
+    )
+BEGIN
+    SELECT * 
+    from payments p
+    WHERE 
+    p.client_id = IFNULL(client_id, p.client_id) AND
+    p.payment_method = IFNULL(payment_method_id,p.payment_method);
+END
+DELIMITER ;
+
+
+CALL get_payments(NULL,NULL);
+CALL get_payments(5,NULL);
+CALL get_payments(5,2);
+CALL get_payments(NULL,2);
+
+
+----------Update in  Procedure-----------
+DELIMITER $$
+CREATE PROCEDURE make_payments
+    (
+        invoice_id INT,
+        payment_total DECIMAL(8,2),
+        payment_date DATE
+    )
+BEGIN
+    UPDATE invoices i
+    SET 
+    i.payment_total = payment_total,
+    i.payment_date = payment_date
+    WHERE i.invoice_id = invoice_id;
+END$$
+DELIMITER ;
+
+
+CALL make_payments(2,2223.823,'2023-01-07');
+
+
+----------Update with validation  in  Procedure-----------
+-- Error Code link
+-- https://www.ibm.com/docs/en/db2-for-zos/11?topic=codes-sqlstate-values-common-error
+DELIMITER $$
+CREATE PROCEDURE make_validate_payments
+    (
+        invoice_id INT,
+        payment_total DECIMAL(8,2),
+        payment_date DATE
+    )
+BEGIN
+	IF payment_total <= 0 THEN
+    	SIGNAL SQLSTATE '22003'
+        SET MESSAGE_TEXT = "Invalid Payment Amounts";     
+    END IF;
+    UPDATE invoices i
+    SET 
+    i.payment_total = payment_total,
+    i.payment_date = payment_date
+    WHERE i.invoice_id = invoice_id;
+END$$
+DELIMITER ;
+
+CALL make_validate_payments(2,-2223.823,'2023-01-07');
