@@ -147,8 +147,61 @@ Nested SELECT statements: Used for complex filtering and data retrieval.
 - String manipulation
 - NULL value handling
 
+
+## How its works!
+
+### Database Basics:
+
+- *USE database_name*: Selects a database to work with.
+- *SELECT FROM table_name*: Retrieves all columns and rows from a table.
+- *SELECT specific_columns FROM table_name*: Fetches only specified columns.
+- *WHERE clause*: Filters results based on certain conditions.
+- *ORDER BY clause*: Sorts results in ascending or descending order.
+- *DISTINCT keyword*: Eliminates duplicate rows.
+
+### Joining Tables:
+
+- *INNER JOIN*: Combines rows from two tables based on a shared column.
+- *LEFT JOIN*: Includes all rows from the left table, even if there's no match in the right table.
+- *RIGHT JOIN*: Includes all rows from the right table, even if there's no match in the left table.
+- *UNION*: Combines results from two tables, removing duplicates.
+
+### Inserting, Updating, Deleting Data:
+
+- *INSERT INTO*: Adds new rows to a table.
+- *UPDATE*: Modifies existing rows.
+- *DELETE*: Removes rows.
+
+### Aggregate Functions:
+
+- *SUM, COUNT, AVG, MAX, MIN*: Perform calculations on groups of rows.
+- *GROUP BY clause*: Groups rows together based on shared values.
+- *HAVING clause*: Filters groups based on aggregate function results.
+
+### Subqueries:
+
+Nested SELECT statements: Used for complex filtering and data retrieval.
+### Views:
+
+- *Virtual tables*: Simplify complex queries and hide underlying table structures.
+
+### Stored Procedures:
+
+- Reusable blocks of SQL code stored within the database.
+
+### Additional Topics Covered:
+
+- Date functions
+- Conditional logic (IF, CASE)
+- String manipulation
+- NULL value handling
+
+### How to Select Database
+```sql
+=======
 ### How to Select Database
 ```python
+>>>>>>> master
  USE <Dbname> || use <Dbname>
 USE mydb || use mydb
 ```
@@ -158,13 +211,19 @@ USE mydb || use mydb
 - Select table
 - Also use semicolon ; at the end of each statement
 
+```sql
+=======
 ```python
+>>>>>>> master
 USE mydb;
 SELECT * FROM customer;
 ```
 
 ### How to Select and filter a specific row using WHERE Clause
+```sql
+=======
 ```python
+>>>>>>> master
 USE mydb;
 SELECT * 
 FROM customer
@@ -172,7 +231,10 @@ WHERE customer_id = 5;
 ```
 
 ### How to Select Table and sort using First_name with ORDER BY Clause
+```sql
+=======
 ```python
+>>>>>>> master
 USE mydb;
 SELECT * 
 FROM customer
@@ -181,27 +243,42 @@ ORDER BY first_name;
 
 ```
 ### How to Select a specific fields with field name
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT first_name, last_name , points FROM customer;
 ```
 
 ### How to Select a specific fields with field name and calculate something in run time
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT first_name, last_name , points, points+10 FROM customer;
 
 ```
 ### Select specific field and calculate something but change calculated name in run time with AS Alias
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT first_name, last_name , points, (points+10)*100 AS discount_factor FROM customer;
 ```
 
 ### if you want to add Space in Alias name
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT first_name, last_name , points, (points+10)*100 AS 'Discount Factor' FROM customer;
 ```
 
 ### How to select only unique and non duplicate value 
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT DISTINCT city FROM customer;
 ```
 - Make sure if you use SELECT DISTINCT first_name, city FROM customer it means both first_name and city
@@ -210,97 +287,152 @@ must be distinct.
 
 
 ### How to filter with WHERE Clause
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE points>1500;
 ``` 
 - filter those records whose points are greater than 1500
 - Also you should use these operators >,<,>=,<=,!=, <> 
 
 ### How to filter string matched record with WHERE Clause
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE city = 'karachi'; 
 ```
 
 ### How to filter those records which does not contain string 'karachi'
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE city != 'karachi'; 
 or 
 SELECT * FROM customer WHERE city <> 'karachi';
 ```
 
 ### How to filter those records whose birth_date > 2023-08-07
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE birth_date > '2023-08-07';
 ```
 
 ### How to filter those records whose birth_date > 2023-08-07 and Points > 1500
 - We use AND operator it return true if both condition meets true
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE birth_date > '2023-08-07' AND points > 1500;
 ```
 
 ### How to filter those records whose birth_date > 2023-08-07 OR Points > 1500
 - We use OR operator it return true if at least one  condition meets true
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE birth_date > '2023-08-07' OR points > 1500;
 ```
 
 ### How to filter those records whose birth_date > 2023-08-07 is NOT Greater than 
 - We use NOT operator to reverse
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE NOT(birth_date > '2023-08-07' OR points > 1500);
 ```
 
 ### How to filter those records whose birth_date > 2023-08-07 OR Points > 1500 AND city ="kohat"
 - We use OR and AND both to add multiple conditions
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE birth_date > '2023-08-07' OR (points > 1500 AND city = 'kohat');
 ```
 
 ### How to select those result whose city is kohat or karachi
 - We use IN operator, we can also use OR operator but IN operator is shorter and it works like OR operator
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE city IN ('karachi','kohat');
 
 ```
 ### How to select those result whose city is not in kohat or karachi
 - We use NOT IN operator
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE city NOT IN ('karachi','kohat');
 ```
 
 ### How to select those points >= 1000 and <= 1500
 - We use BETWEEN operator, note we can also use >=  <= operators but BETWEEN is shorter
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE points BETWEEN 1000 AND 1500;
 ```
 
 ### How to select those rows that matched with specific string pattern using LIKE operator
 - we use WHERE last_name LIKE 's%' it means last_name must be start with s but after s it contain any letters.
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE last_name LIKE 's%';
 SELECT * FROM customer WHERE last_name LIKE 'summer%'; //start with summer ends with any letter
 ```
 
 ### change the pattern in LIKE operator
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE last_name LIKE '%s';// start with any  letter but ends with s
 SELECT * FROM customer WHERE last_name LIKE '%s%';// start with any  letter and ends with any letter but s letter can be any
 where
 ```
 
 ### Use underscore to define how many letters end with that pattern
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE last_name LIKE '_______s'
 ```
 
 ### we can also specify first and last letter and Between letters range with "__"  underscore
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE last_name LIKE 'v______s'
 ```
 
 ### use  REGEXP to use complex string pattern
 - Look we use like operator
+```sql
+SELECT * FROM customer WHERE first_name LIKE '%hr%'
+```
+- we can also use REGEXP for more complex string patterns
+```sql
+SELECT * FROM customer WHERE first_name REGEXP 'hr'
+```
+### first_name must start with hr
+```sql
+=======
 ```python
 SELECT * FROM customer WHERE first_name LIKE '%hr%'
 ```
@@ -310,16 +442,23 @@ SELECT * FROM customer WHERE first_name REGEXP 'hr'
 ```
 ### first_name must start with hr
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE first_name REGEXP '^ch'
 ```
 
 ### first_name must end with t
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE first_name REGEXP 't$'
 ```
 
 ### we can also use pipe operator | in REGEXP
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE first_name REGEXP '^ch|t$'
 ```
 - it means first_name must start with ch 
@@ -327,50 +466,78 @@ SELECT * FROM customer WHERE first_name REGEXP '^ch|t$'
 
 
 ### we can also specify []
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE first_name REGEXP '[agc]t'
 ```
 - first_name will be at, gt, ct anywhere
 
 ### we can change pattern
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE first_name REGEXP 't[agc]'
 ```
 - first_name will be ta, tg, tc anywhere
 
 ### we can also specify range [a-h]
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE first_name REGEXP '[a-h]t'
 ```
 - first_name will be at,bt,ct,dt,et,ft, gt, ht anywhere
 
 ### How to select those records whone phone no is NULL using "IS NULL" operator
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer WHERE phone IS NULL;
 ```
 ### How to select and sort data by column name 
 - by default every column is sorted according  to primary key column
+```sql
+SELECT * FROM customer ORDER by first_name;
+```
+### We can also sort by multiple columns
+```sql
+=======
 ```python
 SELECT * FROM customer ORDER by first_name;
 ```
 ### We can also sort by multiple columns
 ```python
+>>>>>>> master
 SELECT * FROM customer ORDER by first_name, last_name;
 ```
 
 ### We can also sort by multiple columns in Descending order
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer ORDER by first_name DESC, last_name ASC;
 ```
 
 ### How  to Select first 10 records using "LIMIT" Clause
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer LIMIT 10;
 ```
 
 ### How to skip  first 10 records using "LIMIT" Clause and select 3 records before 10 records
 - we define offset 10 , 3
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM customer LIMIT 10 , 3;
 ```
 ### How to select one table with relationship to another table using "INNER JOIN"
@@ -378,18 +545,27 @@ SELECT * FROM customer LIMIT 10 , 3;
 -  In Orders table we have  orders_id, customer_id, status, comments
 - In Customer table we have customer_id, first_name, last_name, birth_date, phone, address, city and state
 - We want to inner join with orders table and customer table
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM orders INNER JOIN customerON orders.customer_id  = customer.customer_id;
 ```
 
 ### We can also achieve "INNER JOIN" with implicit Syntax
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM orders o, customers c WHERE o.customer_id  = c.customer_id;
 
 ```
 
 ### How to find only select first_name, city and phone from customer table 
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT order_id, orders.customer_id first_name, phone, city 
 FROM orders 
 INNER JOIN customer
@@ -398,7 +574,10 @@ orders.customer_id  = customer.customer_id;
 
 ```
 ### We can also use alias in inner join
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT order_id, o.customer_id first_name, phone, city 
 FROM orders o
 INNER JOIN customer c
@@ -411,7 +590,10 @@ o.customer_id  = c.customer_id;
 - In the inventory db we have products table
 - this product table is associated with orders_items 
 - we can easily join using db.table name
+```sql
+=======
 ```python
+>>>>>>> master
 select * 
 FROM orders_items oi
 INNER JOIN inventory.products p
@@ -420,7 +602,10 @@ oi.product_id = p.product_id;
 ```
 
 ### How to select only selected name, quantity from products table 
+```sql
+=======
 ```python
+>>>>>>> master
 select oi.product_id, unit_price, name
 FROM orders_items oi
 INNER JOIN inventory.products p
@@ -430,7 +615,10 @@ oi.product_id = p.product_id;
 ### How to Select Self join table itself 
 - Suppose we have employe table we want to check who is manager in our complany
 - But the best thing is manager is itself an employe of this complany
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT *
 FROM employees m
 JOIN employees e
@@ -440,7 +628,10 @@ ON
 
 ### How to Select Self join table itself 
 - only want to check the manager
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
 e.employee_id,
 e.first_name,
@@ -453,7 +644,10 @@ ON
 
 ### How to JOIN multiple tables
 - We have three tables orders, order_status and customer we want to join
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT *
 FROM orders o
 JOIN customer c
@@ -463,7 +657,10 @@ JOIN order_status os
 ON os.status_is = o.status;
 ```
 ### Lets Extract Beautifully
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
 o.order_id,
 o.order_date,
@@ -479,7 +676,10 @@ ON os.status_is = o.status;
 ```
 ### Compound Join
 - we can combine two fields to unique identify row
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * 
 FROM orders_items oi
 JOIN order_notes oin
@@ -491,7 +691,10 @@ oi.product_id = oin.product_id;
 ### leFT Join
 - Left outer join select those records which are not
 - like in our example we also select those customers who don't have any order as well as who do
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
 c.customer_id, 
 c.first_name, 
@@ -505,7 +708,10 @@ ORDER BY c.customer_id
 ### Right Join
 - Right outer join select those records which satisfy the condition
 - like in our example we only select those customers who have orders
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
 c.customer_id, 
 c.first_name, 
@@ -519,7 +725,10 @@ ORDER BY c.customer_id
 ### USING Clause
 - USING Clause can replace JOIN complex steps
 - But it can only work when both table have same column name
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
 o.order_id,
 c.first_name
@@ -533,7 +742,10 @@ USING (customer_id);
 ### Cross JOIN
 - combine every record from first table to second table
 - WE combine every record from customer table to products table
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
 c.first_name AS customer,
 p.name AS product 
@@ -543,7 +755,10 @@ ORDER BY c.first_name;
 ```
 
 ### Combine tables rows with UNION
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
 order_id,
 order_date,
@@ -560,7 +775,10 @@ WHERE order_date < '2023-11-09'
 ```
 
 ### INSERT RECORDS
+```sql
+=======
 ```python
+>>>>>>> master
 INSERT INTO customer (
     customer_id,
     first_name,
@@ -584,8 +802,11 @@ INSERT INTO customer (
 );
 ```
 
-### INSERT Multiple RECORDS
+### INSERT Multiple RECORDSr
+```sql
+=======
 ```python
+>>>>>>> master
 INSERT INTO customer (
     customer_id,
     first_name,
@@ -621,7 +842,10 @@ INSERT INTO customer (
 
 ```
 ### INSERT Hierarchical RECORDS
+```sql
+=======
 ```python
+>>>>>>> master
 INSERT INTO customer(customer_id,first_name,last_name,birth_date)
 VALUES (DEFAULT,'IGI','ORIGIN','2023-12-25');
 
@@ -634,26 +858,38 @@ VALUES (DEFAULT,LAST_INSERT_ID(),9,35,3);
 
 ```
 ### Creating Copy of a Table
+```sql
+=======
 ```python
+>>>>>>> master
 CREATE TABLE orders_archived  AS
 SELECT * FROM orders;
 ```
 
 
 ### Insert only data from one table to another
+```sql
+=======
 ```python
+>>>>>>> master
 INSERT INTO orders_archived
 SELECT * from orders WHERE order_date > '2023-12-01';
 ```
 
 ### Updating Single Record
+```sql
+=======
 ```python
+>>>>>>> master
 UPDATE customer 
 SET first_name="Muhammad", last_name="Hashim", birth_date="2023-12-30"
 WHERE customer_id = 1;
 ```
 ### Update multiple Records
+```sql
+=======
 ```python
+>>>>>>> master
 UPDATE orders_items
 SET unit_price=50.57, quantity = 5
 WHERE order_id = 1;
@@ -661,7 +897,10 @@ WHERE order_id = 1;
 
 
 ### Using subqueries in Update
+```sql
+=======
 ```python
+>>>>>>> master
 UPDATE orders
 SET comments = "Gold Customer"
 WHERE c_id IN
@@ -672,7 +911,10 @@ WHERE c_id IN
 ```
 
 ### Using subqueries in Delete
+```sql
+=======
 ```python
+>>>>>>> master
 DELETE FROM orders
 WHERE c_id = (
 			SELECT customer_id
@@ -683,7 +925,10 @@ WHERE c_id = (
 ```
 
 ### Aggregate Functions
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
 MAX(salary) AS Highest,
 MIN(salary) AS lowest,
@@ -694,7 +939,10 @@ FROM employees;
 
 ```
 ### The GROUP By Clause in Aggregate Functions
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
 client_id,
 SUM(invoice_total) as total_sales
@@ -704,7 +952,10 @@ ORDER BY total_sales DESC;
 ```
 
 ### The GROUP By Clause with WHERE Clause in Aggregate Functions
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
 client_id,
 SUM(invoice_total) as total_sales
@@ -714,7 +965,10 @@ GROUP BY client_id
 ORDER BY total_sales DESC;
 ```
 ### The GROUP By Clause with inner JOIN in Aggregate Functions
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
 name,
 state,
@@ -726,7 +980,10 @@ GROUP BY state, city;
 
 ```
 ### The GROUP By Clause with inner JOIN in Aggregate Functions
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT date,
 pm.name,
 SUM(amount) AS total_amounts
@@ -737,7 +994,10 @@ GROUP BY date
 ORDER BY date DESC;
 ```
 ### Having Clause with Aggregate Functions
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
 client_id,
 COUNT(*) AS number_of_invoices,
@@ -749,7 +1009,10 @@ HAVING total_sales > 500;
 ```
 
 ### Having Clause with Aggregate Functions
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
 client_id,
 COUNT(*) AS number_of_invoices,
@@ -761,7 +1024,10 @@ HAVING total_sales > 500 AND number_of_invoices > 5;
 
 ```
 ### Aggregate functions WITH ROLLUP
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
 client_id,
 SUM(invoice_total) as total_sales
@@ -769,7 +1035,10 @@ FROM invoices
 GROUP BY client_id WITH ROLLUP;
 ```
 ### Aggregate functions WITH ROLLUP and JOIN
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
 state,
 city,
@@ -782,7 +1051,10 @@ GROUP BY state, city WITH ROLLUP;
 ### Write more about subqueries
 - expensive than lettuce (id = 3)
 - MySQL first execute innersubquery than pass it to out query
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * 
 FROM products 
 WHERE unit_price > (
@@ -794,7 +1066,10 @@ WHERE product_id = 3
 ### Write more about subqueries
 - In Sql_hr database
 - find employees who earn more than average 
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM
 employees WHERE salary > (
 SELECT AVG(salary)
@@ -803,7 +1078,10 @@ SELECT AVG(salary)
 ```
 ### Write more about subqueries using IN operator
 - find that product that have never been ordered 
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * FROM products
 WHERE product_id NOT IN (
 SELECT DISTINCT product_id
@@ -812,7 +1090,10 @@ FROM order_items
 ```
 ### Write more about subqueries using IN operator
 - find clients without invoices
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * 
 FROM clients 
 WHERE client_id NOT IN (
@@ -824,7 +1105,10 @@ FROM invoices
 ### using subqueries
 - find customer who have ordered lettuce
 - select customer_id , first_name, last_name
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT customer_id,
 first_name,
 last_name
@@ -837,7 +1121,10 @@ JOIN orders o USING (order_id)
 );
 ```
 ### using JOIN
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT DISTINCT customer_id,
 first_name,
 last_name
@@ -848,7 +1135,10 @@ WHERE oi.product_id = 3;
 ```
 ### without ALL keyword
 - select invoices larger than all invoices of client 3
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT *
 FROM invoices 
 WHERE invoice_total >(
@@ -858,7 +1148,10 @@ SELECT MAX(invoice_total)
 );
 ```
 ### ALL keyword
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT *
 FROM invoices 
 WHERE invoice_total > ALL(
@@ -871,7 +1164,10 @@ SELECT invoice_total
 - For each employe
 - calculate the avg salary for employee.office
 - return the employee if salary > avg
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT * 
 FROM employees e 
 WHERE salary > (
@@ -885,7 +1181,10 @@ WHERE salary > (
 - Select client that have an invoice
 
 - one method 
+```sql
+=======
 ```python
+>>>>>>> master
 Select *
 FROM clients
 WHERE client_id IN (
@@ -894,7 +1193,10 @@ WHERE client_id IN (
 );
 ```
 - second method
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT *
 FROM clients
 INNER JOIN (
@@ -904,7 +1206,10 @@ INNER JOIN (
 ON clients.client_id = distinct_clients.client_id;
 ```
 - third method
+```sql
+=======
 ```python
+>>>>>>> master
 Select *
 FROM clients c
 WHERE EXISTS (
@@ -914,23 +1219,35 @@ WHERE EXISTS (
 );
 ```
 ### Date Functions to check dynamically current Year orders
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT *
 FROM orders
 WHERE YEAR(order_date) = YEAR(NOW());
 ```
 ### FORMAT_DATE Function
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT DATE_FORMAT(order_date,'%D %M %Y')
 FROM orders;
 ```
 ### ADDING DATE Function
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT DATE_ADD(order_date, INTERVAL 1 YEAR)
 FROM orders;
 ```
 ### IFNULL Function
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
 order_id,
 shipper_id
@@ -942,7 +1259,10 @@ IFNULL(shipper_id,'Not Assigned') AS shipper
 FROM orders;
 ```
 ### COALESCE Function
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
 order_id,
 COALESCE(shipper_id,comments,'Not Assigned') AS shipper
@@ -955,7 +1275,10 @@ COALESCE(shipper_id,comments,'Not Assigned') AS shipper
 FROM orders;
 ```
 ### IF Function
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
     order_id,
     order_date,
@@ -964,7 +1287,10 @@ FROM orders;
 ```
 
 ### CASE  Operator
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
     order_id,
     CASE
@@ -977,7 +1303,10 @@ FROM orders;
 ```
 
 ### Practice
+```sql
+=======
 ```python
+>>>>>>> master
 SELECT 
 CONCAT(first_name,' ',last_name) AS Customer,
 points,
@@ -989,7 +1318,10 @@ CASE
 FROM customers;
 ```
 ### Creating View
+```sql
+=======
 ```python
+>>>>>>> master
 CREATE VIEW sales_by_client AS 
 SELECT 
 c.client_id,
@@ -1000,7 +1332,10 @@ JOIN invoices i USING(client_id)
 GROUP BY client_id, name;
 ```
 ### Drop View
+```sql
+=======
 ```python
+>>>>>>> master
 DROP VIEW invoices_with_balance;
 ```
 ### Updatable View
@@ -1010,7 +1345,10 @@ DROP VIEW invoices_with_balance;
 - UNION
 - If we dont have these in mention above
 - than our view is Updatable view
+``` sql
+=======
 ``` python
+>>>>>>> master
 CREATE OR REPLACE VIEW invoices_with_balance AS
 	SELECT 
 	invoice_id,
@@ -1030,7 +1368,10 @@ WHERE invoice_id = 1;
 ```
 - prevent view as only read-only 
 - add WITH check OPTION;
+```sql
+=======
 ```python
+>>>>>>> master
 CREATE OR REPLACE VIEW invoices_with_balance AS
 	SELECT 
 	invoice_id,
@@ -1048,7 +1389,10 @@ CREATE OR REPLACE VIEW invoices_with_balance AS
 
 ```
 ### Creating Store Procedure
+```sql
+=======
 ```python
+>>>>>>> master
 DELIMITER $$
 CREATE PROCEDURE get_clients()
 BEGIN
@@ -1057,6 +1401,16 @@ END$$
 DELIMITER ;
 ```
 ### Select Procedure
+```sql
+CALL get_clients()
+```
+### Dropping Procedure
+```sql
+DROP Procedure IF EXISTS get_clients;
+```
+### Parameters in Procedure
+```sql
+=======
 ```python
 CALL get_clients()
 ```
@@ -1066,6 +1420,7 @@ DROP Procedure IF EXISTS get_clients;
 ```
 ### Parameters in Procedure
 ```python
+>>>>>>> master
 DROP PROCEDURE IF EXISTS get_clients_by_states;
 DELIMITER $$
 CREATE PROCEDURE get_clients_by_states
@@ -1083,7 +1438,10 @@ CALL get_clients_by_states('CA');
 
 ```
 ### Parameters with defaults values in Procedure
+```sql
+=======
 ```python
+>>>>>>> master
 DELIMITER $$
 CREATE PROCEDURE get_clients_by_default_states
 	(
@@ -1103,7 +1461,10 @@ CALL get_clients_by_default_states(NULL)
 
 ```
 ### Parameters with IF ELSE  in Procedure
+```sql
+=======
 ```python
+>>>>>>> master
 DELIMITER $$
 CREATE PROCEDURE get_clients_by_default_states
 	(
@@ -1129,7 +1490,10 @@ CALL get_clients_by_default_states('CA')
 - with two Parameters
 -  client_id => id(5)
 - payment_method_id => TINYINT(1) 0-255
+```sql
+=======
 ```python
+>>>>>>> master
 DELIMITER $$
 CREATE PROCEDURE get_payments
     (
@@ -1153,7 +1517,10 @@ CALL get_payments(NULL,2);
 
 ```
 ### Update in  Procedure
+```sql
+=======
 ```python
+>>>>>>> master
 DELIMITER $$
 CREATE PROCEDURE make_payments
     (
@@ -1177,7 +1544,10 @@ CALL make_payments(2,2223.823,'2023-01-07');
 ### Update with validation  in  Procedure
 - Error Code link
 - https://www.ibm.com/docs/en/db2-for-zos/11?topic=codes-sqlstate-values-common-error
+```sql
+=======
 ```python
+>>>>>>> master
 DELIMITER $$
 CREATE PROCEDURE make_validate_payments
     (
@@ -1201,8 +1571,3 @@ DELIMITER ;
 CALL make_validate_payments(2,-2223.823,'2023-01-07');
 
 ```
-
-
-
-
-
