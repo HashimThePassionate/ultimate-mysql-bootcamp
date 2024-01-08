@@ -178,6 +178,10 @@ SELECT * FROM customer LIMIT 10;
 --we define offset 10 , 3
 SELECT * FROM customer LIMIT 10 , 3;
 
+----------Reterieve Random record with RAND Function----------
+-- Please use ORDER By Clause otherwise you got an error
+SELECT * FROM orders ORDER BY RAND() LIMIT 1;
+
 ----------How to select one table with relationship to another table using "INNER JOIN"----------
 -- lets we have orders table in orders table we have customer_id which is a foriegn key to customer table
 --  In Orders table we have  orders_id, customer_id, status, comments
