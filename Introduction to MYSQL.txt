@@ -1028,7 +1028,7 @@ CALL get_risk_factor();
 ----------------
 
 
-----------Functions  in  Procedure-----------
+----------Functions-----------
 DELIMITER $$
 CREATE FUNCTION get_risk_factor_for_client
 	(
@@ -1097,3 +1097,5 @@ DELIMITER ;
 |   5                      Topiclounge                     817                  |
 ---------------------------------------------------------------------------------
 
+----------Drop Functions-----------
+DROP FUNCTION get_unpaid_invoices_for_clients;
