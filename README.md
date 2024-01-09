@@ -417,9 +417,6 @@ SELECT * FROM customer ORDER by first_name;
 ### We can also sort by multiple columns
 SELECT * FROM customer ORDER by first_name, last_name;
 ```
-
-### We can also sort by multiple columns in Descending order
-```sql
 SELECT * FROM customer ORDER by first_name DESC, last_name ASC;
 ```
 
@@ -433,6 +430,12 @@ SELECT * FROM customer LIMIT 10;
 ```sql
 SELECT * FROM customer LIMIT 10 , 3;
 ```
+
+### Reterieve Random record with RAND Function
+- Please use ORDER By Clause otherwise you got an error
+```
+SELECT * FROM orders ORDER BY RAND() LIMIT 1;
+```
 ### How to select one table with relationship to another table using "INNER JOIN"
 - lets we have orders table in orders table we have customer_id which is a foriegn key to customer table
 -  In Orders table we have  orders_id, customer_id, status, comments
@@ -445,7 +448,6 @@ SELECT * FROM orders INNER JOIN customerON orders.customer_id  = customer.custom
 ### We can also achieve "INNER JOIN" with implicit Syntax
 ```sql
 SELECT * FROM orders o, customers c WHERE o.customer_id  = c.customer_id;
-
 ```
 
 ### How to find only select first_name, city and phone from customer table 
