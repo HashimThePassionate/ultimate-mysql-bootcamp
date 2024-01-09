@@ -1099,3 +1099,45 @@ DELIMITER ;
 
 ----------Drop Functions-----------
 DROP FUNCTION get_unpaid_invoices_for_clients;
+
+
+----------TRIGGER-----------
+----------Update TRIGGER Example-----------
+-- A block of code that automatically get executed
+-- before or after an insert, Update or Delete statement
+
+DELIMITER $$
+CREATE TRIGGER payment_after_insert
+	AFTER INSERT ON payments
+    FOR EACH ROW
+BEGIN
+	UPDATE invoices
+    SET payment_total = payment_total + NEW.amount
+    WHERE invoice_id = NEW.invoice_id;
+END $$
+DELIMITER ;
+
+INSERT INTO payments 
+VALUES (DEFAULT,5,3,'2023-09-01',10,1);
+
+----------Delete TRIGGER Example-----------
+DELIMITER $$
+
+CREATE TRIGGER payment_after_delete
+AFTER DELETE ON payments
+FOR EACH ROW
+BEGIN
+    UPDATE invoices
+    SET payment_total = payment_total - OLD.amount
+    WHERE invoice_id = OLD.invoice_id;
+END $$
+DELIMITER ;
+
+DELETE FROM payments WHERE payment_id = 10;
+
+----------SHOWING TRIGGERS-----------
+SHOW TRIGGERS;
+SHOW TRIGGERS LIKE 'payments%';
+
+----------DROP TRIGGERS-----------
+DROP TRIGGER IF EXISTS payment_after_insert;
