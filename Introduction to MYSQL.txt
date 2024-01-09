@@ -945,3 +945,60 @@ END$$
 DELIMITER ;
 
 CALL make_validate_payments(2,-2223.823,'2023-01-07');
+
+
+----------Output Parameters  in  Procedure-----------
+DELIMITER $$
+CREATE PROCEDURE get_unpaid_invoices_for_clients 
+	(
+      client_id INT   
+    )
+BEGIN
+	SELECT COUNT(*) ,
+    SUM(invoice_total)
+    FROM invoices i
+    WHERE i.client_id =  client_id
+    	AND payment_total = 0;
+END$$
+DELIMITER ;
+
+CALL get_unpaid_invoices_for_clients(3);
+-- we get this
+-----------------------------------
+|   COUNT(*)   SUM(invoice_total) |
+|   2          286.08             |
+-----------------------------------
+
+-- We can also recieves these values through Parameters 2, 286.08
+-- we can specific OUT to identify Output Parameters
+-- also copy this using INTO
+
+DELIMITER $$
+CREATE PROCEDURE get_unpaid_invoices_for_clients 
+	(
+      client_id INT,
+      OUT invoices_count INT,
+      OUT invoices_total DECIMAL(9,2)
+    )
+BEGIN
+	SELECT COUNT(*), SUM(invoice_total)
+    INTO invoices_count, invoices_total
+    FROM invoices i
+    WHERE i.client_id =  client_id
+    	AND payment_total = 0;
+END$$
+DELIMITER ;
+
+CALL get_unpaid_invoices_for_clients(3)
+
+-- we get some output Parameters in the form of variables which is hard to read
+-- sometime we avoid 
+SET @p0='3'; SET @p1=''; SET @p2=''; 
+CALL `get_unpaid_invoices_for_clients`(@p0, @p1, @p2); 
+SELECT @p1 AS `invoices_count`, @p2 AS `invoices_total`;
+-----------------------------------
+|   COUNT(*)   SUM(invoice_total) |
+|   2          286.08             |
+-----------------------------------
+
+
