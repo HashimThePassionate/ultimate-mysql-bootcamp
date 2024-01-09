@@ -1191,4 +1191,13 @@ INSERT INTO payments
 VALUES (DEFAULT,5,3,'2023-09-01',10,1);
 
 
+----------TRANSACTIONS-----------
+-- A group of sql statements that
+-- represent a Single unit of work
+START TRANSACTION;
+INSERT INTO orders(customer_id,order_date,status)
+VALUES(1,'2024-01-09',1);
+INSERT INTO order_items()
+VALUES(LAST_INSERT_ID(),1,1,1);
+COMMIT;
 
