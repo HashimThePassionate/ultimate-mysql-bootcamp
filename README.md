@@ -367,7 +367,7 @@ SELECT * FROM customer WHERE first_name LIKE '%hr%'
 SELECT * FROM customer WHERE first_name REGEXP 'hr'
 ```
 ### first_name must start with hr
-SELECT * FROM customer WHERE first_name REGEXP '^ch'
+SELECT * FROM customer WHERE first_name REGEXP '^hr'
 ```
 
 ### first_name must end with t
