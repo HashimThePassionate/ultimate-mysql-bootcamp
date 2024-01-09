@@ -276,16 +276,6 @@ o.customer_id = c.customer_id
 JOIN order_status os
 ON os.status_is = o.status;
 
----------Compound Join-----------
--- we can combine two fields to unique identify row
-SELECT * 
-FROM orders_items oi
-JOIN order_notes oin
-ON
-oi.order_id = oin.order_id
-AND
-oi.product_id = oin.product_id;
-
 ---------leFT Join-----------
 --Left outer join select those records which are not
 --like in our example we also select those customers who don't have any order as well as who do
