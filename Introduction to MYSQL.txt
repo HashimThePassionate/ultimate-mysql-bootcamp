@@ -818,7 +818,7 @@ DROP Procedure IF EXISTS get_clients;
 ----------Parameters in Procedure-----------
 DROP PROCEDURE IF EXISTS get_clients_by_states;
 DELIMITER $$
-CREATE PROCEDURE get_clients_by_states
+CREATE PROCEDURE get_clients_by_states()
 	(
         state CHAR(2)
     )
@@ -834,7 +834,7 @@ CALL get_clients_by_states('CA');
 
 ----------Parameters with defaults values in Procedure-----------
 DELIMITER $$
-CREATE PROCEDURE get_clients_by_default_states
+CREATE PROCEDURE get_clients_by_default_states()
 	(
         state CHAR(2)
     )
@@ -853,7 +853,7 @@ CALL get_clients_by_default_states(NULL)
 
 ----------Parameters with IF ELSE  in Procedure-----------
 DELIMITER $$
-CREATE PROCEDURE get_clients_by_default_states
+CREATE PROCEDURE get_clients_by_default_states()
 	(
         state CHAR(2)
     )
@@ -879,7 +879,7 @@ CALL get_clients_by_default_states('CA')
 -- payment_method_id => TINYINT(1) 0-255
 
 DELIMITER $$
-CREATE PROCEDURE get_payments
+CREATE PROCEDURE get_payments()
     (
         client_id INT,
         payment_method_id TINYINT(1)
@@ -902,7 +902,7 @@ CALL get_payments(NULL,2);
 
 ----------Update in  Procedure-----------
 DELIMITER $$
-CREATE PROCEDURE make_payments
+CREATE PROCEDURE make_payments()
     (
         invoice_id INT,
         payment_total DECIMAL(8,2),
@@ -925,7 +925,7 @@ CALL make_payments(2,2223.823,'2023-01-07');
 -- Error Code link
 -- https://www.ibm.com/docs/en/db2-for-zos/11?topic=codes-sqlstate-values-common-error
 DELIMITER $$
-CREATE PROCEDURE make_validate_payments
+CREATE PROCEDURE make_validate_payments()
     (
         invoice_id INT,
         payment_total DECIMAL(8,2),
@@ -949,7 +949,7 @@ CALL make_validate_payments(2,-2223.823,'2023-01-07');
 
 ----------Output Parameters  in  Procedure-----------
 DELIMITER $$
-CREATE PROCEDURE get_unpaid_invoices_for_clients 
+CREATE PROCEDURE get_unpaid_invoices_for_clients()
 	(
       client_id INT   
     )
@@ -974,7 +974,7 @@ CALL get_unpaid_invoices_for_clients(3);
 -- also copy this using INTO
 
 DELIMITER $$
-CREATE PROCEDURE get_unpaid_invoices_for_clients 
+CREATE PROCEDURE get_unpaid_invoices_for_clients()
 	(
       client_id INT,
       OUT invoices_count INT,
@@ -1000,5 +1000,32 @@ SELECT @p1 AS `invoices_count`, @p2 AS `invoices_total`;
 |   COUNT(*)   SUM(invoice_total) |
 |   2          286.08             |
 -----------------------------------
+
+----------Local variables  in  Procedure-----------
+-- risk_factor = invoices_total / invoices_count * 5
+-- these are all local variables
+-- we get data from table and pass these data to local variables finally we select
+-- local variables will die when procedure were finished
+DELIMITER $$
+CREATE PROCEDURE get_risk_factor()
+BEGIN
+	DECLARE risk_factor DECIMAL(9,2) DEFAULT 0;
+    DECLARE invoices_total DECIMAL(9,2);
+    DECLARE invoices_count INT;
+	SELECT COUNT(*), SUM(invoice_total)
+    INTO invoices_count, invoices_total
+    FROM invoices;
+    SET risk_factor = invoices_total / invoices_count * 5;
+    SELECT risk_factor;
+END$$
+DELIMITER ;
+
+CALL get_risk_factor();
+
+----------------
+|  risk_factor |
+|   777.75     |
+----------------
+
 
 
