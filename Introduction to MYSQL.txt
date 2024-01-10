@@ -1314,7 +1314,7 @@ COMMIT; -- 6
 2. Integer datatypes
 3. Fixed point and Floating datatypes
 4. Boolean datatypes
-5. Enum and Set types datatypes
+5. Enum and Set types datatypes -- we avoid to use this datatypes
 6. Date and Time types datatypes
 7. Blob datatypes
 8. JSON datatypes
@@ -1361,4 +1361,11 @@ INT(4) => 0001
 ----------Boolean datatypes-----------
 -- BOOLEAN -- TRUE or FALSE 
 -- BOOL    -- 1 or 0
+
+----------Date and Time types datatypes-----------
+-- DATE             -- storing date without time component
+-- Time             -- time for storing time value
+-- DATETIME         -- 8bytes 
+-- TIMESTAMP        -- 4bytes (0 upto 2038) -- track of a row when inserted to last updated
+-- YEAR             -- year for storing 4 digit year
 
