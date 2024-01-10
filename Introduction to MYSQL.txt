@@ -1247,12 +1247,95 @@ SET TRANSACTION ISOLATION LEVEL READ COMMITTED; -- 1
 START TRANSACTION; -- 2
 select points  FROM customers WHERE customer_id = 1; -- 3
 select points  FROM customers WHERE customer_id = 1; -- 6
-COMMIT;
+COMMIT; -- *
+
 -- Session 2
 Use  sql_store;
 START TRANSACTION; 
 Update customers 
-SET points = 20 -- 4
+SET points = 30 -- 4
 WHERE customer_id = 1;
 COMMIT; -- 5
+
+----------REPEATABLE READ Isolation Level-----------
+-- Session 1
+USE sql_store;
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ; -- 1
+START TRANSACTION; -- 2
+select points  FROM customers WHERE customer_id = 1; -- 3
+select points  FROM customers WHERE customer_id = 1; -- 5
+COMMIT;
+
+ -- Session 2
+Use  sql_store;
+START TRANSACTION; 
+Update customers 
+SET points = 30 
+WHERE customer_id = 1;
+COMMIT; -- 4
+
+
+-- in this Isolation we see phanton Read problem
+USE sql_store;
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+START TRANSACTION; -- 1 
+select *  FROM customers WHERE state = 'VA'; -- we give a special discount -- 3 -- 5
+COMMIT;
+
+ -- Session 2
+Use  sql_store;
+START TRANSACTION; 
+Update customers -- 2
+SET state = 'VA'
+WHERE customer_id = 1;
+COMMIT; -- 4
+
+
+----------SERIALIZABLE Isolation Level-----------
+-- provide Highest level of Isolation
+-- solve all Concurrency problems
+
+USE sql_store;
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ; -- 1
+START TRANSACTION; -- 2
+select *  FROM customers WHERE state = 'VA'; -- 5
+COMMIT;
+
+ -- Session 2
+Use  sql_store;
+START TRANSACTION; -- 3
+Update customers -- 4
+SET state = 'VA'
+WHERE customer_id = 3;
+COMMIT; -- 6
+
+----------MYSQL Datatypes-----------
+1. String datatypes
+2. Integer datatypes
+3. Fixed point and Floating datatypes
+4. Boolean datatypes
+5. Enum and Set types datatypes
+6. Date and Time types datatypes
+7. Blob datatypes
+8. JSON datatypes
+
+----------String Datatypes-----------
+-- CHAR(x)  -- fixed-length like abbreviation of state 'VA'
+-- VARCHAR(x) -- variable-length like storing usernames, passwords, email addresses and so on
+
+-- Recommended 
+-- VARCHAR(50)  -- for short strings like usernames and passwords
+-- VARCHAR(255) -- for medium-length strings like addresses
+
+--Maximum Length
+-- CHAR(x)     --  
+-- VARCHAR(x)  -- max : 65,535 characters (64KB) 
+-- MEDIUMTEXT  -- max : 16MB              16,777,216    characters --JSON objects, CSV and short medium length book
+-- LONGTEXT    -- max : 4GB               4,294,967,296 characters Long Text books
+-- TINYTEXT    -- max : 255Bytes          255           characters
+-- Text        -- max : 65,535 characters (64KB) 
+
+-- Mostly we use VARCHAR type, bcz it uses indexes to speedup queries.
+
+
 
