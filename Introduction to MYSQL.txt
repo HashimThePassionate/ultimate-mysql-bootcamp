@@ -1316,7 +1316,7 @@ COMMIT; -- 6
 4. Boolean datatypes
 5. Enum and Set types datatypes -- we avoid to use this datatypes
 6. Date and Time types datatypes
-7. Blob datatypes
+7. Blob datatypes --we also avoid to use binary data bcz its slow down our database backup
 8. JSON datatypes
 
 ----------String Datatypes-----------
