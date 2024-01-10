@@ -1358,3 +1358,7 @@ INT(4) => 0001
 -- DEC, NUMERIC, FIXED are exactly same as decimal
 -- FLOAT 4bytes, 8bytes, DOUBLE -- used for scientific calculation and are approximately values
 
+----------Boolean datatypes-----------
+-- BOOLEAN -- TRUE or FALSE 
+-- BOOL    -- 1 or 0
+
