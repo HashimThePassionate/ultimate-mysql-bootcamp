@@ -1359,3 +1359,36 @@ INT(4) => 0001
 -- TIMESTAMP        -- 4bytes (0 upto 2038) -- track of a row when inserted to last updated
 -- YEAR             -- year for storing 4 digit year
 
+
+----------Json datatypes-----------
+-- Method 1
+UPDATE products
+SET properties = 
+'
+{
+	"dimension" : [1,2,3],
+    "weight" : 10,
+    "manufacturer":{
+    "name":"Ahmed"
+    }
+}
+'
+WHERE product_id = 1 ;
+
+-- Method 2
+UPDATE products
+SET properties = JSON_OBJECT(
+'weight',10,
+'dimension',JSON_ARRAY(1,2,3),
+'manufacturer',JSON_OBJECT('name','Abdullah')
+)
+WHERE product_id = 2;
+
+-- Selection specific property
+SELECT 
+product_id,
+JSON_EXTRACT(properties,'$.weight')
+FROM products
+WHERE product_id IN (1,2) ;
+
+
