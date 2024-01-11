@@ -533,6 +533,12 @@ client_id,
 SUM(invoice_total) as total_sales
 FROM invoices
 GROUP BY client_id WITH ROLLUP;
+---------Aggregate functions WITH ROLLUP and COALESCE it will return Total instead of NULL-----------
+SELECT 
+COALESCE(client_id,'Grand Total') AS Total,
+SUM(invoice_total)  AS Total_Sales
+FROM invoices
+GROUP BY client_id WITH ROLLUP;
 
 ---------Aggregate functions WITH ROLLUP and JOIN-----------
 SELECT 
