@@ -542,12 +542,10 @@ GROUP BY client_id WITH ROLLUP;
 
 ---------Aggregate functions WITH ROLLUP and JOIN-----------
 SELECT 
-state,
-city,
-SUM(invoice_total) as total_sales
-FROM invoices i
-JOIN clients c USING(client_id)
-GROUP BY state, city WITH ROLLUP;
+COALESCE(client_id,'Grand Total') AS 'Client ID',
+SUM(invoice_total)  AS Total_Sales
+FROM invoices
+GROUP BY client_id WITH ROLLUP;
 
 
 ---------Write more about subqueries-----------
