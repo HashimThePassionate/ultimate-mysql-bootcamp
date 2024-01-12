@@ -21,6 +21,12 @@ ALTER TABLE customers
     MODIFY COLUMN first_name VARCHAR(55) DEFAULT '',
     DROP points
 ;
+-- Change field Name
+ALTER TABLE student_table
+ADD student_city VARCHAR(50) NULL,
+CHANGE student_points points int;
+
+
 
 -- p131
 -- Adjust the DROP TABLE IF EXISTS orders.
