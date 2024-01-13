@@ -1203,11 +1203,11 @@ CALL get_clients_by_default_states('CA')
 ### Practice Procedure
 - Write a stored procedure call  get_payments
 - with two Parameters
--  client_id => id(5)
+- client_id => id(5)
 - payment_method_id => TINYINT(1) 0-255
 ```sql
 DELIMITER $$
-CREATE PROCEDURE get_payments
+CREATE PROCEDURE get_payments()
     (
         client_id INT,
         payment_method_id TINYINT(1)
@@ -1231,7 +1231,7 @@ CALL get_payments(NULL,2);
 ### Update in  Procedure
 ```sql
 DELIMITER $$
-CREATE PROCEDURE make_payments
+CREATE PROCEDURE make_payments()
     (
         invoice_id INT,
         payment_total DECIMAL(8,2),
@@ -1255,7 +1255,7 @@ CALL make_payments(2,2223.823,'2023-01-07');
 - https://www.ibm.com/docs/en/db2-for-zos/11?topic=codes-sqlstate-values-common-error
 ```sql
 DELIMITER $$
-CREATE PROCEDURE make_validate_payments
+CREATE PROCEDURE make_validate_payments()
     (
         invoice_id INT,
         payment_total DECIMAL(8,2),
@@ -1275,5 +1275,595 @@ END$$
 DELIMITER ;
 
 CALL make_validate_payments(2,-2223.823,'2023-01-07');
+```
 
+### Output Parameters  in  Procedure
+```sql
+DELIMITER $$
+CREATE PROCEDURE get_unpaid_invoices_for_clients()
+	(
+      client_id INT   
+    )
+BEGIN
+	SELECT COUNT(*) ,
+    SUM(invoice_total)
+    FROM invoices i
+    WHERE i.client_id =  client_id
+    	AND payment_total = 0;
+END$$
+DELIMITER ;
+
+CALL get_unpaid_invoices_for_clients(3);
+```
+- we get this
+```sql
+-----------------------------------
+|   COUNT(*)   SUM(invoice_total) |
+|   2          286.08             |
+-----------------------------------
+```
+- We can also recieves these values through Parameters 2, 286.08
+- we can specific OUT to identify Output Parameters
+- also copy this using INTO
+```sql
+DELIMITER $$
+CREATE PROCEDURE get_unpaid_invoices_for_clients()
+	(
+      client_id INT,
+      OUT invoices_count INT,
+      OUT invoices_total DECIMAL(9,2)
+    )
+BEGIN
+	SELECT COUNT(*), SUM(invoice_total)
+    INTO invoices_count, invoices_total
+    FROM invoices i
+    WHERE i.client_id =  client_id
+    	AND payment_total = 0;
+END$$
+DELIMITER ;
+
+CALL get_unpaid_invoices_for_clients(3)
+```
+- we get some output Parameters in the form of variables which is hard to read
+- sometime we avoid
+```sql
+SET @p0='3'; SET @p1=''; SET @p2=''; 
+CALL `get_unpaid_invoices_for_clients`(@p0, @p1, @p2); 
+SELECT @p1 AS `invoices_count`, @p2 AS `invoices_total`;
+```
+```sql
+-----------------------------------
+|   COUNT(*)   SUM(invoice_total) |
+|   2          286.08             |
+-----------------------------------
+```
+### Local variables  in  Procedure
+- risk_factor = invoices_total / invoices_count * 5
+- these are all local variables
+- we get data from table and pass these data to local variables finally we select
+- local variables will die when procedure were finished
+```sql
+DELIMITER $$
+CREATE PROCEDURE get_risk_factor()
+BEGIN
+	DECLARE risk_factor DECIMAL(9,2) DEFAULT 0;
+    DECLARE invoices_total DECIMAL(9,2);
+    DECLARE invoices_count INT;
+	SELECT COUNT(*), SUM(invoice_total)
+    INTO invoices_count, invoices_total
+    FROM invoices;
+    SET risk_factor = invoices_total / invoices_count * 5;
+    SELECT risk_factor;
+END$$
+DELIMITER ;
+
+CALL get_risk_factor();
+```
+```sql
+----------------
+|  risk_factor |
+|   777.75     |
+----------------
+
+```
+### Functions
+```sql
+DELIMITER $$
+CREATE FUNCTION get_risk_factor_for_client
+	(
+        client_id INT
+	)
+RETURNS INTEGER
+READS SQL DATA
+BEGIN
+    DECLARE risk_factor DECIMAL(9,2) DEFAULT 0;
+    DECLARE invoices_total DECIMAL(9,2);
+    DECLARE invoices_count INT;
+    
+    SELECT COUNT(*), SUM(invoice_total)
+    INTO invoices_count, invoices_total
+    FROM invoices i
+    WHERE i.client_id = client_id;
+    
+    SET risk_factor = invoices_total / invoices_count * 5;
+    RETURN risk_factor;
+END$$
+DELIMITER ;
+
+SELECT 
+client_id,
+name,
+get_risk_factor_for_client(client_id)
+FROM clients;
+```
+```sql
+---------------------------------------------------------------------------------
+|   client_id              name          get_risk_factor_for_client(client_id)  |       
+|   1                      Vinte                           803                  |
+|   2                      Myworks                         NULL                 |
+|   3                      Yadel                           706                  |
+|   4                      kwidea                          NULL                 |
+|   5                      Topiclounge                     817                  |
+---------------------------------------------------------------------------------
+```
+```sql
+DELIMITER $$
+CREATE FUNCTION get_risk_factor_for_client
+	(
+        client_id INT
+	)
+RETURNS INTEGER
+READS SQL DATA
+BEGIN
+    DECLARE risk_factor DECIMAL(9,2) DEFAULT 0;
+    DECLARE invoices_total DECIMAL(9,2);
+    DECLARE invoices_count INT;
+    
+    SELECT COUNT(*), SUM(invoice_total)
+    INTO invoices_count, invoices_total
+    FROM invoices i
+    WHERE i.client_id = client_id;
+    
+    SET risk_factor = invoices_total / invoices_count * 5;
+    RETURN IFNULL(risk_factor,0);
+END$$
+DELIMITER ;
+```
+```sql
+---------------------------------------------------------------------------------
+|   client_id              name          get_risk_factor_for_client(client_id)  |       
+|   1                      Vinte                           803                  |
+|   2                      Myworks                         0                    |
+|   3                      Yadel                           706                  |
+|   4                      kwidea                          0                    |
+|   5                      Topiclounge                     817                  |
+---------------------------------------------------------------------------------
+```
+### Drop Functions
+- DROP FUNCTION get_unpaid_invoices_for_clients;
+
+
+## TRIGGER
+### Update TRIGGER Example
+- A block of code that automatically get executed
+- before or after an insert, Update or Delete statement
+```sql
+DELIMITER $$
+CREATE TRIGGER payment_after_insert
+	AFTER INSERT ON payments
+    FOR EACH ROW
+BEGIN
+	UPDATE invoices
+    SET payment_total = payment_total + NEW.amount
+    WHERE invoice_id = NEW.invoice_id;
+END $$
+DELIMITER ;
+
+INSERT INTO payments 
+VALUES (DEFAULT,5,3,'2023-09-01',10,1);
+```
+### Delete TRIGGER Example
+```sql
+DELIMITER $$
+
+CREATE TRIGGER payment_after_delete
+AFTER DELETE ON payments
+FOR EACH ROW
+BEGIN
+    UPDATE invoices
+    SET payment_total = payment_total - OLD.amount
+    WHERE invoice_id = OLD.invoice_id;
+END $$
+DELIMITER ;
+
+DELETE FROM payments WHERE payment_id = 10;
+```
+### SHOWING TRIGGERS
+```sql
+SHOW TRIGGERS;
+SHOW TRIGGERS LIKE 'payments%';
+```
+### DROP TRIGGERS
+```sql
+DROP TRIGGER IF EXISTS payment_after_insert;
+```
+### USING TRIGGERS FOR AUDITING
+```sql
+USE sql_invoicing;
+
+CREATE TABLE payments_audit
+(
+    client_id   INT           NOT NULL,
+    date        DATE          NOT NULL,
+    amount      DECIMAL(9, 2) NOT NULL,
+    action_type VARCHAR(50)   NOT NULL,
+    action_date DATETIME      NOT NULL
+);
+
+
+DROP TRIGGER IF EXISTS payments_after_insert;
+DELIMITER $$
+CREATE TRIGGER payments_after_insert
+    AFTER INSERT ON payments
+    FOR EACH ROW
+BEGIN
+    UPDATE invoices
+    SET payment_total = payment_total + NEW.amount
+    WHERE invoice_id = NEW.invoice_id;
+    
+    INSERT INTO payments_audit
+    VALUES (NEW.client_id, NEW.date, NEW.amount, 'Insert', NOW());
+END $$
+
+DELIMITER ;
+DROP TRIGGER IF EXISTS payments_after_delete;
+DELIMITER $$
+CREATE TRIGGER payments_after_delete
+    AFTER DELETE ON payments
+    FOR EACH ROW
+BEGIN
+    UPDATE invoices
+    SET payment_total = payment_total - OLD.amount
+    WHERE invoice_id = OLD.invoice_id;
+    
+    INSERT INTO payments_audit
+    VALUES (OLD.client_id, OLD.date, OLD.amount, 'Delete', NOW());
+END $$
+
+DELIMITER ;
+
+
+INSERT INTO payments 
+VALUES (DEFAULT,5,3,'2023-09-01',10,1);
+
+```
+### TRANSACTIONS
+- A group of sql statements that
+- represent a Single unit of work
+```sql
+START TRANSACTION;
+INSERT INTO orders(customer_id,order_date,status)
+VALUES(1,'2024-01-09',1);
+INSERT INTO order_items()
+VALUES(LAST_INSERT_ID(),1,1,1);
+COMMIT;
+```
+### Concurrency and dead locking
+- run this script line by line in to different script box 
+- query box 1
+```sql
+START TRANSACTION;
+UPDATE customers
+SET points = points + 10
+WHERE customer_id = 1;
+COMMIT;
+```
+- query box 2
+```sql
+START TRANSACTION;
+UPDATE customers
+SET points = points + 10
+WHERE customer_id = 1;
+COMMIT;
+```
+### TRANSACTION Isolation
+```sql
+SHOW VARIABLES LIKE 'transaction_isolation';
+SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+```
+## READ UNCOMMITTED Isolation level
+### Dirty Read Transactions
+
+- Session 1
+```sql
+USE sql_store; --1
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED; --2
+select points -- 6 Read UNCOMMITTED data 
+FROM customers
+WHERE customer_id = 1;
+```
+- Session 2
+```sql
+Use  sql_store; -- 3
+START TRANSACTION; -- 4
+Update customers -- 5
+SET points = 20
+WHERE customer_id = 1;
+COMMIT;
+
+```
+### READ COMMITTED Isolation level
+- Session 1
+```sql
+USE sql_store;
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED; -- 1
+START TRANSACTION; -- 2
+select points  FROM customers WHERE customer_id = 1; -- 3
+select points  FROM customers WHERE customer_id = 1; -- 6
+COMMIT; -- *
+```
+- Session 2
+```sql
+Use  sql_store;
+START TRANSACTION; 
+Update customers 
+SET points = 30 -- 4
+WHERE customer_id = 1;
+COMMIT; -- 5
+```
+### REPEATABLE READ Isolation Level
+- Session 1
+```sql
+USE sql_store;
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ; -- 1
+START TRANSACTION; -- 2
+select points  FROM customers WHERE customer_id = 1; -- 3
+select points  FROM customers WHERE customer_id = 1; -- 5
+COMMIT;
+```
+- Session 2
+```sql
+Use  sql_store;
+START TRANSACTION; 
+Update customers 
+SET points = 30 
+WHERE customer_id = 1;
+COMMIT; -- 4
+```
+
+- in this Isolation we see phanton Read problem
+```sql
+USE sql_store;
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+START TRANSACTION; -- 1 
+select *  FROM customers WHERE state = 'VA'; -- we give a special discount -- 3 -- 5
+COMMIT;
+```
+- Session 2
+```sql
+Use  sql_store;
+START TRANSACTION; 
+Update customers -- 2
+SET state = 'VA'
+WHERE customer_id = 1;
+COMMIT; -- 4
+```
+
+### SERIALIZABLE Isolation Level
+- provide Highest level of Isolation
+- solve all Concurrency problems
+```sql
+USE sql_store;
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ; -- 1
+START TRANSACTION; -- 2
+select *  FROM customers WHERE state = 'VA'; -- 5
+COMMIT;
+```
+- Session 2
+```sql
+Use  sql_store;
+START TRANSACTION; -- 3
+Update customers -- 4
+SET state = 'VA'
+WHERE customer_id = 3;
+COMMIT; -- 6
+```
+### MYSQL Datatypes
+1. String datatypes
+2. Integer datatypes
+3. Fixed point and Floating datatypes
+4. Boolean datatypes
+5. Enum and Set types datatypes -- we avoid to use this datatypes
+6. Date and Time types datatypes
+7. Blob datatypes --we also avoid to use binary data bcz its slow down our database backup
+8. JSON datatypes
+
+### String Datatypes
+- CHAR(x)  -- fixed-length like abbreviation of state 'VA'
+- VARCHAR(x) -- variable-length like storing usernames, passwords, email addresses and so on
+
+- Recommended 
+- VARCHAR(50)   for short strings like usernames and passwords
+- VARCHAR(255)  for medium-length strings like addresses
+
+- Maximum Length
+```sql
+- CHAR(x)     --  
+- VARCHAR(x)  -- max : 65,535 characters (64KB) 
+- MEDIUMTEXT  -- max : 16MB              16,777,216    characters --JSON objects, CSV and short medium length book
+- LONGTEXT    -- max : 4GB               4,294,967,296 characters Long Text books
+- TINYTEXT    -- max : 255Bytes          255           characters
+- Text        -- max : 65,535 characters (64KB) 
+```
+- Mostly we use VARCHAR type, bcz it uses indexes to speedup queries.
+
+
+### Integer Datatypes
+- we store whole numbers that don't have decimal points.
+- Maximum Length
+```sql
+-------------------------------------------------------------------------------------------------------------------------------------
+|   Type	    Storage (Bytes)	    Minimum Value Signed	Minimum Value Unsigned	Maximum Value Signed	Maximum Value Unsigned  |
+|   TINYINT 	1	                -128	                        0	                    127	                    255             |
+|   SMALLINT	2	                -32768	                        0	                    32767	                65535           |
+|   MEDIUMINT	3	                -8388608	                    0	                    8388607	                16777215        |
+|   INT        	4	                -2147483648	                    0	                    2147483647	            4294967295      |
+|   BIGINT  	8	                -2^63	                        0	                    2^63-1	                2^64-1          |
+-------------------------------------------------------------------------------------------------------------------------------------
+```
+- ZEROFILL
+```sql
+INT(4) => 0001
+```
+### Fixed point and Floating Datatypes
+- DECIMAL(p,s) precision,scale --> DECIMAL(9,2) => 1234567.89
+- DEC, NUMERIC, FIXED are exactly same as decimal
+- FLOAT 4bytes, 8bytes, DOUBLE -- used for scientific calculation and are approximately values
+
+### Boolean datatypes
+- BOOLEAN -- TRUE or FALSE 
+- BOOL    -- 1 or 0
+
+### Date and Time types datatypes
+- DATE              storing date without time component
+- Time              time for storing time value
+- DATETIME          8bytes 
+- TIMESTAMP         4bytes (0 upto 2038) -- track of a row when inserted to last updated
+- YEAR              year for storing 4 digit year
+
+
+### Json datatypes
+- Method 1
+```sql
+UPDATE products
+SET properties = 
+'
+{
+	"dimension" : [1,2,3],
+    "weight" : 10,
+    "manufacturer":{
+    "name":"Ahmed"
+    }
+}
+'
+WHERE product_id = 1 ;
+```
+- Method 2
+```sql
+UPDATE products
+SET properties = JSON_OBJECT(
+'weight',10,
+'dimension',JSON_ARRAY(1,2,3),
+'manufacturer',JSON_OBJECT('name','Abdullah')
+)
+WHERE product_id = 2;
+```
+- Selection specific property
+```sql
+SELECT 
+product_id,
+JSON_EXTRACT(properties,'$.weight')
+FROM products
+WHERE product_id IN (1,2) ;
+```
+### Creating Database, Tables and one to one Relationship
+- Create the School database
+```sql
+CREATE DATABASE IF NOT EXISTS School;
+USE School;
+```
+- Create the Student table
+```sql
+CREATE TABLE IF NOT EXISTS Student (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    course VARCHAR(20),
+    age INT
+);
+```
+- Insert data into the Student table
+```sql
+INSERT INTO Student (name, course, age)
+VALUES 
+    ('Abdullah Khokar', 'Python', 19),
+    ('Ahmed Raheem', 'Python', 22),
+    ('Mowahid Ali', 'Python', 20);
+```
+- Create the Address table
+```sql
+CREATE TABLE IF NOT EXISTS Address (
+    AddressId INT PRIMARY KEY AUTO_INCREMENT,
+    Address VARCHAR(100) NOT NULL,
+    StudentId INT NOT NULL UNIQUE,
+    FOREIGN KEY (StudentId) REFERENCES Student(id)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+);
+```
+- Insert data into the Address table
+```sql
+INSERT INTO Address (Address, StudentId)
+VALUES
+    ('Satellite Town Rawalpindi', 1),
+    ('Azad Chaiwala Institute', 2),
+    ('Murree Road Faizabad', 3);
+```
+### Creating Database, Tables and one to Many Relationship
+```sql
+CREATE DATABASE Company;
+USE Company;
+```
+- Create Employees Table
+```sql
+CREATE TABLE Employee (
+    Id INT PRIMARY KEY,
+    Name VARCHAR(45) NOT NULL,
+    Department VARCHAR(45) NOT NULL,
+    Salary FLOAT NOT NULL,
+    Gender VARCHAR(45) NOT NULL,
+    Age INT NOT NULL,
+    City VARCHAR(45) NOT NULL
+);
+```
+- Populate the Employee Table with test data
+```sql
+INSERT INTO Employee VALUES (1001, 'John', 'IT', 35000, 'Male', 25, 'London');
+INSERT INTO Employee VALUES (1002, 'Smith', 'HR', 45000, 'Female', 27, 'London');
+INSERT INTO Employee VALUES (1003, 'James', 'Finance', 50000, 'Male', 28, 'London');
+INSERT INTO Employee VALUES (1004, 'Mike', 'Finance', 50000, 'Male', 28, 'London');
+INSERT INTO Employee VALUES (1005, 'Linda', 'HR', 75000, 'Female', 26, 'London');
+INSERT INTO Employee VALUES (1006, 'Anurag', 'IT', 35000, 'Male', 25, 'Mumbai');
+INSERT INTO Employee VALUES (1007, 'Priyanla', 'HR', 45000, 'Female', 27, 'Mumbai');
+INSERT INTO Employee VALUES (1008, 'Sambit', 'IT', 50000, 'Male', 28, 'Mumbai');
+INSERT INTO Employee VALUES (1009, 'Pranaya', 'IT', 50000, 'Male', 28, 'Mumbai');
+INSERT INTO Employee VALUES (1010, 'Hina', 'HR', 75000, 'Female', 26, 'Mumbai');
+```
+- Create Projects Table
+```sql
+CREATE TABLE Projects (
+    ProjectId INT PRIMARY KEY,
+    Title VARCHAR(200) NOT NULL,
+    ClientId INT,
+    EmployeeId INT,
+    StartDate DATETIME,
+    EndDate DATETIME,
+	
+    FOREIGN KEY fk_project_employee (EmployeeId) REFERENCES Employee(Id)
+    ON DELETE RESTRICT 
+    ON UPDATE CASCADE
+);
+```
+- Populate the Projects Table with test data
+```sql
+INSERT INTO Projects VALUES (1, 'Develop e-commerce website from scratch', 1, 1003, NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY));
+INSERT INTO Projects VALUES (2, 'WordPress website for our company', 1, 1002, NOW(), DATE_ADD(NOW(), INTERVAL 45 DAY));
+INSERT INTO Projects VALUES (3, 'Manage our company servers', 2, 1007, NOW(), DATE_ADD(NOW(), INTERVAL 45 DAY));
+INSERT INTO Projects VALUES (4, 'Hosting account is not working', 3, 1009, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY));
+INSERT INTO Projects VALUES (5, 'MySQL database for my desktop application', 4, 1010, NOW(), DATE_ADD(NOW(), INTERVAL 15 DAY));
+INSERT INTO Projects VALUES (6, 'Develop new WordPress plugin for my business website', 2, 1003, NOW(), DATE_ADD(NOW(), INTERVAL 10 DAY));
+INSERT INTO Projects VALUES (7, 'Migrate web application and database to new server', 2, 1002, NOW(), DATE_ADD(NOW(), INTERVAL 5 DAY));
+INSERT INTO Projects VALUES (8, 'Android Application development', 4, 1004, NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY));
+INSERT INTO Projects VALUES (9, 'Hosting account is not working', 3, 1001, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY));
+INSERT INTO Projects VALUES (10, 'MySQL database for my desktop application', 4, 1008, NOW(), DATE_ADD(NOW(), INTERVAL 15 DAY));
+INSERT INTO Projects VALUES (11, 'Develop new WordPress plugin for my business website', 2, 1007, NOW(), DATE_ADD(NOW(), INTERVAL 10 DAY));
 ```
