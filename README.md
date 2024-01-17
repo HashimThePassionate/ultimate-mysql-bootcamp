@@ -1131,7 +1131,6 @@ DROP Procedure IF EXISTS get_clients;
 ```
 ### Parameters in Procedure
 ```sql
-=======
 ```python
 CALL get_clients()
 ```
@@ -1141,13 +1140,12 @@ DROP Procedure IF EXISTS get_clients;
 ```
 ### Parameters in Procedure
 ```python
->>>>>>> master
 DROP PROCEDURE IF EXISTS get_clients_by_states;
 DELIMITER $$
 CREATE PROCEDURE get_clients_by_states
 	(
         state CHAR(2)
-    )
+	)
 	BEGIN
     SELECT * FROM clients c
     WHERE c.state = state;
@@ -1164,7 +1162,7 @@ DELIMITER $$
 CREATE PROCEDURE get_clients_by_default_states
 	(
         state CHAR(2)
-    )
+    	)
 	BEGIN
     IF state IS NULL THEN
         state = 'CA';
@@ -1207,7 +1205,7 @@ CALL get_clients_by_default_states('CA')
 - payment_method_id => TINYINT(1) 0-255
 ```sql
 DELIMITER $$
-CREATE PROCEDURE get_payments()
+CREATE PROCEDURE get_payments
     (
         client_id INT,
         payment_method_id TINYINT(1)
@@ -1231,7 +1229,7 @@ CALL get_payments(NULL,2);
 ### Update in  Procedure
 ```sql
 DELIMITER $$
-CREATE PROCEDURE make_payments()
+CREATE PROCEDURE make_payments
     (
         invoice_id INT,
         payment_total DECIMAL(8,2),
@@ -1255,7 +1253,7 @@ CALL make_payments(2,2223.823,'2023-01-07');
 - https://www.ibm.com/docs/en/db2-for-zos/11?topic=codes-sqlstate-values-common-error
 ```sql
 DELIMITER $$
-CREATE PROCEDURE make_validate_payments()
+CREATE PROCEDURE make_validate_payments
     (
         invoice_id INT,
         payment_total DECIMAL(8,2),
@@ -1280,7 +1278,7 @@ CALL make_validate_payments(2,-2223.823,'2023-01-07');
 ### Output Parameters  in  Procedure
 ```sql
 DELIMITER $$
-CREATE PROCEDURE get_unpaid_invoices_for_clients()
+CREATE PROCEDURE get_unpaid_invoices_for_clients
 	(
       client_id INT   
     )
@@ -1307,12 +1305,12 @@ CALL get_unpaid_invoices_for_clients(3);
 - also copy this using INTO
 ```sql
 DELIMITER $$
-CREATE PROCEDURE get_unpaid_invoices_for_clients()
+CREATE PROCEDURE get_unpaid_invoices_for_clients
 	(
       client_id INT,
       OUT invoices_count INT,
       OUT invoices_total DECIMAL(9,2)
-    )
+	)
 BEGIN
 	SELECT COUNT(*), SUM(invoice_total)
     INTO invoices_count, invoices_total
@@ -1346,7 +1344,7 @@ SELECT @p1 AS `invoices_count`, @p2 AS `invoices_total`;
 DELIMITER $$
 CREATE PROCEDURE get_risk_factor()
 BEGIN
-	DECLARE risk_factor DECIMAL(9,2) DEFAULT 0;
+    DECLARE risk_factor DECIMAL(9,2) DEFAULT 0;
     DECLARE invoices_total DECIMAL(9,2);
     DECLARE invoices_count INT;
 	SELECT COUNT(*), SUM(invoice_total)
