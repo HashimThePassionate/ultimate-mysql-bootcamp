@@ -7,7 +7,7 @@
 - [Advantages & Disadvantages](#Advantages-&-Disadvantages)
 - [Database Basics](#Database-Basics)
 - [Joining Tables](#Joining-Tables)
-- [Inserting, Updating, Deleting Data](#Inserting,-Updating,-Deleting-Data)
+- [Inserting Updating Deleting Data](#Inserting-Updating-Deleting-Data)
 - [Aggregate Functions](#Aggregate-Functions)
 - [Subqueries](#Subqueries)
 - [Views](#Views)
@@ -126,7 +126,7 @@ Understanding these pros and cons can help users make informed decisions based o
 - *RIGHT JOIN*: Includes all rows from the right table, even if there's no match in the left table.
 - *UNION*: Combines results from two tables, removing duplicates.
 
-### Inserting, Updating, Deleting Data
+### Inserting Updating Deleting Data
 
 - *INSERT INTO*: Adds new rows to a table.
 - *UPDATE*: Modifies existing rows.
