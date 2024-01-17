@@ -2,10 +2,20 @@
 ## Table of Contents
 - [Introduction to MySQL](#Introduction-to-MySQL)
 - [Characteristics of MySQL](#Characteristics-of-MySQL)
+- [Applications of MySQL](#Applications-of-MySQL)
+- [Purposes](#Purposes)
+- [Advantages & Disadvantages](#Advantages-&-Disadvantages)
+- [Database Basics](#Database-Basics)
+- [Joining Tables](#Joining-Tables)
+- [Inserting, Updating, Deleting Data](#Inserting,-Updating,-Deleting-Data)
+- [Aggregate Functions](#Aggregate-Functions)
+- [Subqueries](#Subqueries)
+- [Views](#Views)
+- [Stored Procedures](#Stored-Procedures)
+- [Additional Topics Covered](#Additional-Topics-Covered)
 
 
-
-# Introduction to MySQL
+## Introduction to MySQL
 MySQL is a widely used, open-source relational database management system (RDBMS). It enables users to  
 store, manage, and retrieve data efficiently in a structured format. Think of it as a digital filing 
 cabinet that organizes your information into tables, rows, and columns, making it easy to find and use 
@@ -13,7 +23,6 @@ specific data whenever you need it.
 
 
 ## Characteristics of MySQL
-
 ### *Open-source*: 
    This means that the source code is freely available, allowing anyone to modify and distribute it. This has contributed to its widespread adoption and large community of developers.
 ### *Relational*: 
@@ -25,8 +34,7 @@ specific data whenever you need it.
 ### *Easy to use*: 
    MySQL uses Structured Query Language (SQL), a standardized language for interacting with databases. This makes it relatively easy to learn and use, even for people with limited technical experience.
 
-## Here are some of the common applications of MySQL:
-
+## Applications of MySQL
 ### *Websites and web applications*: 
    Many websites and web applications, such as blogs, e-commerce platforms, and social media sites, use MySQL to store user data, product information, and other website content.
 ### *Content management systems (CMS)*: 
@@ -37,8 +45,7 @@ specific data whenever you need it.
 If you're looking for a powerful, flexible, and easy-to-use database management system, MySQL is a great option. It's a popular choice for a wide range of applications, from small personal projects to large enterprise systems.
 
 
-## Purposes:
-
+## Purposes
 MySQL is a popular open-source relational database management system (RDBMS) that uses SQL as its query language. Its main purposes include:
 
 ### 1. *Data Storage and Retrieval:* 
@@ -67,8 +74,7 @@ Being open-source, MySQL has a large and active community that contributes to it
 
 Understanding these aspects can help users leverage MySQL effectively for their data storage and retrieval needs, whether it's for a small project or a large-scale enterprise application.
 
-## Advantages & Disadvantages:
-
+## Advantages & Disadvantages
 ### *Advantages of MySQL:*
 
 1. *Open Source:* MySQL is free to use and is open-source, making it cost-effective for small businesses and individuals.
@@ -106,9 +112,7 @@ Understanding these pros and cons can help users make informed decisions based o
 
 
 ## How its works!
-
-### Database Basics:
-
+### Database Basics
 - *USE database_name*: Selects a database to work with.
 - *SELECT FROM table_name*: Retrieves all columns and rows from a table.
 - *SELECT specific_columns FROM table_name*: Fetches only specified columns.
@@ -116,26 +120,25 @@ Understanding these pros and cons can help users make informed decisions based o
 - *ORDER BY clause*: Sorts results in ascending or descending order.
 - *DISTINCT keyword*: Eliminates duplicate rows.
 
-### Joining Tables:
-
+### Joining Tables
 - *INNER JOIN*: Combines rows from two tables based on a shared column.
 - *LEFT JOIN*: Includes all rows from the left table, even if there's no match in the right table.
 - *RIGHT JOIN*: Includes all rows from the right table, even if there's no match in the left table.
 - *UNION*: Combines results from two tables, removing duplicates.
 
-### Inserting, Updating, Deleting Data:
+### Inserting, Updating, Deleting Data
 
 - *INSERT INTO*: Adds new rows to a table.
 - *UPDATE*: Modifies existing rows.
 - *DELETE*: Removes rows.
 
-### Aggregate Functions:
+### Aggregate Functions
 
 - *SUM, COUNT, AVG, MAX, MIN*: Perform calculations on groups of rows.
 - *GROUP BY clause*: Groups rows together based on shared values.
 - *HAVING clause*: Filters groups based on aggregate function results.
 
-### Subqueries:
+### Subqueries
 
 Nested SELECT statements: Used for complex filtering and data retrieval.
 ### Views:
@@ -187,16 +190,15 @@ Nested SELECT statements: Used for complex filtering and data retrieval.
 ### Subqueries:
 
 Nested SELECT statements: Used for complex filtering and data retrieval.
-### Views:
 
+### Views
 - *Virtual tables*: Simplify complex queries and hide underlying table structures.
 
-### Stored Procedures:
+### Stored Procedures
 
 - Reusable blocks of SQL code stored within the database.
 
-### Additional Topics Covered:
-
+### Additional Topics Covered
 - Date functions
 - Conditional logic (IF, CASE)
 - String manipulation
