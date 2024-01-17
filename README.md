@@ -1,3 +1,7 @@
+# Welcome to Mysql Zero to Hero repository!
+## Table of Contents
+- [Characteristics of MySQL](#Characteristics-of-MySQL)
+- 
 # Introduction to MySQL
 
 MySQL is a widely used, open-source relational database management system (RDBMS). It enables users to  
@@ -6,7 +10,7 @@ cabinet that organizes your information into tables, rows, and columns, making i
 specific data whenever you need it.
 
 
-## Here are some key characteristics of MySQL:
+## Characteristics of MySQL
 
 ### *Open-source*: 
    This means that the source code is freely available, allowing anyone to modify and distribute it. This has contributed to its widespread adoption and large community of developers.
