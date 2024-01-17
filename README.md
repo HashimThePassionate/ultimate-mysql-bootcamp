@@ -1,7 +1,10 @@
 # Welcome to Mysql Zero to Hero repository!
 ## Table of Contents
+- Introduction to MySQL](#Introduction-to-MySQL)
 - [Characteristics of MySQL](#Characteristics-of-MySQL)
-- 
+
+
+
 # Introduction to MySQL
 
 MySQL is a widely used, open-source relational database management system (RDBMS). It enables users to  
