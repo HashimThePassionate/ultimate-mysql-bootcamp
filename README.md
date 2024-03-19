@@ -286,7 +286,7 @@ or
 SELECT * FROM customer WHERE city <> 'karachi';
 ```
 
-### How to filter those records whose birth_date > 2023-08-07
+### How to filter those records whose birth_date > '2023-08-07'
 ```sql
 SELECT * FROM customer WHERE birth_date > '2023-08-07';
 ```
@@ -297,7 +297,7 @@ SELECT * FROM customer WHERE birth_date > '2023-08-07';
 SELECT * FROM customer WHERE birth_date > '2023-08-07' AND points > 1500;
 ```
 
-### How to filter those records whose birth_date > 2023-08-07 OR Points > 1500
+### How to filter those records whose birth_date > '2023-08-07' OR Points > 1500
 - We use OR operator it return true if at least one  condition meets true
 ```sql
 SELECT * FROM customer WHERE birth_date > '2023-08-07' OR points > 1500;
@@ -349,7 +349,6 @@ where
 
 ### Use underscore to define how many letters end with that pattern
 ```sql
-```python
 SELECT * FROM customer WHERE last_name LIKE '_______s'
 ```
 
@@ -424,7 +423,7 @@ SELECT * FROM customer ORDER by first_name;
 ```
 ### We can also sort by multiple columns
 SELECT * FROM customer ORDER by first_name, last_name;
-```
+```sql
 SELECT * FROM customer ORDER by first_name DESC, last_name ASC;
 ```
 
@@ -547,18 +546,7 @@ o.customer_id = c.customer_id
 JOIN order_status os
 ON os.status_is = o.status;
 ```
-### Compound Join
-- we can combine two fields to unique identify row
-```sql
-SELECT * 
-FROM orders_items oi
-JOIN order_notes oin
-ON
-oi.order_id = oin.order_id
-AND
-oi.product_id = oin.product_id;
-```
-### leFT Join
+### Left Join
 - Left outer join select those records which are not
 - like in our example we also select those customers who don't have any order as well as who do
 ```sql
@@ -1081,9 +1069,6 @@ DROP VIEW invoices_with_balance;
 - If we dont have these in mention above
 - than our view is Updatable view
 ``` sql
-=======
-``` python
->>>>>>> master
 CREATE OR REPLACE VIEW invoices_with_balance AS
 	SELECT 
 	invoice_id,
@@ -1139,15 +1124,12 @@ DROP Procedure IF EXISTS get_clients;
 ```
 ### Parameters in Procedure
 ```sql
-```python
 CALL get_clients()
 ```
 ### Dropping Procedure
-```python
 DROP Procedure IF EXISTS get_clients;
 ```
 ### Parameters in Procedure
-```python
 DROP PROCEDURE IF EXISTS get_clients_by_states;
 DELIMITER $$
 CREATE PROCEDURE get_clients_by_states
@@ -1160,9 +1142,7 @@ CREATE PROCEDURE get_clients_by_states
 	END$$
 DELIMITER ;
 
-
 CALL get_clients_by_states('CA');
-
 ```
 ### Parameters with defaults values in Procedure
 ```sql
@@ -1190,7 +1170,7 @@ DELIMITER $$
 CREATE PROCEDURE get_clients_by_default_states
 	(
         state CHAR(2)
-    )
+        )
 	BEGIN
     IF state IS NULL THEN
         select * from clients;
@@ -1289,7 +1269,7 @@ DELIMITER $$
 CREATE PROCEDURE get_unpaid_invoices_for_clients
 	(
       client_id INT   
-    )
+        )
 BEGIN
 	SELECT COUNT(*) ,
     SUM(invoice_total)
