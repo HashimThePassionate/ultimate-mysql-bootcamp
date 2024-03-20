@@ -710,14 +710,6 @@ UPDATE customer
 SET first_name="Muhammad", last_name="Hashim", birth_date="2023-12-30"
 WHERE customer_id = 1;
 ```
-### Update multiple Records
-```sql
-UPDATE orders_items
-SET unit_price=50.57, quantity = 5
-WHERE order_id = 1;
-```
-
-
 ### Using subqueries in Update
 ```sql
 UPDATE orders
