@@ -642,7 +642,7 @@ INSERT INTO customer (
 );
 ```
 
-### INSERT Multiple RECORDSr
+### INSERT Multiple RECORD
 ```sql
 INSERT INTO customer (
     customer_id,
