@@ -698,9 +698,9 @@ SELECT * FROM orders;
 ```
 
 
-### Insert only data from one table to another
+### Creating only data from one table to another
 ```sql
-INSERT INTO orders_archived
+CREATE TABLE orders_archived  AS
 SELECT * from orders WHERE order_date > '2023-12-01';
 ```
 
