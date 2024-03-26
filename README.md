@@ -1145,7 +1145,7 @@ CREATE PROCEDURE get_clients_by_default_states
     	)
 	BEGIN
     IF state IS NULL THEN
-        state = 'CA';
+       SET state = 'CA';
     END IF;
     SELECT * FROM clients c
     WHERE c.state = state;
