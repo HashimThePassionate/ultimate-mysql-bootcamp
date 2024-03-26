@@ -218,14 +218,14 @@ USE mydb || use mydb
 
 ```sql
 USE mydb;
-SELECT * FROM customer;
+SELECT * FROM customers;
 ```
 
 ### How to Select and filter a specific row using WHERE Clause
 ```sql
 USE mydb;
 SELECT * 
-FROM customer
+FROM customers
 WHERE customer_id = 5;
 ```
 
@@ -233,34 +233,34 @@ WHERE customer_id = 5;
 ```sql
 USE mydb;
 SELECT * 
-FROM customer
+FROM customers
 -- WHERE customer_id = 5  "--" Double Hyphen is used to comment something
 ORDER BY first_name;
 
 ```
 ### How to Select a specific fields with field name
 ```sql
-SELECT first_name, last_name , points FROM customer;
+SELECT first_name, last_name , points FROM customers;
 ```
 
 ### How to Select a specific fields with field name and calculate something in run time
 ```sql
-SELECT first_name, last_name , points, points+10 FROM customer;
+SELECT first_name, last_name , points, points+10 FROM customers;
 
 ```
 ### Select specific field and calculate something but change calculated name in run time with AS Alias
 ```sql
-SELECT first_name, last_name , points, (points+10)*100 AS discount_factor FROM customer;
+SELECT first_name, last_name , points, (points+10)*100 AS discount_factor FROM customers;
 ```
 
 ### if you want to add Space in Alias name
 ```sql
-SELECT first_name, last_name , points, (points+10)*100 AS 'Discount Factor' FROM customer;
+SELECT first_name, last_name , points, (points+10)*100 AS 'Discount Factor' FROM customers;
 ```
 
 ### How to select only unique and non duplicate value 
 ```sql
-SELECT DISTINCT city FROM customer;
+SELECT DISTINCT city FROM customers;
 ```
 - Make sure if you use SELECT DISTINCT first_name, city FROM customer it means both first_name and city
 must be distinct.
@@ -269,122 +269,122 @@ must be distinct.
 
 ### How to filter with WHERE Clause
 ```sql
-SELECT * FROM customer WHERE points>1500;
+SELECT * FROM customers WHERE points>1500;
 ``` 
 - filter those records whose points are greater than 1500
 - Also you should use these operators >,<,>=,<=,!=, <> 
 
 ### How to filter string matched record with WHERE Clause
 ```sql
-SELECT * FROM customer WHERE city = 'karachi'; 
+SELECT * FROM customers WHERE city = 'karachi'; 
 ```
 
 ### How to filter those records which does not contain string 'karachi'
 ```sql
-SELECT * FROM customer WHERE city != 'karachi'; 
+SELECT * FROM customers WHERE city != 'karachi'; 
 or 
-SELECT * FROM customer WHERE city <> 'karachi';
+SELECT * FROM customers WHERE city <> 'karachi';
 ```
 
 ### How to filter those records whose birth_date > '2023-08-07'
 ```sql
-SELECT * FROM customer WHERE birth_date > '2023-08-07';
+SELECT * FROM customers WHERE birth_date > '2023-08-07';
 ```
 
 ### How to filter those records whose birth_date > 2023-08-07 and Points > 1500
 - We use AND operator it return true if both condition meets true
 ```sql
-SELECT * FROM customer WHERE birth_date > '2023-08-07' AND points > 1500;
+SELECT * FROM customers WHERE birth_date > '2023-08-07' AND points > 1500;
 ```
 
 ### How to filter those records whose birth_date > '2023-08-07' OR Points > 1500
 - We use OR operator it return true if at least one  condition meets true
 ```sql
-SELECT * FROM customer WHERE birth_date > '2023-08-07' OR points > 1500;
+SELECT * FROM customers WHERE birth_date > '2023-08-07' OR points > 1500;
 ```
 
 ### How to filter those records whose birth_date > 2023-08-07 is NOT Greater than 
 - We use NOT operator to reverse
 ```sql
-SELECT * FROM customer WHERE NOT(birth_date > '2023-08-07' OR points > 1500);
+SELECT * FROM customers WHERE NOT(birth_date > '2023-08-07' OR points > 1500);
 ```
 
 ### How to filter those records whose birth_date > 2023-08-07 OR Points > 1500 AND city ="kohat"
 - We use OR and AND both to add multiple conditions
 ```sql
-SELECT * FROM customer WHERE birth_date > '2023-08-07' OR (points > 1500 AND city = 'kohat');
+SELECT * FROM customers WHERE birth_date > '2023-08-07' OR (points > 1500 AND city = 'kohat');
 ```
 
 ### How to select those result whose city is kohat or karachi
 - We use IN operator, we can also use OR operator but IN operator is shorter and it works like OR operator
 ```sql
-SELECT * FROM customer WHERE city IN ('karachi','kohat');
+SELECT * FROM customers WHERE city IN ('karachi','kohat');
 
 ```
 ### How to select those result whose city is not in kohat or karachi
 - We use NOT IN operator
 ```sql
-SELECT * FROM customer WHERE city NOT IN ('karachi','kohat');
+SELECT * FROM customers WHERE city NOT IN ('karachi','kohat');
 ```
 
 ### How to select those points >= 1000 and <= 1500
 - We use BETWEEN operator, note we can also use >=  <= operators but BETWEEN is shorter
 ```sql
-SELECT * FROM customer WHERE points BETWEEN 1000 AND 1500;
+SELECT * FROM customers WHERE points BETWEEN 1000 AND 1500;
 ```
 
 ### How to select those rows that matched with specific string pattern using LIKE operator
 - we use WHERE last_name LIKE 's%' it means last_name must be start with s but after s it contain any letters.
 ```sql
-SELECT * FROM customer WHERE last_name LIKE 's%';
-SELECT * FROM customer WHERE last_name LIKE 'summer%'; //start with summer ends with any letter
+SELECT * FROM customers WHERE last_name LIKE 's%';
+SELECT * FROM customers WHERE last_name LIKE 'summer%'; //start with summer ends with any letter
 ```
 
 ### change the pattern in LIKE operator
 ```sql
-SELECT * FROM customer WHERE last_name LIKE '%s';// start with any  letter but ends with s
-SELECT * FROM customer WHERE last_name LIKE '%s%';// start with any  letter and ends with any letter but s letter can be any
+SELECT * FROM customers WHERE last_name LIKE '%s';// start with any  letter but ends with s
+SELECT * FROM customers WHERE last_name LIKE '%s%';// start with any  letter and ends with any letter but s letter can be any
 where
 ```
 
 ### Use underscore to define how many letters end with that pattern
 ```sql
-SELECT * FROM customer WHERE last_name LIKE '_______s'
+SELECT * FROM customers WHERE last_name LIKE '_______s'
 ```
 
 ### we can also specify first and last letter and Between letters range with "__"  underscore
 ```sql
-SELECT * FROM customer WHERE last_name LIKE 'v______s'
+SELECT * FROM customers WHERE last_name LIKE 'v______s'
 ```
 
 ### use  REGEXP to use complex string pattern
 - Look we use like operator
 ```sql
-SELECT * FROM customer WHERE first_name LIKE '%hr%'
+SELECT * FROM customers WHERE first_name LIKE '%hr%'
 ```
 - we can also use REGEXP for more complex string patterns
 ```sql
-SELECT * FROM customer WHERE first_name REGEXP 'hr'
+SELECT * FROM customers WHERE first_name REGEXP 'hr'
 ```
 ### first_name must start with hr
 ```sql
-SELECT * FROM customer WHERE first_name LIKE '%hr%'
+SELECT * FROM customers WHERE first_name LIKE '%hr%'
 ```
 - we can also use REGEXP for more complex string patterns
 SELECT * FROM customer WHERE first_name REGEXP 'hr'
 ```
 ### first_name must start with hr
-SELECT * FROM customer WHERE first_name REGEXP '^hr'
+SELECT * FROM customers WHERE first_name REGEXP '^hr'
 ```
 
 ### first_name must end with t
 ```sql
-SELECT * FROM customer WHERE first_name REGEXP 't$'
+SELECT * FROM customers WHERE first_name REGEXP 't$'
 ```
 
 ### we can also use pipe operator | in REGEXP
 ```sql
-SELECT * FROM customer WHERE first_name REGEXP '^ch|t$'
+SELECT * FROM customers WHERE first_name REGEXP '^ch|t$'
 ```
 - it means first_name must start with ch 
 - Or first_name must end with t
@@ -392,50 +392,50 @@ SELECT * FROM customer WHERE first_name REGEXP '^ch|t$'
 
 ### we can also specify []
 ```sql
-SELECT * FROM customer WHERE first_name REGEXP '[agc]t'
+SELECT * FROM customers WHERE first_name REGEXP '[agc]t'
 ```
 - first_name will be at, gt, ct anywhere
 
 ### we can change pattern
 ```sql
-SELECT * FROM customer WHERE first_name REGEXP 't[agc]'
+SELECT * FROM customers WHERE first_name REGEXP 't[agc]'
 ```
 - first_name will be ta, tg, tc anywhere
 
 ### we can also specify range [a-h]
 ```sql
-SELECT * FROM customer WHERE first_name REGEXP '[a-h]t'
+SELECT * FROM customers WHERE first_name REGEXP '[a-h]t'
 ```
 - first_name will be at,bt,ct,dt,et,ft, gt, ht anywhere
 
 ### How to select those records whone phone no is NULL using "IS NULL" operator
 ```sql
-SELECT * FROM customer WHERE phone IS NULL;
+SELECT * FROM customers WHERE phone IS NULL;
 ```
 ### How to select and sort data by column name 
 - by default every column is sorted according  to primary key column
 ```sql
-SELECT * FROM customer ORDER by first_name;
+SELECT * FROM customers ORDER by first_name;
 ```
 ### We can also sort by multiple columns
 ```sql
-SELECT * FROM customer ORDER by first_name;
+SELECT * FROM customers ORDER by first_name;
 ```
 ### We can also sort by multiple columns
 SELECT * FROM customer ORDER by first_name, last_name;
 ```sql
-SELECT * FROM customer ORDER by first_name DESC, last_name ASC;
+SELECT * FROM customers ORDER by first_name DESC, last_name ASC;
 ```
 
 ### How  to Select first 10 records using "LIMIT" Clause
 ```sql
-SELECT * FROM customer LIMIT 10;
+SELECT * FROM customers LIMIT 10;
 ```
 
 ### How to skip  first 10 records using "LIMIT" Clause and select 3 records before 10 records
 - we define offset 10 , 3
 ```sql
-SELECT * FROM customer LIMIT 10 , 3;
+SELECT * FROM customers LIMIT 10 , 3;
 ```
 
 ### Reterieve Random record with RAND Function
@@ -461,7 +461,7 @@ SELECT * FROM orders o, customers c WHERE o.customer_id  = c.customer_id;
 ```sql
 SELECT order_id, orders.customer_id first_name, phone, city 
 FROM orders 
-INNER JOIN customer
+INNER JOIN customers
 ON 
 orders.customer_id  = customer.customer_id;
 
@@ -470,7 +470,7 @@ orders.customer_id  = customer.customer_id;
 ```sql
 SELECT order_id, o.customer_id first_name, phone, city 
 FROM orders o
-INNER JOIN customer c
+INNER JOIN customers c
 ON 
 o.customer_id  = c.customer_id;
 ```
@@ -525,7 +525,7 @@ ON
 ```sql
 SELECT *
 FROM orders o
-JOIN customer c
+JOIN customers c
 ON
 o.customer_id = c.customer_id
 JOIN order_status os
@@ -540,7 +540,7 @@ c.first_name,
 c.last_name,
 os.name AS Status
 FROM orders o
-JOIN customer c
+JOIN customers c
 ON
 o.customer_id = c.customer_id
 JOIN order_status os
@@ -554,7 +554,7 @@ SELECT
 c.customer_id, 
 c.first_name, 
 o.order_id 
-FROM customer c 
+FROM customers c 
 LEFT JOIN orders o 
 ON c.customer_id = o.customer_id 
 ORDER BY c.customer_id 
@@ -568,7 +568,7 @@ SELECT
 c.customer_id, 
 c.first_name, 
 o.order_id 
-FROM customer c 
+FROM customers c 
 LEFT JOIN orders o 
 ON c.customer_id = o.customer_id 
 ORDER BY c.customer_id 
@@ -582,7 +582,7 @@ SELECT
 o.order_id,
 c.first_name
 FROM orders o 
-JOIN customer c
+JOIN customers c
 -- ON o.customer_id = c.first_name
 USING (customer_id);
 ```
@@ -595,7 +595,7 @@ USING (customer_id);
 SELECT 
 c.first_name AS customer,
 p.name AS product 
-FROM customer c
+FROM customers c
 CROSS JOIN inventory.products p 
 ORDER BY c.first_name;
 ```
@@ -619,7 +619,7 @@ WHERE order_date < '2023-11-09'
 
 ### INSERT RECORDS
 ```sql
-INSERT INTO customer (
+INSERT INTO customers (
     customer_id,
     first_name,
     last_name,
@@ -644,7 +644,7 @@ INSERT INTO customer (
 
 ### INSERT Multiple RECORD
 ```sql
-INSERT INTO customer (
+INSERT INTO customers (
     customer_id,
     first_name,
     last_name,
@@ -680,15 +680,15 @@ INSERT INTO customer (
 ```
 ### INSERT Hierarchical RECORDS
 ```sql
-INSERT INTO customer(customer_id,first_name,last_name,birth_date)
+INSERT INTO customers(customer_id,first_name,last_name,birth_date)
 VALUES (DEFAULT,'IGI','ORIGIN','2023-12-25');
 
-INSERT INTO orders(order_id,order_date, status,c_id)
+INSERT INTO orders(order_id,order_date, status,customer_id)
 VALUES(DEFAULT,'2023-12-25',1,LAST_INSERT_ID());
 
 INSERT INTO
-orders_items(order_items_id,order_id,product_id,unit_price,quantity)
-VALUES (DEFAULT,LAST_INSERT_ID(),9,35,3);
+orders_items(order_id,product_id,unit_price,quantity)
+VALUES (LAST_INSERT_ID(),9,35,3);
 
 ```
 ### Creating Copy of a Table
@@ -706,7 +706,7 @@ SELECT * from orders WHERE order_date > '2023-12-01';
 
 ### Updating Single Record
 ```sql
-UPDATE customer 
+UPDATE customers 
 SET first_name="Muhammad", last_name="Hashim", birth_date="2023-12-30"
 WHERE customer_id = 1;
 ```
@@ -716,7 +716,7 @@ UPDATE orders
 SET comments = "Gold Customer"
 WHERE c_id IN
                 (SELECT customer_id
-                 FROM customer
+                 FROM customers
                  WHERE points > 1800);
 
 ```
@@ -726,7 +726,7 @@ WHERE c_id IN
 DELETE FROM orders
 WHERE c_id = (
 			SELECT customer_id
-			FROM customer 
+			FROM customers
 			WHERE first_name = "Delano"
 			 );
 
