@@ -1632,7 +1632,7 @@ COMMIT; -- 4
 - solve all Concurrency problems
 ```sql
 USE sql_store;
-SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ; -- 1
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE; -- 1
 START TRANSACTION; -- 2
 select *  FROM customers WHERE state = 'VA'; -- 5
 COMMIT;
