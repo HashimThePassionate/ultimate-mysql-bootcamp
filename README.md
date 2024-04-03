@@ -1845,3 +1845,53 @@ INSERT INTO Projects VALUES (9, 'Hosting account is not working', 3, 1001, NOW()
 INSERT INTO Projects VALUES (10, 'MySQL database for my desktop application', 4, 1008, NOW(), DATE_ADD(NOW(), INTERVAL 15 DAY));
 INSERT INTO Projects VALUES (11, 'Develop new WordPress plugin for my business website', 2, 1007, NOW(), DATE_ADD(NOW(), INTERVAL 10 DAY));
 ```
+### Creating Database, Tables and Many to Many Relationship
+-- Create the database
+CREATE DATABASE IF NOT EXISTS Library;
+USE Library;
+```
+-- Create the Authors table
+CREATE TABLE IF NOT EXISTS Authors (
+    AuthorId INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(100) NOT NULL
+);
+```
+-- Create the Books table
+```
+CREATE TABLE IF NOT EXISTS Books (
+    BookId INT PRIMARY KEY AUTO_INCREMENT,
+    Title VARCHAR(255) NOT NULL,
+    ISBN VARCHAR(20) NOT NULL
+);
+```
+-- Create the BookAuthors junction table
+```
+CREATE TABLE IF NOT EXISTS BookAuthors (
+    BookId INT,
+    AuthorId INT,
+    PRIMARY KEY (BookId, AuthorId),
+    FOREIGN KEY (BookId) REFERENCES Books(BookId) ON DELETE CASCADE,
+    FOREIGN KEY (AuthorId) REFERENCES Authors(AuthorId) ON DELETE CASCADE
+);
+```
+-- Insert data into Authors table
+```
+INSERT INTO Authors (Name) VALUES
+    ('J.K. Rowling'),
+    ('Stephen King'),
+    ('George R.R. Martin');
+```
+-- Insert data into Books table
+```
+INSERT INTO Books (Title, ISBN) VALUES
+    ('Harry Potter and the Philosopher''s Stone', '978-0747532743'),
+    ('The Shining', '978-0307743657'),
+    ('A Game of Thrones', '978-0553381689');
+```
+-- Insert data into BookAuthors table to represent the many-to-many relationship
+```
+INSERT INTO BookAuthors (BookId, AuthorId) VALUES
+    (1, 1), -- Harry Potter and the Philosopher's Stone by J.K. Rowling
+    (2, 2), -- The Shining by Stephen King
+    (3, 3); -- A Game of Thrones by George R.R. Martin
+```
