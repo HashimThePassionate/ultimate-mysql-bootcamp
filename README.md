@@ -1898,7 +1898,7 @@ INSERT INTO BookAuthors (BookId, AuthorId) VALUES
 ### CURRENT_TIMESTAMP Field
 ```sql
 CREATE TABLE your_table_name (
-    enroll_at TIMESTAMP -- updated time on every record
+    enroll_at TIMESTAMP -- when we update a record than record time will updated atomatically everytime  
     admission_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
