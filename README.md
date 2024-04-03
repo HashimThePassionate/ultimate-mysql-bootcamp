@@ -1902,3 +1902,27 @@ CREATE TABLE your_table_name (
     admission_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
+### Indexing
+
+### Example Query (Before Indexing):
+```sql
+SELECT *
+FROM customers
+WHERE first_name LIKE '%e%'OR last_name LIKE '%le%';
+```
+
+#### Creating Indexes:
+```sql
+CREATE INDEX idx_first_name ON customers (first_name);
+CREATE INDEX idx_last_name ON customers (last_name);
+```
+### Example Query (after Indexing):
+```sql
+SELECT *
+FROM customers
+WHERE first_name LIKE '%e%'OR last_name LIKE '%le%';
+```
+### Note:
+* Indexes improve query performance by providing a faster way to retrieve data. However, they come with a cost in terms of storage space and maintenance overhead.
+* It's essential to consider the trade-offs when creating indexes. While they can speed up read queries, they may slow down write operations and consume additional storage.
+* Indexes should be created based on the queries frequently executed in your application to achieve the best performance improvement.
