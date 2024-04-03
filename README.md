@@ -1895,3 +1895,10 @@ INSERT INTO BookAuthors (BookId, AuthorId) VALUES
     (2, 2), -- The Shining by Stephen King
     (3, 3); -- A Game of Thrones by George R.R. Martin
 ```
+### CURRENT_TIMESTAMP Field
+```sql
+CREATE TABLE your_table_name (
+    enroll_at TIMESTAMP -- updated time on every record
+    admission_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
