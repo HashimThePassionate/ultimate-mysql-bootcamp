@@ -1849,7 +1849,7 @@ INSERT INTO Projects VALUES (11, 'Develop new WordPress plugin for my business w
 -- Create the database
 CREATE DATABASE IF NOT EXISTS Library;
 USE Library;
-```
+```sql
 -- Create the Authors table
 CREATE TABLE IF NOT EXISTS Authors (
     AuthorId INT PRIMARY KEY AUTO_INCREMENT,
@@ -1857,7 +1857,7 @@ CREATE TABLE IF NOT EXISTS Authors (
 );
 ```
 -- Create the Books table
-```
+```sql
 CREATE TABLE IF NOT EXISTS Books (
     BookId INT PRIMARY KEY AUTO_INCREMENT,
     Title VARCHAR(255) NOT NULL,
@@ -1865,7 +1865,7 @@ CREATE TABLE IF NOT EXISTS Books (
 );
 ```
 -- Create the BookAuthors junction table
-```
+```sql
 CREATE TABLE IF NOT EXISTS BookAuthors (
     BookId INT,
     AuthorId INT,
@@ -1875,21 +1875,21 @@ CREATE TABLE IF NOT EXISTS BookAuthors (
 );
 ```
 -- Insert data into Authors table
-```
+```sql
 INSERT INTO Authors (Name) VALUES
     ('J.K. Rowling'),
     ('Stephen King'),
     ('George R.R. Martin');
 ```
 -- Insert data into Books table
-```
+```sql
 INSERT INTO Books (Title, ISBN) VALUES
     ('Harry Potter and the Philosopher''s Stone', '978-0747532743'),
     ('The Shining', '978-0307743657'),
     ('A Game of Thrones', '978-0553381689');
 ```
 -- Insert data into BookAuthors table to represent the many-to-many relationship
-```
+```sql
 INSERT INTO BookAuthors (BookId, AuthorId) VALUES
     (1, 1), -- Harry Potter and the Philosopher's Stone by J.K. Rowling
     (2, 2), -- The Shining by Stephen King
