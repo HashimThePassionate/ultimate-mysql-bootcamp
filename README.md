@@ -1913,7 +1913,7 @@ Indexes come to the rescue by providing a sorted and structured representation o
 ### Data Structures for Fast Querying
 MySQL primarily employs Binary-Tree data structures to implement indexes. B-Trees are self-balancing search trees optimized for fast searches and insertions. They resemble a hierarchical index card system, where each level guides the search towards the target data:
 
-<img src="" alt="Binary Search Tree" width="100%">
+<img src="https://raw.githubusercontent.com/HashimThePassionate/Introduction-to-MySQL/main/images/B_Tree.png" alt="Binary Search Tree" width="100%">
 
 -   **Root Node:** The topmost level, containing pointers to the most selective child nodes.
 -   **Intermediate Nodes:** Each intermediate node holds references to its child nodes, further narrowing down the search based on indexed column values.
@@ -1952,8 +1952,6 @@ we can see using **Explain** keyword before select statement...
 CREATE INDEX idx_state ON customer (state);
 EXPLAIN SELECT customer_id FROM customer where state = 'CA';
 ```
-<img src="" alt="Binary Search Tree" width="100%">
-
 ### Viewing Indexes:
 ```sql
 CREATE INDEX idx_state ON customers (state);
