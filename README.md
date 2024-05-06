@@ -2024,4 +2024,16 @@ SELECT *
 FROM posts 
 WHERE MATCH(title,body) AGAINST ('handling a form, IN BOOLEAN MODE');
 ```
+##  Composite Index:
 
+A composite index, also known as a compound index, is an index created on multiple columns in a database table. Unlike a single-column index that indexes values from a single column, a composite index indexes values from multiple columns concatenated together. This allows queries to efficiently filter, sort, and search based on combinations of values from these columns
+
+```sql
+use sql_store;
+CREATE INDEX id_points ON customers(points);
+SHOW INDEXES IN customers;
+CREATE INDEX idx_state_points ON customers (state,points);
+EXPLAIN SELECT customer_id FROM customers
+WHERE state = 'CA' and points> 1000;
+DROP INDEX idx_state_points ON customers;
+```
