@@ -1,7 +1,6 @@
 # MYSQL Datatypes
 
-- [](images/MySQL-Data-Type.jpg)
-
+![MySQL-Data-Type](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/663bff24-95d9-4105-b950-287f0919f4c4)
 
 # Introduction To MYSQL Datatypes
 
