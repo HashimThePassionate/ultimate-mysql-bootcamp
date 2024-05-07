@@ -2082,4 +2082,45 @@ AND
 last_name LIKE 'A%';
 ```
 
+##  When indexes are ignored??:
+```sql
+EXPLAIN 
+SELECT customer_id 
+FROM customers 
+WHERE state = 'CA' 
+OR 
+points > 1000;
+```
+How to optimize this query? lets create a separte index and than apply union
+```sql
+CREATE INDEX idx_points ON customers(points);
+```
+Now apply again:
+```sql
+EXPLAIN 
+SELECT customer_id 
+FROM customers 
+WHERE state = 'CA' 
+UNION 
+EXPLAIN 
+SELECT customer_id 
+FROM customers 
+WHERE points > 1000;
+```
+Another Example:
+```sql
+EXPLAIN 
+SELECT customer_id 
+FROM customers 
+WHERE points + 10 > 2010;
+```
+This is searching FULL indexes so to fix,
+```sql
+EXPLAIN 
+SELECT customer_id 
+FROM customers 
+WHERE points > 2000;
+```
+
+
 
