@@ -2295,5 +2295,20 @@ For simplicity we can sue
     SET PASSWORD  = '*************';
 ```
 
+##  Lets Create A New User And Grant privileges:
+```sql
+    CREATE USER farooq IDENTIFIED BY '******'
+    GRANT SELECT, INSERT 
+    ON sql_store.*
+    To farooq
+```
+For Admin
+```sql
+    GRANT ALL ON *.*
+    TO farooq
+```
+
+
+
 
 
