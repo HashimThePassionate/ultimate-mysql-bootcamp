@@ -2285,6 +2285,10 @@ For simplicity we can sue
     DROP USER hashim
 ```
 
+## Changing Password For A User:
+```sql
+    SET PASSWORD FOR hashim = '*************';
+```
 
 
 
