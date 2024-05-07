@@ -36,6 +36,11 @@
 - Text        -- max : 65,535 characters (64KB)
 ```
 - Mostly we use VARCHAR type, bcz it uses indexes to speedup queries.
+- Example with image:
+  
+![Screenshot_7-5-2024_225237_localhost](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/994abf94-781a-4d05-bc59-da3e872c1ba0)
+
+  
 
 ## 2. Integer Datatypes:
 
@@ -95,6 +100,8 @@ SET properties =
 '
 WHERE product_id = 1 ;
 ```
+![Screenshot_7-5-2024_233251_localhost](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/c3c8e1bc-6351-4a9c-ae0d-e796365f8927)
+
 - Method 2
 
 ```
@@ -106,6 +113,7 @@ SET properties = JSON_OBJECT(
 )
 WHERE product_id = 2;
 ```
+![Screenshot_7-5-2024_233643_localhost](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/9b42cbe5-e514-425a-bc18-999bbf2a09bd)
 
 - Selection specific property
 
@@ -116,4 +124,5 @@ JSON_EXTRACT(properties,'$.weight')
 FROM products
 WHERE product_id IN (1,2) ;
 ```
+![Screenshot_7-5-2024_233825_localhost](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/77bb360f-2d36-4b6a-a54c-d075278debc2)
 
