@@ -2280,6 +2280,11 @@ For simplicity we can sue
     SELECT * FROM mysql.user;
 ```
 
+## Dropping A User:
+```sql
+    DROP USER hashim
+```
+
 
 
 
