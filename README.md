@@ -2290,5 +2290,10 @@ For simplicity we can sue
     SET PASSWORD FOR hashim = '*************';
 ```
 
+## Changing Password For Current Login User:
+```sql
+    SET PASSWORD  = '*************';
+```
+
 
 
