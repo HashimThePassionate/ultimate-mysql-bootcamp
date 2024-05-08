@@ -4,16 +4,16 @@
 
 # Introduction To MYSQL Datatypes
 
-1. String datatypes
-2. Integer datatypes
-3. Fixed point and Floating datatypes
-4. Boolean datatypes
+1. [String datatypes](#string-datatypes)
+2. [Integer datatypes](#integer-datatypes) 
+3. [Fixed point and Floating datatypes](#fixed-point-and-floating-datatypes)
+4. [Boolean datatypes](#boolean-datatypes)
 5. Enum and Set types datatypes -- we avoid to use this datatypes
-6. Date and Time types datatypes
+6. [Date and Time types datatypes](#date-and-time-types-datatypes)
 7. Blob datatypes --we also avoid to use binary data bcz its slow down our database backup
-8. JSON datatypes
+8. [JSON datatypes](#jSON-datatypes)
 
-## 1. String Datatypes:
+## 1. String datatypes:
 
 - `CHAR(x)` -- fixed-length like abbreviation of state 'VA'
 
@@ -41,7 +41,7 @@
 ![Screenshot 2024-05-08 180828](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/a3fb4b7e-2745-42ba-8d15-d4250ce30aaa)
   
 
-## 2. Integer Datatypes:
+## 2. Integer datatypes:
 
 - we store whole numbers that don't have decimal points.
 - Maximum Length
@@ -64,7 +64,7 @@ INT(4) => 0001
 ![Screenshot 2024-05-08 183522](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/1c24a9cc-6b00-497b-8cb5-020bca1238bd)
 
 
-## 3. Fixed point and Floating Datatypes:
+## 3. Fixed point and Floating datatypes:
 
 - DECIMAL(p,s) precision,scale --> DECIMAL(9,2) => 1234567.89
 - DEC, NUMERIC, FIXED are exactly same as decimal
