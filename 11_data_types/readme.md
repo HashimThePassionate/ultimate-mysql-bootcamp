@@ -13,7 +13,7 @@
 7. Blob datatypes --we also avoid to use binary data bcz its slow down our database backup
 8. [JSON datatypes](#JSON-datatypes)
 
-## 1. String datatypes
+## 1. String datatypes:
 
 - `CHAR(x)` -- fixed-length like abbreviation of state 'VA'
 
