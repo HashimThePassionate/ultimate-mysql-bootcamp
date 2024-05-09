@@ -1,17 +1,19 @@
 # MYSQL Datatypes
 
-![MySQL-Data-Type](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/663bff24-95d9-4105-b950-287f0919f4c4)
+![Untitled](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/417e8018-83cf-4b91-aa2f-be516c119fa9)
+
+
 
 # Introduction To MYSQL Datatypes
 
-1. [String datatypes](#String-datatypes)
-2. [Integer datatypes](#Integer-datatypes) 
-3. [Fixed point and Floating datatypes](#Fixed-point-and-Floating-datatypes)
-4. [Boolean datatypes](#Boolean-datatypes)
+1. String datatypes
+2. Integer datatypes 
+3. Fixed point and Floating datatypes
+4. Boolean datatypes
 5. Enum and Set types datatypes -- we avoid to use this datatypes
-6. [Date and Time types datatypes](#Date-and-Time-types-datatypes)
+6. Date and Time types datatypes
 7. Blob datatypes --we also avoid to use binary data bcz its slow down our database backup
-8. [JSON datatypes](#JSON-datatypes)
+8. JSON datatypes
 
 ## 1. String datatypes:
 
@@ -38,7 +40,8 @@
 - Mostly we use VARCHAR type, bcz it uses indexes to speedup queries.
 
 ####  Creating a table with CHAR(x) and VARCHAR(x) columns:
-![Screenshot 2024-05-08 180828](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/a3fb4b7e-2745-42ba-8d15-d4250ce30aaa)
+![Screenshot 2024-05-08 175954](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/3579d2ae-1379-4786-ab50-12557eac9a7b)
+
   
 
 ## 2. Integer datatypes:
@@ -61,7 +64,8 @@
 INT(4) => 0001
 ```
 #### Creating a table with integer columns without ZEROFILL:
-![Screenshot 2024-05-08 183522](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/1c24a9cc-6b00-497b-8cb5-020bca1238bd)
+
+![Screenshot 2024-05-08 183522](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/a0af8efe-fac5-4b97-a164-b118fa32386b)
 
 
 ## 3. Fixed point and Floating datatypes:
@@ -84,7 +88,8 @@ CREATE TABLE numeric_types_table (
 ```
 
 ### Output
-![Screenshot 2024-05-08 184323](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/305f7b09-f955-45b8-ab72-98815982db48)
+![Screenshot 2024-05-08 184323](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/d944dc09-ef7e-4b4e-be75-b02f900d7703)
+
 
 ## 4. Boolean datatypes:
 
@@ -96,7 +101,8 @@ CREATE TABLE numeric_types_table (
     bool_column BOOL);
   ```
 ### Output
-![Screenshot 2024-05-08 184850](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/b1c0cb63-2fe1-4a17-9edc-75189c6db7f8)
+
+![Screenshot 2024-05-08 184850](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/7a43e7b4-1d29-41de-adca-eac28732168f)
 
 
 ## 5. Date and Time types datatypes:
@@ -118,7 +124,8 @@ CREATE TABLE numeric_types_table (
     year_column YEAR);
   ```
   ### Output
-![Screenshot 2024-05-08 195038](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/e3bd8ea5-3b9a-4871-b395-859715ca544b)
+![Screenshot 2024-05-08 195038](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/7a60fc11-4848-4524-9398-29589bb967cc)
+
 
 - `date_column`: Used for storing dates without a time component.
 - `time_column`: Used for storing time values.
@@ -152,7 +159,8 @@ VALUES
     (2, 'Widget B', '{"color": "blue", "size": "large", "weight": 20, "manufacturer": {"name": "Company X", "location": "City Y"}}');
     ```
 #### Output
-![Screenshot 2024-05-08 200327](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/6b185ab0-365a-4d21-9fb8-93a5a4f7cc41)
+![Screenshot 2024-05-08 200327](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/bd9fcc7c-3c73-450a-ae22-d4bd0acb6825)
+
 
 In this example:
 
@@ -165,7 +173,8 @@ SELECT name, JSON_VALUE(properties, '$.color') AS color
 FROM products;
 ```
 #### Output
-![Screenshot 2024-05-08 200401](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/b1bc1b87-cde1-4734-a084-02fc0fe349d4)
+![Screenshot 2024-05-08 200401](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/de5b9962-7360-4cee-884b-f8b08ced4785)
+
 
 This query retrieves the name of each product along with its color property from the JSON data stored in the `properties` column.
 
