@@ -135,51 +135,45 @@ CREATE TABLE numeric_types_table (
 
 
 ## 6. Json datatypes:
-Certainly! JSON data types are commonly used to store structured data in a flexible format within a database. Here's an example of how JSON data types can be used in a table:
-
-Suppose you have a table named products that stores information about various products, including their properties in JSON format.
-
-```sql
-CREATE TABLE products (
-    product_id INT PRIMARY KEY,
-    name VARCHAR(100),
-    properties JSON);
- ```
-In this example:
-
-- `product_id`: An integer column serving as the primary key for uniquely identifying each product.
-- `name`: A VARCHAR column for storing the name of the product.
-- `properties`: A JSON column for storing additional properties of the product in JSON format.
-  
-  You can then insert JSON data into the properties column for each product. Here's how you might insert data:
+- Method 1
   ```sql
-  INSERT INTO products (product_id, name, properties)
-VALUES
-    (1, 'Widget A', '{"color": "red", "size": "small", "weight": 10}'),
-    (2, 'Widget B', '{"color": "blue", "size": "large", "weight": 20, "manufacturer": {"name": "Company X", "location": "City Y"}}');
-    ```
-#### Output
-![Screenshot 2024-05-08 200327](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/bd9fcc7c-3c73-450a-ae22-d4bd0acb6825)
+  UPDATE products
+SET properties = 
+'
+{
+	"dimension" : [1,2,3],
+    "weight" : 10,
+    "manufacturer":{
+    "name":"Ahmed"
+    }
+}
+'
+WHERE product_id = 1 ;
+     ```
 
-
-In this example:
-
-- The first product (`Widget A`) has properties such as color, size, and weight specified directly in the JSON format.
-- The second product (`Widget B`) has additional properties like manufacturer information nested within the JSON structure.
-
-You can then query the data and access the JSON `properties` using various JSON functions provided by your database system. For example:
+- Method 2
 ```sql
-SELECT name, JSON_VALUE(properties, '$.color') AS color
-FROM products;
+UPDATE products
+SET properties = JSON_OBJECT(
+'weight',10,
+'dimension',JSON_ARRAY(1,2,3),
+'manufacturer',JSON_OBJECT('name','Abdullah')
+)
+WHERE product_id = 2;
 ```
 #### Output
-![Screenshot 2024-05-08 200401](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/de5b9962-7360-4cee-884b-f8b08ced4785)
+![Screenshot 2024-05-09 230414](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/9aa1f9bd-ee59-45a5-a140-a767f63576ff)
 
-
-This query retrieves the name of each product along with its color property from the JSON data stored in the `properties` column.
-
-JSON data types provide flexibility in storing structured data within a relational database, allowing you to store and query semi-structured or hierarchical data effectively.
-
+- Selection specific property
+  ```sql
+  SELECT 
+product_id,
+JSON_EXTRACT(properties,'$.weight')
+FROM products
+WHERE product_id IN (1,2) ;
+    ```
+#### Output
+![Screenshot 2024-05-09 230717](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/2f515931-bc09-4e49-bf50-d5be7e1f2f7b)
 
 
 
