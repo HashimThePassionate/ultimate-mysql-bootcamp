@@ -25,4 +25,4 @@ SELECT COUNT(*) AS active_count FROM example_boolean WHERE is_active = TRUE;
 -- Check if there are any inactive records
 SELECT CASE WHEN EXISTS (SELECT * FROM example_boolean WHERE is_active = FALSE) THEN 'Inactive records exist' ELSE 'No inactive records' END AS status;
 
->>>>>>> 213b51e59b698c81059e981578f8f21ba8978e9a:11_data_types/01_string_datatypes
+>>>>>>> 213b51e59b698c81059e981578f8f21ba8978e9a:11_data_types/04_boolean_datatypes
