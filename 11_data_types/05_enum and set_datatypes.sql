@@ -28,4 +28,4 @@ SELECT status, COUNT(*) AS count FROM example_enum GROUP BY status;
 -- Check if 'pending' status exists in the table
 SELECT IF('pending' IN (SELECT status FROM example_enum), 'Yes', 'No') AS status_exists;
 
->>>>>>> 213b51e59b698c81059e981578f8f21ba8978e9a:11_data_types/01_string_datatypes
+>>>>>>> 213b51e59b698c81059e981578f8f21ba8978e9a:11_data_types/05_enum and set_datatypes
