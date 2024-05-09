@@ -5,14 +5,14 @@
 
 # Introduction To MYSQL Datatypes
 
-1. [String datatypes](#String-datatypes)
-2. [Integer datatypes](#Integer-datatypes) 
-3. [Fixed point and Floating datatypes](#Fixed-point-and-Floating-datatypes)
-4. [Boolean datatypes](#Boolean-datatypes)
+1. String datatypes
+2. Integer datatypes 
+3. Fixed point and Floating datatypes
+4. Boolean datatypes
 5. Enum and Set types datatypes -- we avoid to use this datatypes
-6. [Date and Time types datatypes](#Date-and-Time-types-datatypes)
+6. Date and Time types datatypes
 7. Blob datatypes --we also avoid to use binary data bcz its slow down our database backup
-8. [JSON datatypes](#JSON-datatypes)
+8. JSON datatypes
 
 ## 1. String datatypes:
 
