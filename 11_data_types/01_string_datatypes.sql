@@ -1,6 +1,4 @@
-<<<<<<< HEAD:11_data_types/01_string_datatypes.sql
 
-=======
 -- --------------------------------------------
 -- Table Creation
 -- --------------------------------------------
@@ -60,4 +58,3 @@ SELECT COUNT(*) FROM example_table;
 -- Truncating the table (removing all rows)
 TRUNCATE TABLE example_table;
 
->>>>>>> 213b51e59b698c81059e981578f8f21ba8978e9a:11_data_types/01_string_datatypes
