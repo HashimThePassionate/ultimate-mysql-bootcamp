@@ -26,6 +26,6 @@ SELECT SUM(score) AS total_score FROM example_integers;
 SELECT MAX(age) AS max_age FROM example_integers;
 
 
->>>>>>> 213b51e59b698c81059e981578f8f21ba8978e9a:11_data_types/01_string_datatypes
+>>>>>>> 213b51e59b698c81059e981578f8f21ba8978e9a:11_data_types/02_integers_datatypes
 
 
