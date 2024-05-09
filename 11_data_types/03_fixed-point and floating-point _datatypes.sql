@@ -26,4 +26,4 @@ SELECT AVG(temperature) AS avg_temperature FROM example_fp_float;
 SELECT MAX(price) AS max_price FROM example_fp_float;
 
 
->>>>>>> 213b51e59b698c81059e981578f8f21ba8978e9a:11_data_types/01_string_datatypes
+>>>>>>> 213b51e59b698c81059e981578f8f21ba8978e9a:11_data_types/03_fixed_point and float_point_datatypes
