@@ -1,4 +1,4 @@
-# MYSQL Datatypes
+# MYSQL Datatypes 
 
 ![Screenshot 2024-05-09 171635](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/ba390828-cc84-474e-b48a-68d089c29417)
 
