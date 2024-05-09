@@ -24,4 +24,4 @@ SELECT * FROM example_datetime WHERE event_date > '2024-06-01';
 -- Calculate the difference in days between two dates
 SELECT DATEDIFF('2024-06-15', '2024-05-10') AS days_difference;
 
->>>>>>> 213b51e59b698c81059e981578f8f21ba8978e9a:11_data_types/01_string_datatypes
+>>>>>>> 213b51e59b698c81059e981578f8f21ba8978e9a:11_data_types/06_date and time_datatypes
