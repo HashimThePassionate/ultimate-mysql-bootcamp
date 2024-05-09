@@ -1,6 +1,7 @@
 # MYSQL Datatypes
 
-![MySQL-Data-Type](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/663bff24-95d9-4105-b950-287f0919f4c4)
+![Screenshot 2024-05-09 171635](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/ba390828-cc84-474e-b48a-68d089c29417)
+
 
 # Introduction To MYSQL Datatypes
 
@@ -38,8 +39,8 @@
 - Mostly we use VARCHAR type, bcz it uses indexes to speedup queries.
 
 ####  Creating a table with CHAR(x) and VARCHAR(x) columns:
-![Screenshot 2024-05-08 180828](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/a3fb4b7e-2745-42ba-8d15-d4250ce30aaa)
-  
+![Screenshot 2024-05-08 180828](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/623634a3-88ee-4d70-8a49-c526b857e9de)
+
 
 ## 2. Integer datatypes:
 
@@ -61,7 +62,8 @@
 INT(4) => 0001
 ```
 #### Creating a table with integer columns without ZEROFILL:
-![Screenshot 2024-05-08 183522](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/1c24a9cc-6b00-497b-8cb5-020bca1238bd)
+![Screenshot 2024-05-08 183522](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/587e42d2-0f89-40da-ac0c-d85fa601fc2f)
+
 
 
 ## 3. Fixed point and Floating datatypes:
@@ -84,7 +86,7 @@ CREATE TABLE numeric_types_table (
 ```
 
 ### Output
-![Screenshot 2024-05-08 184323](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/305f7b09-f955-45b8-ab72-98815982db48)
+![Screenshot 2024-05-08 184323](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/3fb76d5b-09b2-4df0-ae4a-daa0124e7495)
 
 ## 4. Boolean datatypes:
 
@@ -96,7 +98,8 @@ CREATE TABLE numeric_types_table (
     bool_column BOOL);
   ```
 ### Output
-![Screenshot 2024-05-08 184850](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/b1c0cb63-2fe1-4a17-9edc-75189c6db7f8)
+
+![Screenshot 2024-05-08 184850](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/9bcd5dc4-db8e-4a57-aebe-308efd698bd5)
 
 
 ## 5. Date and Time types datatypes:
@@ -118,7 +121,8 @@ CREATE TABLE numeric_types_table (
     year_column YEAR);
   ```
   ### Output
-![Screenshot 2024-05-08 195038](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/e3bd8ea5-3b9a-4871-b395-859715ca544b)
+![Screenshot 2024-05-08 195038](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/cdf9172b-b0ea-4e29-9bfb-0e3c8ada5084)
+
 
 - `date_column`: Used for storing dates without a time component.
 - `time_column`: Used for storing time values.
@@ -152,7 +156,7 @@ VALUES
     (2, 'Widget B', '{"color": "blue", "size": "large", "weight": 20, "manufacturer": {"name": "Company X", "location": "City Y"}}');
     ```
 #### Output
-![Screenshot 2024-05-08 200327](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/6b185ab0-365a-4d21-9fb8-93a5a4f7cc41)
+![Screenshot 2024-05-08 200327](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/40b611f8-fd67-42f0-9c25-dc2b16c14247)
 
 In this example:
 
@@ -165,7 +169,9 @@ SELECT name, JSON_VALUE(properties, '$.color') AS color
 FROM products;
 ```
 #### Output
-![Screenshot 2024-05-08 200401](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/b1bc1b87-cde1-4734-a084-02fc0fe349d4)
+
+![Screenshot 2024-05-08 200401](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/6c1e206e-4dc2-4d7c-928e-4abd9a8f9eed)
+
 
 This query retrieves the name of each product along with its color property from the JSON data stored in the `properties` column.
 
