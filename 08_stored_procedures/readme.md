@@ -73,10 +73,10 @@ Imagine you have a recipe for your favorite chocolate chip cookies.  Instead of 
 7. **Modify as Needed:** Modify the stored procedure code to perform more complex operations as required.
 
 ---
+### `Example1:`
+**Stored Procedure with Parameters:**
 
-### `Stored Procedure with Parameters:`
-
-**Example:** Suppose you have a table called `clients` with columns `id`, `name`, and `state`, and you want to create a stored procedure to retrieve clients based on a specific state.
+Suppose you have a table called `clients` with columns `id`, `name`, and `state`, and you want to create a stored procedure to retrieve clients based on a specific state.
 
 ```sql
 DROP PROCEDURE IF EXISTS get_clients_by_state;
@@ -97,4 +97,22 @@ DELIMITER ;
 ```sql
 CALL get_clients_by_state('CA');
 ```
+### `Example2:`
+DELIMITER $$
+CREATE PROCEDURE get_clients_by_default_states
+	(
+        state CHAR(2)
+        )
+	BEGIN
+    IF state IS NULL THEN
+        select * from clients;
+    ELSE
+            SELECT * FROM clients c
+            WHERE c.state = state;
+    END IF;
+	END$$
+DELIMITER ;
 
+
+CALL get_clients_by_default_states(NULL)
+CALL get_clients_by_default_states('CA')
