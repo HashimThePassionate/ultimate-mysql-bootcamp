@@ -1,4 +1,5 @@
-#  How to Install MySQL Workbench
+#  How to Install MySQL Workbench :
+- <b>Follow the below steps to install MYSQL Workbench on Windows</b> :
 
 1. Make sure to visit only the **official website** **[MYSQL](https://www.mysql.com/products/workbench/)**
 for downloading the MySQL Workbench.You do not want to get into shoddy websites and download the wrong file that infects your favorite machine, right? <ins>Shown in figure(01)</ins>
