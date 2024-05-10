@@ -73,7 +73,7 @@ for downloading the MySQL Workbench.You do not want to get into shoddy websites 
 <hr>
 
 15. It might take some time. Then when you will receive a green check box in all configuration steps, simply click **Finish**. <ins>Shown in figure(15)</ins>
-<img src="https://github.com/cyber-fanatic/ultimate-mysql-bootcamp/blob/main/00_getting_started/01_install_mysql_on_windows/Pasted%20image%2018.png">
+<img src="https://github.com/cyber-fanatic/ultimate-mysql-bootcamp/blob/main/00_getting_started/01_install_mysql_on_windows/images/Pasted%20image%2018.png">
 <p align="center"><br><em>figure(15)</em></p>
 <hr>
 
