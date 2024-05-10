@@ -98,9 +98,9 @@ for downloading the MySQL Workbench.You do not want to get into shoddy websites 
 
 ## "Congratulations, the installation of MySQL Workbench has been completed successfully!"
 - **confirm the installation:**
-  "Now, you can **confirm the installation** of MySQL Workbench. Go to the **Windows search bar**, type **'MySQL Workbench,'** and you'll see the **MySQL Workbench icon**. Click on this icon to open it." <ins>Shown in figure(19) and figure(21)</ins>
+  "Now, you can **confirm the installation** of MySQL Workbench. Go to the **Windows search bar**, type **'MySQL Workbench,'** and you'll see the **MySQL Workbench icon**. Click on this icon to open it." <ins>Shown in figure(20)</ins>
 
 <img src="https://github.com/cyber-fanatic/ultimate-mysql-bootcamp/blob/main/00_getting_started/01_install_mysql_on_windows/images/Pasted%20image%2023.png">
-<p align="center"><br><em>figure(21)</em></p>
+<p align="center"><br><em>figure(20)</em></p>
 <hr>
  
