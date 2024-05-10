@@ -1,5 +1,8 @@
-#  How to Install MySQL Workbench
-1. Open your browser and **download SQL Workbench** for your **Linux** system from here. You will see a screen as shown below then click on the**Download button**.  <ins>Shown in figure(01)</ins>
+#  How to Install MySQL Workbench:
+
+- <b>Follow the below steps to install MYSQL Workbench on Linux:</b>
+
+1. Open your browser and **download SQL Workbench** for your **Linux** system from here---> [MYSQL](https://dev.mysql.com/downloads/repo/apt/). You will see a screen as shown below then click on the**Download button**.  <ins>Shown in figure(01)</ins>
 <img src="https://github.com/cyber-fanatic/ultimate-mysql-bootcamp/blob/main/00_getting_started/02_install_mysql_on_linux/images/Screenshot%20from%202024-05-09%2000-13-43.png">
 <p align="center"><em>figure(01)</em></p>
 <hr>
