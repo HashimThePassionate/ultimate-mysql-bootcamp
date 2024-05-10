@@ -6,6 +6,21 @@ A **stored procedure** in a database is like a recipe or a set of instructions. 
 Imagine you have a recipe for your favorite chocolate chip cookies.  Instead of rewriting the recipe every time you want to bake cookies, you can store it in a recipe book. That way, you can easily find it and follow the instructions whenever you have a craving.
 
 ---
+### `why we use Store Prodcedure:`
+
+1. **Code Reusability**: Instead of writing the same SQL code repeatedly in different parts of your application, you can write it once in a stored procedure and then call the procedure wherever needed.
+
+2. **Improved Performance**: Stored procedures are precompiled and stored in the database. This can lead to better performance compared to executing the same SQL statements dynamically from your application.
+
+3. **Security**: Using stored procedures can enhance security by allowing you to grant permissions at the procedure level rather than on the underlying tables. This can help protect your data from unauthorized access.
+
+4. **Reduced Network Traffic**: Since the stored procedure is executed on the database server, only the procedure call needs to be sent over the network, reducing the amount of data transferred.
+
+5. **Encapsulation of Business Logic**: Stored procedures can encapsulate complex business logic, making it easier to manage and maintain your application code.
+
+6. **Ease of Maintenance**: If you need to modify a query or logic in your application, you only need to update the stored procedure rather than making changes in multiple places in your code.
+
+---
 
 ### `Advantage of Store Procedure:`
 |  ***`Advantage`***                | ***`Description`***                                                                                        |
