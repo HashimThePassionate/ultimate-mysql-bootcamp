@@ -47,7 +47,7 @@ for downloading the MySQL Workbench.You do not want to get into shoddy websites 
 <p align="center"><br><em>figure(9)</em></p>
 <hr>
 
-10. Keep everything as it is and simply click **Next**. It will apply the TCP/IP connectivity for our **MySQL server**. <ins>Shown in figure(10)</ins>
+10. Keep everything as it is and simply click **Next**. It will apply the **TCP/IP** connectivity for our **MySQL server**. <ins>Shown in figure(10)</ins>
 <img src="https://github.com/cyber-fanatic/ultimate-mysql-bootcamp/blob/main/00_getting_started/01_install_mysql_on_windows/images/Pasted image 13.png">
 <p align="center"><br><em>figure(10)</em></p>
 <hr>
