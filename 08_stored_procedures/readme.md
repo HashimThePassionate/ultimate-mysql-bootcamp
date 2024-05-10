@@ -26,7 +26,7 @@ Imagine you have a recipe for your favorite chocolate chip cookies.  Instead of 
 
 ---
 
-### `Creating a Stored Procedure in MySQL Workbench`
+### `Creating a Stored Procedure in MySQL Workbench:`
 
 1. **Open MySQL Workbench** and connect to your database server.
 
@@ -58,4 +58,28 @@ Imagine you have a recipe for your favorite chocolate chip cookies.  Instead of 
 7. **Modify as Needed:** Modify the stored procedure code to perform more complex operations as required.
 
 ---
+
+### `Stored Procedure with Parameters:`
+
+**Example:** Suppose you have a table called `clients` with columns `id`, `name`, and `state`, and you want to create a stored procedure to retrieve clients based on a specific state.
+
+```sql
+DROP PROCEDURE IF EXISTS get_clients_by_state;
+DELIMITER $$
+CREATE PROCEDURE get_clients_by_state
+    (
+        IN p_state CHAR(2) -- Input parameter: State code
+    )
+    BEGIN
+        SELECT * FROM clients c
+        WHERE c.state = p_state;
+    END$$
+DELIMITER ;
+```
+
+**Calling the Procedure:** To call the stored procedure and retrieve clients from the state of California ('CA'), you would use the following SQL code:
+
+```sql
+CALL get_clients_by_state('CA');
+```
 
