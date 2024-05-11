@@ -22,7 +22,7 @@
  WHERE city NOT IN ('Atlanta','Chicago');
  ```
 - We use `NOT IN operator`.
-- 
+  
 ## Additional Notes  
 
 - The `IN Operator` can also be used with subqueries, allowing for more complex filtering based on the results of another query.
