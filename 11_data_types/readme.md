@@ -1,7 +1,5 @@
 # MYSQL Datatypes
-
-![Untitled](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/417e8018-83cf-4b91-aa2f-be516c119fa9)
-
+![Untitled](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/aec6e2db-3f69-4710-9c07-d3d90fc7d5d3)
 
 
 # Introduction To MYSQL Datatypes
@@ -15,168 +13,30 @@
 7. Blob datatypes --we also avoid to use binary data bcz its slow down our database backup
 8. JSON datatypes
 
-## 1. String datatypes:
+Certainly! Here's an engaging introduction to MySQL data types:
 
-- `CHAR(x)` -- fixed-length like abbreviation of state 'VA'
+---
 
-- `VARCHAR(x)` -- variable-length like storing usernames, passwords, email addresses and so on
+### Unlock the Power of MySQL Data Types: Your Gateway to Data Mastery
 
-- `Recommended`
+Welcome to the world of MySQL, where data isn't just stored; it's sculpted, molded, and optimized for greatness. If you've ever marveled at the complexity of databases powering the digital universe, MySQL is your backstage pass to understanding and mastering this essential technology.
 
-- `VARCHAR(50)` for short strings like usernames and passwords
+At the heart of MySQL lies its diverse array of data types, the building blocks of your data kingdom. Picture each data type as a unique tool in your digital toolkit, each with its own strengths and specialties, waiting to be wielded by your creative genius.
 
-- `VARCHAR(255)` for medium-length strings like addresses
+Let's take a journey through the enchanting realm of MySQL data types:
 
-- `Maximum Length`
+1. **Numeric Wonders**: From tiny integers to colossal floating-point numbers, MySQL offers a spectrum of numeric data types that cater to every numerical need. Whether you're crunching financial figures or plotting the trajectory of a spacecraft, MySQL's numeric arsenal has got you covered.
 
-```sql
-- CHAR(x)     --  
-- VARCHAR(x)  -- max : 65,535 characters (64KB) 
-- MEDIUMTEXT  -- max : 16MB              16,777,216    characters --JSON objects, CSV and short medium length book
-- LONGTEXT    -- max : 4GB               4,294,967,296 characters Long Text books
-- TINYTEXT    -- max : 255Bytes          255           characters
-- Text        -- max : 65,535 characters (64KB)
-```
-- Mostly we use VARCHAR type, bcz it uses indexes to speedup queries.
+2. **Textual Treasures**: Words, sentences, novels—MySQL embraces the written word with its text data types. From concise CHARs to expansive TEXTs, MySQL ensures that your textual data is not just stored, but cherished and protected with the utmost care.
 
-####  Creating a table with CHAR(x) and VARCHAR(x) columns:
-![Screenshot 2024-05-08 175954](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/3579d2ae-1379-4786-ab50-12557eac9a7b)
+3. **Temporal Sorcery**: Time is not just a dimension but a valuable asset in the MySQL universe. Date, time, timestamp—these temporal data types offer a gateway to the past, present, and future, empowering you to manipulate and manage time with finesse.
 
-  
+4. **Spatial Marvels**: In a world where location is everything, MySQL's spatial data types reign supreme. Geometric shapes, coordinates, distances—MySQL transforms the abstract concept of space into tangible, manipulable entities, paving the way for groundbreaking spatial analysis.
 
-## 2. Integer datatypes:
+5. **Binary Enigmas**: Sometimes, data speaks a language only machines can understand. Binary data types in MySQL allow you to store and manipulate binary information, unlocking a realm of possibilities for handling multimedia, encryption, and beyond.
 
-- we store whole numbers that don't have decimal points.
-- Maximum Length
-```sql
--------------------------------------------------------------------------------------------------------------------------------------
-|   Type	    Storage (Bytes)	    Minimum Value Signed	Minimum Value Unsigned	Maximum Value Signed	Maximum Value Unsigned  |
-|   TINYINT 	1	                -128	                        0	                    127	                    255             |
-|   SMALLINT	2	                -32768	                        0	                    32767	                65535           |
-|   MEDIUMINT	3	                -8388608	                    0	                    8388607	                16777215        |
-|   INT        	4	                -2147483648	                    0	                    2147483647	            4294967295      |
-|   BIGINT  	8	                -2^63	                        0	                    2^63-1	                2^64-1          |
--------------------------------------------------------------------------------------------------------------------------------------
-```
-- ZEROFILL
+With MySQL data types as your trusty companions, you're not just learning a technology—you're embarking on a quest for data mastery. So, arm yourself with curiosity, ambition, and a thirst for knowledge, and let MySQL be your guide to unlocking the full potential of data-driven innovation.
 
-```
-INT(4) => 0001
-```
-#### Creating a table with integer columns without ZEROFILL:
-
-![Screenshot 2024-05-08 183522](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/a0af8efe-fac5-4b97-a164-b118fa32386b)
-
-
-## 3. Fixed point and Floating datatypes:
-
-- DECIMAL(p,s) precision,scale --> DECIMAL(9,2) => 1234567.89
-- DEC, NUMERIC, FIXED are exactly same as decimal
-- FLOAT 4bytes, 8bytes, DOUBLE -- used for scientific calculation and are approximately values.
-
-
-
-
-```sql 
-CREATE TABLE numeric_types_table (
-    decimal_column DECIMAL(9,2),
-    dec_column DEC(9,2),
-    numeric_column NUMERIC(9,2),
-    fixed_column FIXED(9,2),
-    float_column FLOAT,
-    double_column DOUBLE);
-```
-
-### Output
-![Screenshot 2024-05-08 184323](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/d944dc09-ef7e-4b4e-be75-b02f900d7703)
-
-
-## 4. Boolean datatypes:
-
-- BOOLEAN -- TRUE or FALSE
-- BOOL -- 1 or 0.
-  ```sql
-  CREATE TABLE example_boolean_table (
-    boolean_column BOOLEAN,
-    bool_column BOOL);
-  ```
-### Output
-
-![Screenshot 2024-05-08 184850](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/7a43e7b4-1d29-41de-adca-eac28732168f)
-
-
-## 5. Date and Time types datatypes:
-
-- DATE storing date without time component
-- Time time for storing time value
-- DATETIME 8bytes
-- TIMESTAMP 4bytes (0 upto 2038) -- track of a row when inserted to last updated
-- YEAR year for storing 4 digit year
-
-  
-  
-  ```sql
-  CREATE TABLE date_time_table (
-    date_column DATE,
-    time_column TIME,
-    datetime_column DATETIME,
-    timestamp_column TIMESTAMP,
-    year_column YEAR);
-  ```
-  ### Output
-![Screenshot 2024-05-08 195038](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/7a60fc11-4848-4524-9398-29589bb967cc)
-
-
-- `date_column`: Used for storing dates without a time component.
-- `time_column`: Used for storing time values.
-- `datetime_column`: Used for storing date and time together.
-- `timestamp_column`: Typically used to track the timestamp of when a row was inserted or last updated.
-- `year_column`: Used for storing four-digit year values.
-
-
-## 6. Json datatypes:
-- Method 1
-  ```sql
-  UPDATE products
-SET properties = 
-'
-{
-	"dimension" : [1,2,3],
-    "weight" : 10,
-    "manufacturer":{
-    "name":"Ahmed"
-    }
-}
-'
-WHERE product_id = 1 ;
-     ```
-
-- Method 2
-```sql
-UPDATE products
-SET properties = JSON_OBJECT(
-'weight',10,
-'dimension',JSON_ARRAY(1,2,3),
-'manufacturer',JSON_OBJECT('name','Abdullah')
-)
-WHERE product_id = 2;
-```
-#### Output
-![Screenshot 2024-05-09 230414](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/9aa1f9bd-ee59-45a5-a140-a767f63576ff)
-
-- Selection specific property
-  ```sql
-  SELECT 
-product_id,
-JSON_EXTRACT(properties,'$.weight')
-FROM products
-WHERE product_id IN (1,2) ;
-    ```
-#### Output
-![Screenshot 2024-05-09 230717](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/2f515931-bc09-4e49-bf50-d5be7e1f2f7b)
-
-
-
-
+Are you ready to dive into the enchanting world of MySQL data types? Your adventure awaits!
 
 
