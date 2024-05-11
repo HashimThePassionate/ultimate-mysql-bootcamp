@@ -1,4 +1,4 @@
-## WHERE Clause 
+## The WHERE Clause 
 
 **Introduction**
 
