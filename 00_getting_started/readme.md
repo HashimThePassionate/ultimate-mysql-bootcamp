@@ -1,9 +1,5 @@
 ## Overview :
-  In this section of the course, we will learn about the **installation** process of MySQL Workbench,
-  a powerful tool for SQL management and development. MySQL Workbench provides a **user-friendly** 
-  interface for designing databases, writing queries, and administering MySQL servers.
-  By installing MySQL Workbench, we gain access to a comprehensive suite of features 
-  that streamline database-related tasks and enhance productivity.
+   In this section of the course, we'll cover the **installation** of the **complete MySQL bundle**, which includes **MySQL Server**, **MySQL Workbench**, and **MySQL Shell**. This bundle provides a **comprehensive environment** for database **management** and **development** tasks. MySQL Workbench, a **graphical user interface tool**, offers features like **database design**, **SQL development**, **administration**, and **performance monitoring**. With **MySQL Shell**, users can interact with MySQL Server through a **command-line interface**, executing queries and managing databases efficiently.
 
   ## Key Features of MYSQL Workbench :
   -  **performance:** MySQL Workbench helps make databases **faster** and **better** by finding and fixing problems that slow them down.
