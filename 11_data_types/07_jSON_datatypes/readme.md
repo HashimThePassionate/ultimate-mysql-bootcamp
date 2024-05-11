@@ -1,7 +1,7 @@
 ## 6. Json datatypes:
 - Method 1
   
-  ```sql
+ ```sql
   UPDATE products
 SET properties = 
 '
@@ -14,9 +14,10 @@ SET properties =
 }
 '
 WHERE product_id = 1 ;
-     ```
+ ```
 
 - Method 2
+
 ```sql
 UPDATE products
 SET properties = JSON_OBJECT(
