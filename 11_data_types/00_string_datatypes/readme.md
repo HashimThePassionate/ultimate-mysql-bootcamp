@@ -25,14 +25,18 @@
 ---MYSQL QUERIES
 
 ```sql
-CREATE TABLE `products` (
-  `product_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `quantity_in_stock` int(11) NOT NULL,
-  `unit_price` decimal(4,2) NOT NULL,
-  PRIMARY KEY (`product_id`)
+CREATE TABLE `customers` (
+  `customer_id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `birth_date` date DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `address` varchar(50) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `state` char(2) NOT NULL,
+  `points` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`customer_id`)
 );
 ```
 
-https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/b2ff6b83-27f8-499b-bc38-8c35bc3d92cc
 
