@@ -1,11 +1,15 @@
 # Store Procedure
+
 ### `What is a Stored Procedures:`
+
 A **stored procedure** in a database is like a recipe or a set of instructions. It allows you to store a sequence of database operations that can be reused whenever needed. Instead of writing the same instructions repeatedly, you can save them as a stored procedure and execute them with a single command. This helps make database operations more efficient and easier to manage.
 
-#### ***`For Example:`***
-Imagine you have a recipe for your favorite chocolate chip cookies.  Instead of rewriting the recipe every time you want to bake cookies, you can store it in a recipe book. That way, you can easily find it and follow the instructions whenever you have a craving.
+#### **_`For Example:`_**
+
+Imagine you have a recipe for your favorite chocolate chip cookies. Instead of rewriting the recipe every time you want to bake cookies, you can store it in a recipe book. That way, you can easily find it and follow the instructions whenever you have a craving.
 
 ---
+
 ### `why we use Store Prodcedure:`
 
 1. **Code Reusability**: Instead of writing the same SQL code repeatedly in different parts of your application, you can write it once in a stored procedure and then call the procedure wherever needed.
@@ -23,96 +27,21 @@ Imagine you have a recipe for your favorite chocolate chip cookies.  Instead of 
 ---
 
 ### `Advantage of Store Procedure:`
-|  ***`Advantage`***                | ***`Description`***                                                                                        |
-|--------------------------|---------------------------------------------------------------------------------------------------|
-| Structured Data Storage  | Tables provide a structured way to store data, making it easy to organize and retrieve information.|
-|Efficient Data Retrieval | Using tables allows for efficient retrieval of data through SQL queries, especially with proper indexes.|
-| Data Integrity           | Tables can enforce data integrity through constraints like primary keys, foreign keys, and check constraints.|
-| Flexibility              | Tables can store different types of data and allow for complex relationships between data entities.|
-| Reduced Network Traffic              | Send only the procedure name, not the entire set of instructions.|
+
+| **_`Advantage`_**        | **_`Description`_**                                                                                           |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| Structured Data Storage  | Tables provide a structured way to store data, making it easy to organize and retrieve information.           |
+| Efficient Data Retrieval | Using tables allows for efficient retrieval of data through SQL queries, especially with proper indexes.      |
+| Data Integrity           | Tables can enforce data integrity through constraints like primary keys, foreign keys, and check constraints. |
+| Flexibility              | Tables can store different types of data and allow for complex relationships between data entities.           |
+| Reduced Network Traffic  | Send only the procedure name, not the entire set of instructions.                                             |
 
 ---
+
 ### `Disadvantage of Store Procedure:`
-| **Disadvantage**         | **Description**                                                                                   |
-|--------------------------|---------------------------------------------------------------------------------------------------|
-| Increased Complexity   | Debugging and troubleshooting procedures can be more complex than simple queries.|
-| Development Time     |Initial creation of procedures takes extra time compared to a single query.|
-| Vendor Dependence         | Procedures may not be portable across different database systems.|
 
----
-
-### `Creating a Stored Procedure in MySQL Workbench:`
-
-1. **Open MySQL Workbench** and connect to your database server.
-
-2. **Select the Database:** In the navigation pane on the left, click on the schema (database) where you want to create the stored procedure.
-
-3. **Open SQL Editor:** Click on the "SQL Editor" tab in the main window.
-
-4. **Write the Procedure:** Enter the SQL code for your stored procedure. For example, to create a simple procedure that selects all records from a table called `my_table`:
-
-   ```sql
-   DELIMITER //
-   CREATE PROCEDURE simple_proc()
-   BEGIN
-       SELECT * FROM my_table;
-   END //
-   DELIMITER ;
-   ```
-
-5. **Execute the SQL Code:** Click the lightning bolt icon or press `Ctrl + Enter` to execute the SQL code. If successful, you should see a message indicating that one row was affected.
-
-6. **Call the Procedure:** To call the stored procedure, use the following SQL code:
-
-   ```sql
-   CALL simple_proc();
-   ```
-
-   This will execute the `simple_proc` procedure and return the result set.
-
-7. **Modify as Needed:** Modify the stored procedure code to perform more complex operations as required.
-
----
-### `Example1:`
-**Stored Procedure with Parameters:**
-
-Suppose you have a table called `clients` with columns `id`, `name`, and `state`, and you want to create a stored procedure to retrieve clients based on a specific state.
-
-```sql
-DROP PROCEDURE IF EXISTS get_clients_by_state;
-DELIMITER $$
-CREATE PROCEDURE get_clients_by_state
-    (
-        IN p_state CHAR(2) -- Input parameter: State code
-    )
-    BEGIN
-        SELECT * FROM clients c
-        WHERE c.state = p_state;
-    END$$
-DELIMITER ;
-```
-
-**Calling the Procedure:** To call the stored procedure and retrieve clients from the state of California ('CA'), you would use the following SQL code:
-
-```sql
-CALL get_clients_by_state('CA');
-```
-### `Example2:`
-DELIMITER $$
-CREATE PROCEDURE get_clients_by_default_states
-	(
-        state CHAR(2)
-        )
-	BEGIN
-    IF state IS NULL THEN
-        select * from clients;
-    ELSE
-            SELECT * FROM clients c
-            WHERE c.state = state;
-    END IF;
-	END$$
-DELIMITER ;
-
-
-CALL get_clients_by_default_states(NULL)
-CALL get_clients_by_default_states('CA')
+| **Disadvantage**     | **Description**                                                                   |
+| -------------------- | --------------------------------------------------------------------------------- |
+| Increased Complexity | Debugging and troubleshooting procedures can be more complex than simple queries. |
+| Development Time     | Initial creation of procedures takes extra time compared to a single query.       |
+| Vendor Dependence    | Procedures may not be portable across different database systems.                 |
