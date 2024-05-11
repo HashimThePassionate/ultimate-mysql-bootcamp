@@ -1,4 +1,4 @@
-## Prerequisites for creating database
+## Prerequisites for Creating Database
 
 Before proceeding with database creation, ensure that you have the following:
 
