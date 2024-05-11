@@ -7,7 +7,6 @@
  FROM customers 
  WHERE last_name LIKE 's%';
  ```
- <img src=./Images/6Capture.PNG></img>
 
 
  **Another Example**
@@ -24,6 +23,6 @@
  FROM customers 
  WHERE last_name LIKE 'v______s'
  ```
- <img src=./Images/7Capture.PNG></img>
+
 
 
