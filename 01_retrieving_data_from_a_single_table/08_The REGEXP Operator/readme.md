@@ -1,5 +1,4 @@
-## The REGEXP Operator Documentation
-
+## The REGEXP Operator 
 **Introduction**
 
 - The `REGEXP Operator` is a logical operator in SQL used to search for strings that match a specified regular expression pattern.
