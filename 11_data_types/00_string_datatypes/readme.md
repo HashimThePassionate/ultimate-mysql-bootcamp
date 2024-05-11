@@ -34,6 +34,8 @@ CREATE TABLE `products` (
 );
 ```
 
+https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/b2ff6b83-27f8-499b-bc38-8c35bc3d92cc
+
 
 
 
