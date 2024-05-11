@@ -12,8 +12,8 @@
  FROM customers 
  WHERE first_name REGEXP 'hr' -- hr is a pattern
  ```
-`first_name`: The column to be searched for the specified regular expression pattern.
-`Pattern`: The regular expression pattern to search for.
+- `first_name`: The column to be searched for the specified regular expression pattern.
+- `Pattern`: The regular expression pattern to search for.
 
 - We can also use `REGEXP` for more complex string patterns.
 
