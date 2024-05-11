@@ -13,7 +13,6 @@
  FROM customers 
  ORDER by first_name DESC, last_name ASC;
  ```
- <img src=./Images/9Capture.PNG></img>
 
 ## How to Select Table and sort using First_name with ORDER BY Clause
 
