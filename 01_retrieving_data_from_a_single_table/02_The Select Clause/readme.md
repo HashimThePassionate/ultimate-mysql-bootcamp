@@ -15,8 +15,8 @@
  ```
 - `SELECT *`: You can use `*` to retrieve all data from the table.
 - `customers`: Specifies the name of the table from which you want to retrieve data.
-- 
-## `AS`Alias in SQL
+  
+## Alias `AS`in SQL
 
 **Introduction**
 - In SQL, `aliases` provide alternative names for columns or tables in a database query.
