@@ -1,5 +1,6 @@
 ## 6. Json datatypes:
 - Method 1
+  
   ```sql
   UPDATE products
 SET properties = 
@@ -27,6 +28,7 @@ WHERE product_id = 2;
 ```
 
 - Selection specific property
+  
   ```sql
   SELECT 
 product_id,
