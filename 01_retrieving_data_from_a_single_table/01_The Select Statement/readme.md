@@ -15,6 +15,7 @@ Before proceeding with database creation, ensure that you have the following:
  USE <Dbname> || use <Dbname> -- use your own database
  USE mydb || use mydb
  ```
+- `-- ` is used to comment anything in SQL
 ## The SELECT Statement
 **Introduction**
 - The `SELECT statement` is one of the fundamental SQL commands used to retrieve data from a database. 
