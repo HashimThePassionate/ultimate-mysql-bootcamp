@@ -1,3 +1,4 @@
+-- create table
 CREATE TABLE numeric_types_table (
     decimal_column DECIMAL(9,2),
     dec_column DEC(9,2),
