@@ -1,7 +1,18 @@
-## How to Select Database
- 
+## Prerequisites for creating database
+
+Before proceeding with database creation, ensure that you have the following:
+
+- Access to a database management system (DBMS) such as MySQL, SQLite, etc.
+- Administrative privileges or permissions to create databases.
+- Basic understanding of SQL (Structured Query Language).
+
+## Connect to the Database Management System
+- Open your preferred database management tool `(e.g., MySQL Workbench, pgAdmin, SQLiteStudio)`.
+- Connect to the database management system using the appropriate credentials `(username, password, host, port)`.
+
+## Create a New Database
  ```sql
- USE <Dbname> || use <Dbname>
+ USE <Dbname> || use <Dbname> -- use your own database
  USE mydb || use mydb
  ```
 ## SELECT Statement
@@ -20,7 +31,7 @@ FROM customers;
 - `customer_id,first_name, last_name, ...`: Specifies the columns you want to retrieve data from.
 - `customers`: Specifies the name of the table from which you want to retrieve data.
 
-## How to Select all Table fields in Database using `SELECT *`
+## How to Select all fields in Database using SELECT `*`
 
  - First Select Database.
  - Than Select table
