@@ -54,8 +54,12 @@ You can leave it blank also. Click on Tst Connection to check the connection.  <
 
 10. In case you are **not able to connect** to the **server** or you face issues on **Test Connection**. Kindly **check if the server is up and running**. Open **System Preferences** -> **My SQL** and see if the server **status is running**. <ins>shown in figure (10) , (10.1) and (10.2)</ins>
 <img src="https://github.com/cyber-fanatic/ultimate-mysql-bootcamp/blob/main/00_getting_started/03_install_mysql_on_mac/images/Screenshot%20from%202024-05-08%2023-50-30.png">
-
-
+<p align="center"><br><em>figure(10)</em></p>
+<img src="https://github.com/cyber-fanatic/ultimate-mysql-bootcamp/blob/main/00_getting_started/03_install_mysql_on_mac/images/Screenshot%20from%202024-05-11%2020-55-26.png">
+<p align="center"><br><em>figure(10.1)</em></p>
+<img src="https://github.com/cyber-fanatic/ultimate-mysql-bootcamp/blob/main/00_getting_started/03_install_mysql_on_mac/images/Screenshot%20from%202024-05-11%2020-56-06.png">
+<p align="center"><br><em>figure(10.2)</em></p>
+<hr>
 
 
 
