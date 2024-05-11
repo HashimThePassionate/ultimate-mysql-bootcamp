@@ -11,7 +11,7 @@
  FROM customers 
  ORDER by first_name DESC, last_name ASC ...;
  ```
-- `First_name`, `Last_name`, ...: The columns used to sort the result set.
+- `First_name`, `Last_name`: The columns used to sort the result set.
 - ASC (optional): Specifies ascending order *(default)*.
 - DESC (optional): Specifies descending order.
   
@@ -29,7 +29,7 @@
 ## Additional Notes
 - The `ORDER BY Clause` can be applied to one or more columns, allowing for multi-level sorting.
 - If no sorting order (ASC or DESC) is specified, ASC (ascending order) is assumed by default.
-- The `ORDER BY Clause` is *typically the last clause in a SELECT statement*.
+- The `ORDER BY Clause` is `*typically the last clause in a SELECT statement*`.
 
  
 
