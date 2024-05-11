@@ -28,7 +28,7 @@
 - `Condition1` and `Condition2`: Conditions of which at least one must be true for a row to be included in the result set.
 - We use `OR Operator` it will return true if at least one condition meets true.
 
-## Introduction
+**Introduction**
 
 - The `NOT Operator` is a logical operator in SQL used to negate a condition in a WHERE clause.
 - It allows you to specify that a condition must not be true for a row to be included in the result set.
