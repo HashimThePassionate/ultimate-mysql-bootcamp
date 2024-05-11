@@ -24,7 +24,6 @@ DELIMITER ;
 CALL get_clients_by_state('CA');
 ```
 
----
 
 ![[Helpful video]](https://raw.githubusercontent.com/Hassansahi1122/ultimate-mysql-bootcamp/main/08_stored_procedures/video/MySQL%20Workbench%202024-05-09%2022-45-54.gif)]
 
