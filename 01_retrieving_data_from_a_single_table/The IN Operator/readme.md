@@ -7,7 +7,6 @@
  FROM customers 
  WHERE city IN ('karachi','kohat');
  ```
- <img src=./Images/4Capture.PNG></img>
 
  ## How to select those result whose city is not in kohat or karachi
 
