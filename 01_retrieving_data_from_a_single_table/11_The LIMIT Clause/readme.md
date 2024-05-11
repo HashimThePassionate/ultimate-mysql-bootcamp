@@ -14,7 +14,7 @@
  ```
 - `Phone`, `State`, ...: The columns to be selected from the table.
 - `Customers`: The name of the table from which to retrieve data.
-- `Number_of_rows: The maximum number of rows to be returned by the query.
+- `Number_of_rows`: The maximum number of rows to be returned by the query.
 
 **This query will return the first 7 rows from the customers table.**
   
