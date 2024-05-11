@@ -1,4 +1,4 @@
-## IN Operator
+## The IN Operator
 
 **Introduction**
 - The `IN Operator` is a logical operator in SQL used to specify multiple values in a WHERE clause.
