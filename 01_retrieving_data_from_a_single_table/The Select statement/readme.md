@@ -16,8 +16,6 @@
  SELECT * 
  FROM customers;
  ```
- <img src=></img>
-
  **This code selects all data of the table**
 
 
