@@ -6,7 +6,6 @@
  FROM customers
  WHERE customer_id = 5;
  ```
-<img src=./Images/12Capture.PNG></img>
 
 ## How to filter with "WHERE Clause" 
 
