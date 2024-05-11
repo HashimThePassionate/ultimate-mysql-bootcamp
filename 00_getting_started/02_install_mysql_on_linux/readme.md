@@ -1,4 +1,4 @@
-##  How to Install Default MySQL-Server that comes with Debian Linux : (optional)
+##  How to Install Default MySQL-Server on Debian Linux : (optional)
 
 MySQL is  available in **Debian Linux repositories**. This means you can easily **install MySQL** on  Linux using the package manager.it can be easily added with a simple command. **Here is Command Below**:
 
