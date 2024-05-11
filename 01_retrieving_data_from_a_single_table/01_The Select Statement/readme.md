@@ -15,7 +15,7 @@ Before proceeding with database creation, ensure that you have the following:
  USE <Dbname> || use <Dbname> -- use your own database
  USE mydb || use mydb
  ```
-## SELECT Statement
+## The SELECT Statement
 **Introduction**
 - The `SELECT statement` is one of the fundamental SQL commands used to retrieve data from a database. 
 - It allows you to query a database table and specify which columns or fields you want to retrieve, as well as any filtering or sorting 
