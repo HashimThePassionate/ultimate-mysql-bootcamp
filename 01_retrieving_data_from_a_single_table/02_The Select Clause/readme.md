@@ -1,4 +1,4 @@
-## Select Clause
+## The Select Clause
 **Introduction**
 
 - The `SELECT clause` lies at the heart of SQL, empowering users to retrieve specific data from a database based on their needs and 
