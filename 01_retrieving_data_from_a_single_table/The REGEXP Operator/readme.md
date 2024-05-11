@@ -22,7 +22,6 @@
  FROM customers 
  WHERE first_name REGEXP '^cl|t$'
  ```
- <img src=./Images/10Capture.PNG></img>
 
  - it means first_name must start with cl
  - Or first_name must end with t
