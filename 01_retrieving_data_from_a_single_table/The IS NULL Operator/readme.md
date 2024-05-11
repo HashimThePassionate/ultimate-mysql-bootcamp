@@ -5,5 +5,5 @@
  FROM customers 
  WHERE phone IS NULL;
  ```
- <img src=./Images/5Capture.PNG></img>
+
 
