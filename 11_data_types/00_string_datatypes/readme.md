@@ -22,6 +22,19 @@
 ```
 - Mostly we use VARCHAR type, bcz it uses indexes to speedup queries.
 
+---MYSQL QUERIES
+
+```sql
+CREATE TABLE `products` (
+  `product_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `quantity_in_stock` int(11) NOT NULL,
+  `unit_price` decimal(4,2) NOT NULL,
+  PRIMARY KEY (`product_id`)
+);
+```
+
+
 
 
 
