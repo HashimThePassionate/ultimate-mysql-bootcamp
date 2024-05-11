@@ -16,5 +16,7 @@
  SELECT *  
  FROM customers  
  WHERE city NOT IN ('karachi','kohat');
- ```
+ ```  
+
+ 
 

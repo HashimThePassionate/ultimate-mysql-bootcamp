@@ -1,7 +1,7 @@
 ## How to Select Database
  
  ```sql
- USE <Dbname> || use <Dbname> 
+ USE <Dbname> || use <Dbname>
  USE mydb || use mydb
  ```
 

@@ -22,7 +22,7 @@
 ```sql
 SELECT * 
 FROM customers 
-WHERE city = 'Chicago'; 
+WHERE city = 'Chicago';
 ```
 
 ## How to filter those records whose birth_date > '2023-08-07'

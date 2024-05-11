@@ -15,6 +15,7 @@
  WHERE birth_date > '2023-08-07' OR points > 1500;
  ```
  
+ 
 ## How to filter those records whose birth_date > 2023-08-07 is NOT Greater than
 
  - We use NOT operator to reverse
