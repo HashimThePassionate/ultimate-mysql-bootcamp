@@ -30,10 +30,10 @@ WHERE product_id = 2;
 
 - Selection specific property
   
-  ```sql
+```sql
   SELECT 
 product_id,
 JSON_EXTRACT(properties,'$.weight')
 FROM products
 WHERE product_id IN (1,2) ;
-    ```
+```
