@@ -17,5 +17,6 @@
 ```
 INT(4) => 0001
 ```
-https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/e6bccc3f-2bd6-46e6-9ccf-b9cc81cf0e9e
+![Integers datatypes](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/67bf3e7a-c681-4626-b77b-579369dd122e)
+
 
