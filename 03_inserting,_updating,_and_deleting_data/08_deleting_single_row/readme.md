@@ -15,5 +15,8 @@ WHERE customer_id = 52;
 * `WHERE condition`: The condition that identifies the row to be deleted. If omitted, all rows in the table will be deleted.
 
 - It's important to use caution when deleting rows from a database, especially without specifying a condition. If you omit the `WHERE` clause, it will delete all rows from the table, which can lead to data loss if not intended. Always double-check your conditions before executing a delete operation to avoid unintended consequences.
+<hr>
 
 <img src = './assets/delete-single.gif'>
+
+<hr>

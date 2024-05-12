@@ -35,5 +35,8 @@ INSERT INTO customers (
 * `(value1, value2, value3, ...)`: The actual values you want to insert into the specified columns.
 
 **This code will insert new row to a table.**
+<hr>
 
 <img src='./assets/insert_single_record.gif'>
+
+<hr>

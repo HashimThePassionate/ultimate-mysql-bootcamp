@@ -15,5 +15,8 @@ WHERE customer_id = 1;
 * `column1, column2, ...`: The columns you want to update.
 * `new_value1, new_value2, ...`: The new values you want to set for the specified columns.
 * `WHERE condition`: The condition that identifies the row(s) to be updated. If omitted, all rows in the table will be updated.
+<hr>
 
-<!-- <img src = './assets/update-single.gif'> -->
+<img src = './assets/update-single.gif'>
+
+<hr>

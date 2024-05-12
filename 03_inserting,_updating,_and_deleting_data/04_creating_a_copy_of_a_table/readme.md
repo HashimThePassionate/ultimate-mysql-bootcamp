@@ -15,5 +15,8 @@ SELECT * FROM orders;
 * `original_table_name`: The name of the existing table that you want to copy.
 
 - This statement creates a new table (`new_table_name`) with the same structure and data as the original table (`original_table_name`). All columns and rows from the original table are copied to the new table.
+<hr>
 
 <img src='./assets/create-copy.gif'>
+
+<hr>

@@ -16,5 +16,8 @@ WHERE customer_id = '12' AND '13';
 * `condition_1, condition_2, condition_3`: These represent individual conditions that are evaluated against each row in the table. These conditions can involve comparisons, functions, or other logical expressions. If any of these conditions are true for a row, the row will be included in the deletion process.
 
 - Deleting multiple rows at once can be efficient and convenient, especially when you need to remove a group of records based on certain criteria. However, as with deleting a single row, it's important to use caution and double-check your conditions before executing a delete operation to avoid unintended consequences or data loss.
+<hr>
 
 <img src ='./assets/delete-multiple.gif'>
+
+<hr>
