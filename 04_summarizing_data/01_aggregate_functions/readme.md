@@ -28,6 +28,6 @@ FROM employees;
 
 <hr>
 
-<img src ='./assets/aggregate-functions'>
+<img src ='./assets/aggregate-functions.gif'>
 
 <hr>

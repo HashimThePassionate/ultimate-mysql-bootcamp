@@ -21,6 +21,6 @@ GROUP BY client_id WITH ROLLUP;
 
 <hr>
 
-<img src= './assets/roll-up'>
+<img src= './assets/roll-up.gif'>
 
 <hr>

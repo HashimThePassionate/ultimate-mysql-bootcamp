@@ -19,7 +19,7 @@ GROUP BY client_id
 ORDER BY total_sales DESC;
 ```
 
-<img src = './assets/group-by'>
+<img src = './assets/group-by.gif'>
 
 <hr>
 
@@ -35,6 +35,6 @@ GROUP BY client_id
 HAVING total_sales > 500 AND number_of_invoices > 5;
 ```
 
-<img src = './assets/group-by-aggregate'>
+<img src = './assets/group-by-aggregate.if'>
 
 <hr>
