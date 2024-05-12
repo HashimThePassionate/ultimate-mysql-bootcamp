@@ -1,4 +1,10 @@
+CREATE TABLE IF NOT EXISTS products (
+    product_id INT PRIMARY KEY,
+    properties JSON
+);
+
 ---Method 1
+
 UPDATE products
 SET properties = 
 '
