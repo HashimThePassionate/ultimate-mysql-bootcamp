@@ -15,7 +15,8 @@
  USE mydb; -- write your own database
  SELECT * 
  FROM customers;
- ```
+ ``` 
+ 
  **This code selects all data of the table**
 
 

@@ -5,7 +5,7 @@
  ```sql 
  SELECT *  
  FROM customers 
- WHERE city IN ('karachi','kohat');
+ WHERE city IN ('Chicago','kohat');
  ```
 
  ## How to select those result whose city is not in kohat or karachi
