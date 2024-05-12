@@ -1,0 +1,21 @@
+--- Enum example
+CREATE TABLE enum_example (
+    color ENUM('Red', 'Green', 'Blue')
+);
+-- Inserting values
+INSERT INTO enum_example (color) VALUES ('Red'), ('Green'), ('Blue');
+
+-- Querying data
+SELECT * FROM enum_example;
+
+ --- Set example
+ CREATE TABLE set_example (
+    toppings SET('Cheese', 'Pepperoni', 'Mushrooms', 'Onions', 'Olives')
+);
+-- Inserting values
+INSERT INTO set_example (toppings) VALUES ('Cheese, Pepperoni'), ('Mushrooms, Onions'), ('Cheese, Olives');
+
+-- Querying data
+SELECT * FROM set_example;
+
+
