@@ -40,5 +40,7 @@ SELECT * FROM set_example;
 In both cases, you define the possible values for the column within parentheses after the data type declaration. When inserting data,
 you provide values within single quotes, separated by commas if necessary.
 
-Uploading set datatypes.mp4…
+
+https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/6da2ed2a-a07a-4b02-8fbe-557a824b2abf
+
 
