@@ -35,6 +35,6 @@ GROUP BY client_id
 HAVING total_sales > 500 AND number_of_invoices > 5;
 ```
 
-<img src = './assets/group-by-aggregate.if'>
+<img src = './assets/group-by-aggregate.gif'>
 
 <hr>
