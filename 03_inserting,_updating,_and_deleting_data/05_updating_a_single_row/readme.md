@@ -5,9 +5,10 @@
 - Here's the basic syntax for updating a single row in SQL:
 
 ```sql
-UPDATE Products
-SET Price = 45.00
-WHERE ProductID = 101;
+USE sql_store;
+UPDATE customers 
+SET first_name="Muhammad", last_name="Hashim", birth_date="2023-12-30"
+WHERE customer_id = 1;
 ```
 
 * `table_name`: The name of the table containing the row you want to update.
@@ -15,4 +16,4 @@ WHERE ProductID = 101;
 * `new_value1, new_value2, ...`: The new values you want to set for the specified columns.
 * `WHERE condition`: The condition that identifies the row(s) to be updated. If omitted, all rows in the table will be updated.
 
-<img src='./image/update-single.PNG'>
+<!-- <img src = './assets/update-single.gif'> -->

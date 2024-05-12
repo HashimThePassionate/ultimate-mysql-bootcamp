@@ -5,20 +5,40 @@
 - You can insert multiple rows using the same `INSERT INTO` statement by providing multiple sets of values in the `VALUES` clause, separated by commas. Here's the syntax:
 
 ```sql
-INSERT INTO Employees (EmployeeID, FirstName, LastName, Department, Salary)
-VALUES 
-    (1, 'John', 'Doe', 'Finance', 50000.00),
-    (2, 'Jane', 'Smith', 'Marketing', 55000.00),
-    (3, 'Alice', 'Johnson', 'Human Resources', 48000.00),
-    (4, 'Bob', 'Williams', 'IT', 60000.00);
+INSERT INTO customers (
+    customer_id,
+    first_name,
+    last_name,
+    birth_date,
+    phone,
+    address,
+    city,
+    state,
+    points
+) VALUES (
+    53,
+    'Ishaque',
+    'Chaiwala',
+    NULL,
+    NULL,
+    'Azad Chaiwala Institute',
+    'Rawalpindi',
+    'Sindh',
+    DEFAULT
+),
+(
+    54,
+    'Muhammad',
+    'Mowahid',
+    NULL,
+    NULL,
+    'Azad Chaiwala Institute',
+    'Rawalpindi',
+    'Punjab',
+    DEFAULT
+);
 ```
 
 - Each set of values in the `VALUES` clause corresponds to a new row to be inserted into the table. The values within each set must match the order and data types of the columns specified in the `INSERT INTO` statement.
 
 - Executing this SQL statement will insert three new rows into the employees table, each with the specified values for EmployeeID, FirstName, LastName, Department and Salary.
-
-
-**This query will add multiple rows to a table.**
-
-<img src='./image/insert result.PNG'>
-

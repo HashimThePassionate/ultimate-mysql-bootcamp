@@ -4,8 +4,28 @@
 - Inserting a row in SQL means adding a new record to a table within a database. It's one of the fundamental operations in database management and is  typically done using the INSERT INTO statement. Here's a basic syntax:
 
 ```sql
-INSERT INTO Products (ProductID, ProductName, Category, Price, StockQuantity)
-VALUES (107, 'Backpack', 'Accessories', 50.00, 80);
+USE sql_store;
+INSERT INTO customers (
+    customer_id,
+    first_name,
+    last_name,
+    birth_date,
+    phone,
+    address,
+    city,
+    state,
+    points
+) VALUES (
+    11,
+    'Ahmed',
+    'Raheem',
+    NULL,
+    NULL,
+    'Azad Chaiwala Institute',
+    'Rawalpindi',
+    'MA',
+    DEFAULT
+);
 ```
 - Executing this SQL statement would insert a new row into the employees table with the specified values in the corresponding columns.
 
@@ -16,7 +36,4 @@ VALUES (107, 'Backpack', 'Accessories', 50.00, 80);
 
 **This code will insert new row to a table.**
 
-<img src='./image/insert-single.PNG'></img>
-
-
-
+<img src='./assets/insert_single_record.gif'>

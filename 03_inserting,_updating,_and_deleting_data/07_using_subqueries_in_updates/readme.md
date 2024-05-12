@@ -13,13 +13,13 @@
 - Here's a basic example of using a subquery to filter data:
 
 ```sql
-SELECT employee_name
-FROM employees
-WHERE department_id IN (
-    SELECT department_id
-    FROM departments
-    WHERE department_name = 'Sales'
-);
+UPDATE orders
+SET comments = "Gold Customer"
+WHERE c_id IN
+                (SELECT customer_id
+                 FROM customers
+                 WHERE points > 1800);
+
 ```
 
 - In this example, the inner query retrieves the department_id for the 'Sales' department from the departments table, and the outer query selects the names of employees who belong to the Sales department based on the department_id retrieved by the subquery.
