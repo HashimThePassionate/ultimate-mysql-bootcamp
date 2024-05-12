@@ -57,7 +57,7 @@ Here are some disadvantages of triggers presented in a tabular format:
 
 ---
 
-### `Creating a Stored Procedure in MySQL Workbench:`
+### `Creating a Trigger in MySQL Workbench:`
 Creating a trigger in MySQL Workbench involves writing the trigger code and then executing it in the SQL Editor. Here's a general outline of the process:
 
 1. **Open MySQL Workbench** and connect to your MySQL server.
