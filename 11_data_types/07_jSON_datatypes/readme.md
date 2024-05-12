@@ -8,6 +8,10 @@ CREATE TABLE IF NOT EXISTS products (
 );
 ```
 
+
+https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/08438747-d1e7-4852-a9b1-c7d02ee29854
+
+
 - Method 1
   
  ```sql
