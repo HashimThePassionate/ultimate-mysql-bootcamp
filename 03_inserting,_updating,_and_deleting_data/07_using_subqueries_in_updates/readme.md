@@ -10,7 +10,7 @@
 
 4. **Nested Queries**: Subqueries can be nested within each other, allowing for complex logic and data retrieval. You can have subqueries within subqueries to achieve more intricate data manipulations.
 
-- Here's a basic example of using a subquery to filter data:
+- Here's a basic example of using a subquery to filter data:-
 
 ```sql
 UPDATE orders

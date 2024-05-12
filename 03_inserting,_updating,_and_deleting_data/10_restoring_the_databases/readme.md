@@ -16,7 +16,7 @@
 
 - The SQL syntax can vary depending on the database management system (DBMS) you're using.
 
-- For example, in Microsoft SQL Server, you would typically use the `RESTORE DATABASE` statement to restore a database from a backup file. Here's a basic example:
+- For example, in Microsoft SQL Server, you would typically use the `RESTORE DATABASE` statement to restore a database from a backup file. Here's a basic example:-
 
 ```sql
 RESTORE DATABASE YourDatabaseName
@@ -34,7 +34,7 @@ MOVE 'LogicalLogFileNamelog' TO 'C:\YourLogFiles.ldf';
 * `MOVE 'LogicalDataFileName' TO 'C:\YourDataFiles.mdf'`: Specifies the new file location for the data file.
 * `MOVE 'LogicalLogFileNamelog' TO 'C:\YourLogFiles.ldf'`: Specifies the new file location for the log file.
 
-- In MySQL, the syntax would be different. You would typically use the `mysql` command-line client or a similar tool to restore a database from a backup file. Here's a basic example of how you might do it:
+- In MySQL, the syntax would be different. You would typically use the `mysql` command-line client or a similar tool to restore a database from a backup file. Here's a basic example of how you might do it:-
 
 ```bash
 mysql -u username -p YourDatabaseName < /path/to/your/backup/file.sql

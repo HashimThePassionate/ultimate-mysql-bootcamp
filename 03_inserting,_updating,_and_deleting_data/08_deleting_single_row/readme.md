@@ -2,7 +2,7 @@
 
 - Deleting a single row in a database removes that specific record from the table. It's a straightforward operation, typically done using the `DELETE FROM` statement in SQL.
 
-- Here's the basic syntax for deleting a single row in SQL:
+- Here's the basic syntax for deleting a single row in SQL:-
 
 ```sql
 USE sql_store;

@@ -1,7 +1,7 @@
 ### Inserting a Row
 
 - *INSERT INTO*: This adds new rows to a table.
-- Inserting a row in SQL means adding a new record to a table within a database. It's one of the fundamental operations in database management and is  typically done using the INSERT INTO statement. Here's a basic syntax:
+- Inserting a row in SQL means adding a new record to a table within a database. It's one of the fundamental operations in database management and is  typically done using the INSERT INTO statement. Here's a basic syntax:-
 
 ```sql
 USE sql_store;

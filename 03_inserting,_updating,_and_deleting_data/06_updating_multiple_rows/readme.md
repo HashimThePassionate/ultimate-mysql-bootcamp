@@ -2,7 +2,7 @@
 
 - Updating multiple rows in a database involves modifying the data of multiple records in a table simultaneously. This is typically done using the `UPDATE` statement in SQL, where you can specify conditions to identify the rows to be updated.
 
-- Here's the basic syntax for updating multiple rows in SQL:
+- Here's the basic syntax for updating multiple rows in SQL:-
 
 ```sql
 UPDATE your_table_name

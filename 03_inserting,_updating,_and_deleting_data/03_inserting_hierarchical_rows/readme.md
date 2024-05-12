@@ -2,6 +2,8 @@
 
 - Inserting hierarchical data in SQL typically refers to the process of inserting records into a table where there's a parent-child relationship among the records, creating a hierarchical structure. This is commonly done in scenarios like organizational charts, file systems, or product categories where each record (child) is associated with another record (parent).
 
+- Here's the syntax:-
+
 ```sql
 INSERT INTO customers(customer_id,first_name,last_name,birth_date)
 VALUES (DEFAULT,'IGI','ORIGIN','2023-12-25');

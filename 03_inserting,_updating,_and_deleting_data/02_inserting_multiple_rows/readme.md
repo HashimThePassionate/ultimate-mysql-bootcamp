@@ -2,7 +2,7 @@
 
 - Inserting multiple rows in SQL allows you to add more than one record to a table in a single SQL statement. This is often more efficient than executing multiple INSERT statements for each row individually.
 
-- You can insert multiple rows using the same `INSERT INTO` statement by providing multiple sets of values in the `VALUES` clause, separated by commas. Here's the syntax:
+- You can insert multiple rows using the same `INSERT INTO` statement by providing multiple sets of values in the `VALUES` clause, separated by commas. Here's the syntax:-
 
 ```sql
 INSERT INTO customers (

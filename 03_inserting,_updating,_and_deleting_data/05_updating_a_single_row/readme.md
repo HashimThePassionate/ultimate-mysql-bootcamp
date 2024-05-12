@@ -2,7 +2,7 @@
 
 - Updating a single row in a database involves modifying the data of an existing record in a table. This is typically done using the `UPDATE` statement in SQL. When you update a single row, you're changing the values of one or more columns for that specific row while leaving the other rows unchanged.
 
-- Here's the basic syntax for updating a single row in SQL:
+- Here's the basic syntax for updating a single row in SQL:-
 
 ```sql
 USE sql_store;

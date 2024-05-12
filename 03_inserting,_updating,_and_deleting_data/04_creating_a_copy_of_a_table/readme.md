@@ -4,7 +4,7 @@
 
 - When you create a copy of a table, you essentially replicate both the structure (columns, data types, constraints, etc.) and the data itself. This means that the new table will have the same columns, indexes, and constraints as the original table, and it will contain a copy of all the rows from the original table at the time the copy was made.
 
-- Here's how you typically create a copy of a table in SQL:
+- Here's how you typically create a copy of a table in SQL:-
 
 ```sql
 CREATE TABLE orders_archived  AS

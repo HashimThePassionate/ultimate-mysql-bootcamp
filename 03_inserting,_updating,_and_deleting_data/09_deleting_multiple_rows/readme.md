@@ -2,7 +2,7 @@
 
 - Deleting multiple rows in a database removes multiple records from a table simultaneously. This is typically done using the `DELETE FROM` statement in SQL, where you can specify conditions to identify the rows to be deleted.
 
-- Here's the basic syntax for deleting multiple rows in SQL:
+- Here's the basic syntax for deleting multiple rows in SQL:-
 
 ```sql
 USE sql_store;
