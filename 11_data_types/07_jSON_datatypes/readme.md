@@ -1,4 +1,17 @@
 ## 6. Json datatypes:
+In MySQL, JSON is a native data type that can store JSON documents. 
+It supports all standard JSON operations, including creation, retrieval, and manipulation of JSON data.
+```sql
+CREATE TABLE IF NOT EXISTS products (
+    product_id INT PRIMARY KEY,
+    properties JSON
+);
+```
+
+![Jason](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/8f84ca5a-cd14-4b1c-bc7d-80b6d99d362c)
+
+
+
 - Method 1
   
  ```sql

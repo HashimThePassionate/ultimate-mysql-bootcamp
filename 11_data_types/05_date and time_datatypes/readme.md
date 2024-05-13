@@ -23,4 +23,5 @@
 - `timestamp_column`: Typically used to track the timestamp of when a row was inserted or last updated.
 - `year_column`: Used for storing four-digit year values.
 
-https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/42d0d35a-4148-4b89-8c98-c0da10510e58
+![date and time datatypes](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/efdc5467-d923-4204-9e57-9b22060c988f)
+

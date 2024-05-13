@@ -38,7 +38,8 @@ CREATE TABLE `customers` (
   PRIMARY KEY (`customer_id`)
 );
 ```
-https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/7999813b-d481-43e4-8fd5-20b4977d598b
+
+![String datatypes](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/cb56e698-83cd-464b-829d-b7686c48ddfa)
 
 
 

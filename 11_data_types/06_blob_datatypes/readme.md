@@ -7,3 +7,7 @@ BLOBs come in different types depending on the database system you're using:
 - `BLOB`: Can store up to 65,535 bytes.
 - `MEDIUMBLOB`: Can store up to 16,777,215 bytes.
 - `LONGBLOB`: Can store up to 4,294,967,295 bytes.
+
+![blob datatypes](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/45f71483-aab5-495b-a13d-7dba4025e5bd)
+
+
