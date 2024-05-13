@@ -25,3 +25,36 @@
 
 ![date and time datatypes](https://github.com/Techwiz-Laraib/ultimate-mysql-bootcamp/assets/159939710/efdc5467-d923-4204-9e57-9b22060c988f)
 
+```sql
+USE sql_inventory;
+-- Create the table
+CREATE TABLE enroll (
+    enroll_at TIMESTAMP, -- when we update a record than record time will updated automatically every time  
+    admission_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-- Insert 20 records with the current timestamp for enroll_at
+INSERT INTO enroll (enroll_at) VALUES 
+    (NOW()),
+    (NOW() - INTERVAL 1 DAY),
+    (NOW() - INTERVAL 2 DAY),
+    (NOW() - INTERVAL 3 DAY),
+    (NOW() - INTERVAL 4 DAY),
+    (NOW() - INTERVAL 5 DAY),
+    (NOW() - INTERVAL 6 DAY),
+    (NOW() - INTERVAL 7 DAY),
+    (NOW() - INTERVAL 8 DAY),
+    (NOW() - INTERVAL 9 DAY),
+    (NOW() - INTERVAL 10 DAY),
+    (NOW() - INTERVAL 11 DAY),
+    (NOW() - INTERVAL 12 DAY),
+    (NOW() - INTERVAL 13 DAY),
+    (NOW() - INTERVAL 14 DAY),
+    (NOW() - INTERVAL 15 DAY),
+    (NOW() - INTERVAL 16 DAY),
+    (NOW() - INTERVAL 17 DAY),
+    (NOW() - INTERVAL 18 DAY),
+    (NOW() - INTERVAL 19 DAY);
+
+```

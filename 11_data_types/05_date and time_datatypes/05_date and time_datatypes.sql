@@ -26,3 +26,33 @@ INSERT INTO `invoices` VALUES (17,'33-615-4694',3,126.38,68.10,'2019-07-30','201
 INSERT INTO `invoices` VALUES (18,'52-269-9803',5,180.17,42.77,'2019-05-23','2019-06-12','2019-01-08');
 INSERT INTO `invoices` VALUES (19,'83-559-4105',1,134.47,0.00,'2019-11-23','2019-12-13',NULL);
 
+USE sql_inventory;
+-- Create the table
+CREATE TABLE enroll (
+    enroll_at TIMESTAMP, -- when we update a record than record time will updated automatically every time  
+    admission_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-- Insert 20 records with the current timestamp for enroll_at
+INSERT INTO enroll (enroll_at) VALUES 
+    (NOW()),
+    (NOW() - INTERVAL 1 DAY),
+    (NOW() - INTERVAL 2 DAY),
+    (NOW() - INTERVAL 3 DAY),
+    (NOW() - INTERVAL 4 DAY),
+    (NOW() - INTERVAL 5 DAY),
+    (NOW() - INTERVAL 6 DAY),
+    (NOW() - INTERVAL 7 DAY),
+    (NOW() - INTERVAL 8 DAY),
+    (NOW() - INTERVAL 9 DAY),
+    (NOW() - INTERVAL 10 DAY),
+    (NOW() - INTERVAL 11 DAY),
+    (NOW() - INTERVAL 12 DAY),
+    (NOW() - INTERVAL 13 DAY),
+    (NOW() - INTERVAL 14 DAY),
+    (NOW() - INTERVAL 15 DAY),
+    (NOW() - INTERVAL 16 DAY),
+    (NOW() - INTERVAL 17 DAY),
+    (NOW() - INTERVAL 18 DAY),
+    (NOW() - INTERVAL 19 DAY);
