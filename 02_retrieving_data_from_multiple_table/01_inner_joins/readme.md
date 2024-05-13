@@ -1,4 +1,4 @@
-## INNER Joins
+## INNER JOINS
 
 **Introduction**
 
