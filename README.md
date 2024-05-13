@@ -1945,8 +1945,6 @@ EXPLAIN SELECT customer_id FROM customer where state = 'CA';
 Now look to find the customer whose state is CA, mysql reads all the records
 we can see using **Explain** keyword before select statement...
 
-<img src="" alt="Binary Search Tree" width="100%">
-
 #### Now lets Create Indexe for fast searching:
 ```sql
 CREATE INDEX idx_state ON customer (state);
