@@ -26,7 +26,7 @@ ORDER BY c.customer_id;
 - `Left Outer Join` select those records which are not.
 - Like in our example we also select those customers who don't have any order as well as who do.
 
-2.**RIGHT OUTER JOIN**:
+**2. RIGHT OUTER JOIN**:
 - Returns all rows from the right table (the second table specified in the JOIN clause), and the matched rows from the left table (the first table specified in the JOIN clause).
 - If there's no match, NULL values are returned for columns from the left table.
 
