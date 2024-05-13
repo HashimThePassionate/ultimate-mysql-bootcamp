@@ -13,8 +13,8 @@ SELECT *
 FROM orders o, customers c 
 WHERE o.customer_id  = c.customer_id;
 ```
-`Orders`,`Customer`: The tables you are joining, listed in the FROM clause separated by commas.
-`customer_id`: Columns used to establish the join conditions, specified in the WHERE clause.
+- `Orders`,`Customer`: The tables you are joining, listed in the FROM clause separated by commas.
+- `customer_id`: Columns used to establish the join conditions, specified in the WHERE clause.
 
 ## Additional Notes:
 
