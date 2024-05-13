@@ -1,4 +1,4 @@
-## Outer Joins
+## Outer JOINS
 
 **Introduction**
 
