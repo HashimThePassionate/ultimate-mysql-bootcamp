@@ -1,3 +1,4 @@
+
 # Writing Complex Queries in MySQL Documentation
 
 ## Introduction
