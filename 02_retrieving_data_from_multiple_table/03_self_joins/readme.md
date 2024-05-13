@@ -1,4 +1,4 @@
-## SELF Joins
+## SELF JOINS
 
 **Introduction**
 
