@@ -1,247 +1,309 @@
----------------How to Select Database-------------
-USE <Dbname> || use <Dbname>
+### How to Select Database
+```sql
+### How to Select Database
+ USE <Dbname> || use <Dbname>
 USE mydb || use mydb
+```
 
+### How to Select all Table fields in Database using "*" 
+- First Select Database
+- Select table
+- Also use semicolon ; at the end of each statement
 
----------------How to Select all Table fields in Database using "*" -------------
-1.First Select Database
-2.Select table
-3.Also use semicolon ; at the end of each statement
+```sql
 USE mydb;
-SELECT * FROM customer;
+SELECT * FROM customers;
+```
 
-
----------------How to Select and filter a specific row using WHERE Clause-------------
+### How to Select and filter a specific row using WHERE Clause
+```sql
 USE mydb;
 SELECT * 
-FROM customer
+FROM customers
 WHERE customer_id = 5;
+```
 
-
----------------How to Select Table and sort using First_name with ORDER BY Clause-------------
+### How to Select Table and sort using First_name with ORDER BY Clause
+```sql
 USE mydb;
 SELECT * 
-FROM customer
+FROM customers
 -- WHERE customer_id = 5  "--" Double Hyphen is used to comment something
 ORDER BY first_name;
 
+```
+### How to Select a specific fields with field name
+```sql
+SELECT first_name, last_name , points FROM customers;
+```
 
----------------How to Select a specific fields with field name-------------
-SELECT first_name, last_name , points FROM customer;
+### How to Select a specific fields with field name and calculate something in run time
+```sql
+SELECT first_name, last_name , points, points+10 FROM customers;
 
+```
+### Select specific field and calculate something but change calculated name in run time with AS Alias
+```sql
+SELECT first_name, last_name , points, (points+10)*100 AS discount_factor FROM customers;
+```
 
----------------How to Select a specific fields with field name and calculate something in run time-------------
-SELECT first_name, last_name , points, points+10 FROM customer;
+### if you want to add Space in Alias name
+```sql
+SELECT first_name, last_name , points, (points+10)*100 AS 'Discount Factor' FROM customers;
+```
 
-
----------------Select specific field and calculate something but change calculated name in run time with AS Alias-------------
-SELECT first_name, last_name , points, (points+10)*100 AS discount_factor FROM customer;
-
-
----------------if you want to add Space in Alias name-------------
-SELECT first_name, last_name , points, (points+10)*100 AS 'Discount Factor' FROM customer;
-
-
----------------How to select only unique and non duplicate value ---------------
-SELECT DISTINCT city FROM customer;
--- Make sure if you use SELECT DISTINCT first_name, city FROM customer it means both first_name and city
-must be distinct. It does not mean that only the city column should be distinct.
-
-
----------------How to filter with WHERE Clause-------------
-SELECT * FROM customer WHERE points>1500; 
--- filter those records whose points are greater than 1500
--- Also you should use these operators >,<,>=,<=,!=, <> 
-
-
----------------How to filter string matched record with WHERE Clause-------------
-SELECT * FROM customer WHERE city = 'karachi'; 
+### How to select only unique and non duplicate value 
+```sql
+SELECT DISTINCT city FROM customers;
+```
+- Make sure if you use SELECT DISTINCT first_name, city FROM customer it means both first_name and city
+must be distinct.
+- It does not mean that only the city column should be distinct.
 
 
----------------How to filter those records which does not contain string 'karachi'-------------
-SELECT * FROM customer WHERE city != 'karachi'; 
+### How to filter with WHERE Clause
+```sql
+SELECT * FROM customers WHERE points>1500;
+``` 
+- filter those records whose points are greater than 1500
+- Also you should use these operators >,<,>=,<=,!=, <> 
+
+### How to filter string matched record with WHERE Clause
+```sql
+SELECT * FROM customers WHERE city = 'karachi'; 
+```
+
+### How to filter those records which does not contain string 'karachi'
+```sql
+SELECT * FROM customers WHERE city != 'karachi'; 
 or 
-SELECT * FROM customer WHERE city <> 'karachi';
+SELECT * FROM customers WHERE city <> 'karachi';
+```
 
+### How to filter those records whose birth_date > '2023-08-07'
+```sql
+SELECT * FROM customers WHERE birth_date > '2023-08-07';
+```
 
----------------How to filter those records whose birth_date > 2023-08-07-------------
-SELECT * FROM customer WHERE birth_date > '2023-08-07';
+### How to filter those records whose birth_date > 2023-08-07 and Points > 1500
+- We use AND operator it return true if both condition meets true
+```sql
+SELECT * FROM customers WHERE birth_date > '2023-08-07' AND points > 1500;
+```
 
+### How to filter those records whose birth_date > '2023-08-07' OR Points > 1500
+- We use OR operator it return true if at least one  condition meets true
+```sql
+SELECT * FROM customers WHERE birth_date > '2023-08-07' OR points > 1500;
+```
 
----------------How to filter those records whose birth_date > 2023-08-07 and Points > 1500------------
--- We use AND operator it return true if both condition meets true
-SELECT * FROM customer WHERE birth_date > '2023-08-07' AND points > 1500;
+### How to filter those records whose birth_date > 2023-08-07 is NOT Greater than 
+- We use NOT operator to reverse
+```sql
+SELECT * FROM customers WHERE NOT(birth_date > '2023-08-07' OR points > 1500);
+```
 
+### How to filter those records whose birth_date > 2023-08-07 OR Points > 1500 AND city ="kohat"
+- We use OR and AND both to add multiple conditions
+```sql
+SELECT * FROM customers WHERE birth_date > '2023-08-07' OR (points > 1500 AND city = 'kohat');
+```
 
----------------How to filter those records whose birth_date > 2023-08-07 OR Points > 1500------------
--- We use OR operator it return true if at least one  condition meets true
-SELECT * FROM customer WHERE birth_date > '2023-08-07' OR points > 1500;
+### How to select those result whose city is kohat or karachi
+- We use IN operator, we can also use OR operator but IN operator is shorter and it works like OR operator
+```sql
+SELECT * FROM customers WHERE city IN ('karachi','kohat');
 
+```
+### How to select those result whose city is not in kohat or karachi
+- We use NOT IN operator
+```sql
+SELECT * FROM customers WHERE city NOT IN ('karachi','kohat');
+```
 
----------------How to filter those records whose birth_date > 2023-08-07 is NOT Greater than ------------
--- We use NOT operator to reverse
-SELECT * FROM customer WHERE NOT(birth_date > '2023-08-07' OR points > 1500);
+### How to select those points >= 1000 and <= 1500
+- We use BETWEEN operator, note we can also use >=  <= operators but BETWEEN is shorter
+```sql
+SELECT * FROM customers WHERE points BETWEEN 1000 AND 1500;
+```
 
+### How to select those rows that matched with specific string pattern using LIKE operator
+- we use WHERE last_name LIKE 's%' it means last_name must be start with s but after s it contain any letters.
+```sql
+SELECT * FROM customers WHERE last_name LIKE 's%';
+SELECT * FROM customers WHERE last_name LIKE 'summer%'; //start with summer ends with any letter
+```
 
----------------How to filter those records whose birth_date > 2023-08-07 OR Points > 1500 AND city ="kohat"------------
--- We use OR and AND both to add multiple conditions
-SELECT * FROM customer WHERE birth_date > '2023-08-07' OR (points > 1500 AND city = 'kohat');
-
-
----------------How to select those result whose city is kohat or karachi------------
--- We use IN operator, we can also use OR operator but IN operator is shorter and it works like OR operator 
-SELECT * FROM customer WHERE city IN ('karachi','kohat');
-
-
----------------How to select those result whose city is not in kohat or karachi------------
--- We use NOT IN operator
-SELECT * FROM customer WHERE city NOT IN ('karachi','kohat');
-
-
----------------How to select those points >= 1000 and <= 1500------------
--- We use BETWEEN operator, note we can also use >=  <= operators but BETWEEN is shorter
-SELECT * FROM customer WHERE points BETWEEN 1000 AND 1500;
-
-
----------------How to select those rows that matched with specific string pattern using LIKE operator------------
--- we use WHERE last_name LIKE 's%' it means last_name must be start with s but after s it contain any letters.
-SELECT * FROM customer WHERE last_name LIKE 's%';
-SELECT * FROM customer WHERE last_name LIKE 'summer%'; //start with summer ends with any letter
-
-
------------change the pattern in LIKE operator-----------
-SELECT * FROM customer WHERE last_name LIKE '%s';// start with any  letter but ends with s
-SELECT * FROM customer WHERE last_name LIKE '%s%';// start with any  letter and ends with any letter but s letter can be any
+### change the pattern in LIKE operator
+```sql
+SELECT * FROM customers WHERE last_name LIKE '%s';// start with any  letter but ends with s
+SELECT * FROM customers WHERE last_name LIKE '%s%';// start with any  letter and ends with any letter but s letter can be any
 where
+```
 
+### Use underscore to define how many letters end with that pattern
+```sql
+SELECT * FROM customers WHERE last_name LIKE '_______s'
+```
 
------------Use underscore to define how many letters end with that pattern-----------
-SELECT * FROM customer WHERE last_name LIKE '_______s'
+### we can also specify first and last letter and Between letters range with "__"  underscore
+```sql
+SELECT * FROM customers WHERE last_name LIKE 'v______s'
+```
 
-
------------we can also specify first and last letter and Between letters range with "__"  underscore-----------
-SELECT * FROM customer WHERE last_name LIKE 'v______s'
-
-
------------use  REGEXP to use complex string pattern-----------
--- Look we use like operator
-SELECT * FROM customer WHERE first_name LIKE '%hr%'
---we can also use REGEXP for more complex string patterns
+### use  REGEXP to use complex string pattern
+- Look we use like operator
+```sql
+SELECT * FROM customers WHERE first_name LIKE '%hr%'
+```
+- we can also use REGEXP for more complex string patterns
+```sql
+SELECT * FROM customers WHERE first_name REGEXP 'hr'
+```
+### first_name must start with hr
+```sql
+SELECT * FROM customers WHERE first_name LIKE '%hr%'
+```
+- we can also use REGEXP for more complex string patterns
 SELECT * FROM customer WHERE first_name REGEXP 'hr'
+```
+### first_name must start with hr
+SELECT * FROM customers WHERE first_name REGEXP '^hr'
+```
 
------------first_name must start with hr-----------
-SELECT * FROM customer WHERE first_name REGEXP '^ch'
+### first_name must end with t
+```sql
+SELECT * FROM customers WHERE first_name REGEXP 't$'
+```
+
+### we can also use pipe operator | in REGEXP
+```sql
+SELECT * FROM customers WHERE first_name REGEXP '^ch|t$'
+```
+- it means first_name must start with ch 
+- Or first_name must end with t
 
 
------------first_name must end with t-----------
-SELECT * FROM customer WHERE first_name REGEXP 't$'
+### we can also specify []
+```sql
+SELECT * FROM customers WHERE first_name REGEXP '[agc]t'
+```
+- first_name will be at, gt, ct anywhere
 
+### we can change pattern
+```sql
+SELECT * FROM customers WHERE first_name REGEXP 't[agc]'
+```
+- first_name will be ta, tg, tc anywhere
 
------------we can also use pipe operator | in REGEXP-----------
-SELECT * FROM customer WHERE first_name REGEXP '^ch|t$'
---it means first_name must start with ch 
---Or first_name must end with t
+### we can also specify range [a-h]
+```sql
+SELECT * FROM customers WHERE first_name REGEXP '[a-h]t'
+```
+- first_name will be at,bt,ct,dt,et,ft, gt, ht anywhere
 
-
------------we can also specify []-----------
-SELECT * FROM customer WHERE first_name REGEXP '[agc]t'
--- first_name will be at, gt, ct anywhere
-
------------we can change pattern-----------
-SELECT * FROM customer WHERE first_name REGEXP 't[agc]'
--- first_name will be ta, tg, tc anywhere
-
------------we can also specify range [a-h]-----------
-SELECT * FROM customer WHERE first_name REGEXP '[a-h]t'
--- first_name will be at,bt,ct,dt,et,ft, gt, ht anywhere
-
------------How to select those records whone phone no is NULL using "IS NULL" operator -----------
-SELECT * FROM customer WHERE phone IS NULL;
-
------------How to select and sort data by column name ----------
--- by default every column is sorted according  to primary key column
-SELECT * FROM customer ORDER by first_name;
-
-----------We can also sort by multiple columns-----------
+### How to select those records whone phone no is NULL using "IS NULL" operator
+```sql
+SELECT * FROM customers WHERE phone IS NULL;
+```
+### How to select and sort data by column name 
+- by default every column is sorted according  to primary key column
+```sql
+SELECT * FROM customers ORDER by first_name;
+```
+### We can also sort by multiple columns
+```sql
+SELECT * FROM customers ORDER by first_name;
+```
+### We can also sort by multiple columns
 SELECT * FROM customer ORDER by first_name, last_name;
+```sql
+SELECT * FROM customers ORDER by first_name DESC, last_name ASC;
+```
 
+### How  to Select first 10 records using "LIMIT" Clause
+```sql
+SELECT * FROM customers LIMIT 10;
+```
 
-----------We can also sort by multiple columns in Descending order-----------
-SELECT * FROM customer ORDER by first_name DESC, last_name ASC;
+### How to skip  first 10 records using "LIMIT" Clause and select 3 records before 10 records
+- we define offset 10 , 3
+```sql
+SELECT * FROM customers LIMIT 10 , 3;
+```
 
-
-----------How  to Select first 10 records using "LIMIT" Clause-----------
-SELECT * FROM customer LIMIT 10;
-
-
-----------How to skip  first 10 records using "LIMIT" Clause and select 3 records before 10 records----------
---we define offset 10 , 3
-SELECT * FROM customer LIMIT 10 , 3;
-
-----------Reterieve Random record with RAND Function----------
--- Please use ORDER By Clause otherwise you got an error
+### Reterieve Random record with RAND Function
+- Please use ORDER By Clause otherwise you got an error
+```
 SELECT * FROM orders ORDER BY RAND() LIMIT 1;
-
-----------How to select one table with relationship to another table using "INNER JOIN"----------
--- lets we have orders table in orders table we have customer_id which is a foriegn key to customer table
---  In Orders table we have  orders_id, customer_id, status, comments
--- In Customer table we have customer_id, first_name, last_name, birth_date, phone, address, city and state
--- We want to inner join with orders table and customer table
+```
+### How to select one table with relationship to another table using "INNER JOIN"
+- lets we have orders table in orders table we have customer_id which is a foriegn key to customer table
+-  In Orders table we have  orders_id, customer_id, status, comments
+- In Customer table we have customer_id, first_name, last_name, birth_date, phone, address, city and state
+- We want to inner join with orders table and customer table
+```sql
 SELECT * FROM orders INNER JOIN customerON orders.customer_id  = customer.customer_id;
+```
 
-
-----------We can also achieve "INNER JOIN" with implicit Syntax---------
+### We can also achieve "INNER JOIN" with implicit Syntax
+```sql
 SELECT * FROM orders o, customers c WHERE o.customer_id  = c.customer_id;
+```
 
-
-
----------How to find only select first_name, city and phone from customer table -----------
+### How to find only select first_name, city and phone from customer table 
+```sql
 SELECT order_id, orders.customer_id first_name, phone, city 
 FROM orders 
-INNER JOIN customer
+INNER JOIN customers
 ON 
 orders.customer_id  = customer.customer_id;
 
-
----------We can also use alias in inner join -----------
+```
+### We can also use alias in inner join
+```sql
 SELECT order_id, o.customer_id first_name, phone, city 
 FROM orders o
-INNER JOIN customer c
+INNER JOIN customers c
 ON 
 o.customer_id  = c.customer_id;
+```
 
-
----------We to join tables across Databases -----------
--- suppose we have a Database name inventory
--- In the inventory db we have products table
--- this product table is associated with orders_items 
--- we can easily join using db.table name
+### We to join tables across Databases 
+- suppose we have a Database name inventory
+- In the inventory db we have products table
+- this product table is associated with orders_items 
+- we can easily join using db.table name
+```sql
 select * 
 FROM orders_items oi
 INNER JOIN inventory.products p
 ON
 oi.product_id = p.product_id;
+```
 
-
----------How to select only selected name, quantity from products table -----------
+### How to select only selected name, quantity from products table 
+```sql
 select oi.product_id, unit_price, name
 FROM orders_items oi
 INNER JOIN inventory.products p
 ON
 oi.product_id = p.product_id;
-
----------How to Select Self join table itself -----------
--- Suppose we have employe table we want to check who is manager in our complany
--- But the best thing is manager is itself an employe of this complany
+```
+### How to Select Self join table itself 
+- Suppose we have employe table we want to check who is manager in our complany
+- But the best thing is manager is itself an employe of this complany
+```sql
 SELECT *
 FROM employees m
 JOIN employees e
 ON
  e.reports_to = m.employee_id;
+```
 
-
----------How to Select Self join table itself -----------
--- only want to check the manager
+### How to Select Self join table itself 
+- only want to check the manager
+```sql
 SELECT 
 e.employee_id,
 e.first_name,
@@ -250,19 +312,21 @@ FROM employees m
 JOIN employees e
 ON
  e.reports_to = m.employee_id;
+```
 
-
----------How to JOIN multiple tables -----------
--- We have three tables orders, order_status and customer we want to join
+### How to JOIN multiple tables
+- We have three tables orders, order_status and customer we want to join
+```sql
 SELECT *
 FROM orders o
-JOIN customer c
+JOIN customers c
 ON
 o.customer_id = c.customer_id
 JOIN order_status os
 ON os.status_is = o.status;
-
----------Lets Extract Beautifully-----------
+```
+### Lets Extract Beautifully
+```sql
 SELECT 
 o.order_id,
 o.order_date,
@@ -270,63 +334,68 @@ c.first_name,
 c.last_name,
 os.name AS Status
 FROM orders o
-JOIN customer c
+JOIN customers c
 ON
 o.customer_id = c.customer_id
 JOIN order_status os
 ON os.status_is = o.status;
-
----------leFT Join-----------
---Left outer join select those records which are not
---like in our example we also select those customers who don't have any order as well as who do
+```
+### Left Join
+- Left outer join select those records which are not
+- like in our example we also select those customers who don't have any order as well as who do
+```sql
 SELECT 
 c.customer_id, 
 c.first_name, 
 o.order_id 
-FROM customer c 
+FROM customers c 
 LEFT JOIN orders o 
 ON c.customer_id = o.customer_id 
 ORDER BY c.customer_id 
 
-
----------Right Join-----------
---Right outer join select those records which satisfy the condition
---like in our example we only select those customers who have orders
+```
+### Right Join
+- Right outer join select those records which satisfy the condition
+- like in our example we only select those customers who have orders
+```sql
 SELECT 
 c.customer_id, 
 c.first_name, 
 o.order_id 
-FROM customer c 
+FROM customers c 
 LEFT JOIN orders o 
 ON c.customer_id = o.customer_id 
 ORDER BY c.customer_id 
+```
 
-
----------USING Clause-----------
--- USING Clause can replace JOIN complex steps
--- But it can only work when both table have same column name
+### USING Clause
+- USING Clause can replace JOIN complex steps
+- But it can only work when both table have same column name
+```sql
 SELECT 
 o.order_id,
 c.first_name
 FROM orders o 
-JOIN customer c
+JOIN customers c
 -- ON o.customer_id = c.first_name
 USING (customer_id);
+```
 
 
-
----------Cross JOIN-----------
--- combine every record from first table to second table
--- WE combine every record from customer table to products table
+### Cross JOIN
+- combine every record from first table to second table
+- WE combine every record from customer table to products table
+```sql
 SELECT 
 c.first_name AS customer,
 p.name AS product 
-FROM customer c
+FROM customers c
 CROSS JOIN inventory.products p 
 ORDER BY c.first_name;
+```
 
-
----------Combine tables rows with UNION-----------
+### Combine tables rows with UNION
+```sql
 SELECT 
 order_id,
 order_date,
@@ -340,10 +409,11 @@ order_date,
 'Archived' AS status
 FROM orders
 WHERE order_date < '2023-11-09'
+```
 
-
----------INSERT RECORDS-----------
-INSERT INTO customer (
+### INSERT RECORDS
+```sql
+INSERT INTO customers (
     customer_id,
     first_name,
     last_name,
@@ -364,10 +434,11 @@ INSERT INTO customer (
     'Punjab',
     DEFAULT
 );
+```
 
-
----------INSERT Multiple RECORDS-----------
-INSERT INTO customer (
+### INSERT Multiple RECORD
+```sql
+INSERT INTO customers (
     customer_id,
     first_name,
     last_name,
@@ -400,63 +471,63 @@ INSERT INTO customer (
     DEFAULT
 );
 
-
----------INSERT Hierarchical RECORDS-----------
-INSERT INTO customer(customer_id,first_name,last_name,birth_date)
+```
+### INSERT Hierarchical RECORDS
+```sql
+INSERT INTO customers(customer_id,first_name,last_name,birth_date)
 VALUES (DEFAULT,'IGI','ORIGIN','2023-12-25');
 
-INSERT INTO orders(order_id,order_date, status,c_id)
+INSERT INTO orders(order_id,order_date, status,customer_id)
 VALUES(DEFAULT,'2023-12-25',1,LAST_INSERT_ID());
 
 INSERT INTO
-orders_items(order_items_id,order_id,product_id,unit_price,quantity)
-VALUES (DEFAULT,LAST_INSERT_ID(),9,35,3);
+orders_items(order_id,product_id,unit_price,quantity)
+VALUES (LAST_INSERT_ID(),9,35,3);
 
-
----------Creating Copy of a Table-----------
+```
+### Creating Copy of a Table
+```sql
 CREATE TABLE orders_archived  AS
 SELECT * FROM orders;
+```
 
 
-
----------Insert only data from one table to another-----------
-INSERT INTO orders_archived
+### Creating only data from one table to another
+```sql
+CREATE TABLE orders_archived  AS
 SELECT * from orders WHERE order_date > '2023-12-01';
+```
 
-
----------Updating Single Record-----------
-UPDATE customer 
+### Updating Single Record
+```sql
+UPDATE customers 
 SET first_name="Muhammad", last_name="Hashim", birth_date="2023-12-30"
 WHERE customer_id = 1;
-
----------Update multiple Records-----------
-UPDATE orders_items
-SET unit_price=50.57, quantity = 5
-WHERE order_id = 1;
-
-
-
----------Using subqueries in Update-----------
+```
+### Using subqueries in Update
+```sql
 UPDATE orders
 SET comments = "Gold Customer"
 WHERE c_id IN
                 (SELECT customer_id
-                 FROM customer
+                 FROM customers
                  WHERE points > 1800);
 
+```
 
-
----------Using subqueries in Delete-----------
+### Using subqueries in Delete
+```sql
 DELETE FROM orders
 WHERE c_id = (
 			SELECT customer_id
-			FROM customer 
+			FROM customers
 			WHERE first_name = "Delano"
 			 );
 
+```
 
-
----------Aggregate Functions-----------
+### Aggregate Functions
+```sql
 SELECT 
 MAX(salary) AS Highest,
 MIN(salary) AS lowest,
@@ -465,17 +536,19 @@ SUM(salary) AS total,
 COUNT(salary) AS number_of_records
 FROM employees;
 
-
----------The GROUP By Clause in Aggregate Functions-----------
+```
+### The GROUP By Clause in Aggregate Functions
+```sql
 SELECT 
 client_id,
 SUM(invoice_total) as total_sales
 FROM invoices
 GROUP BY client_id
 ORDER BY total_sales DESC;
+```
 
-
----------The GROUP By Clause with WHERE Clause in Aggregate Functions-----------
+### The GROUP By Clause with WHERE Clause in Aggregate Functions
+```sql
 SELECT 
 client_id,
 SUM(invoice_total) as total_sales
@@ -483,8 +556,9 @@ FROM invoices
 WHERE invoice_date >= '2019-07-01'
 GROUP BY client_id
 ORDER BY total_sales DESC;
-
----------The GROUP By Clause with inner JOIN in Aggregate Functions-----------
+```
+### The GROUP By Clause with inner JOIN in Aggregate Functions
+```sql
 SELECT 
 name,
 state,
@@ -494,8 +568,9 @@ FROM invoices i
 JOIN clients c USING(client_id)
 GROUP BY state, city;
 
-
----------The GROUP By Clause with inner JOIN in Aggregate Functions-----------
+```
+### The GROUP By Clause with inner JOIN in Aggregate Functions
+```sql
 SELECT date,
 pm.name,
 SUM(amount) AS total_amounts
@@ -504,8 +579,9 @@ JOIN payment_methods pm
 ON p.payment_method = pm.payment_method_id
 GROUP BY date
 ORDER BY date DESC;
-
----------Having Clause with Aggregate Functions-----------
+```
+### Having Clause with Aggregate Functions
+```sql
 SELECT 
 client_id,
 COUNT(*) AS number_of_invoices,
@@ -514,44 +590,43 @@ FROM invoices
 GROUP BY client_id
 HAVING total_sales > 500;
 
+```
 
-
----------Having Clause with Aggregate Functions-----------
+### Having Clause with Aggregate Functions
+```sql
 SELECT 
 client_id,
-COUNT(invoice_total) AS number_of_invoices,
+COUNT(*) AS number_of_invoices,
 SUM(invoice_total) as total_sales
 FROM invoices
 GROUP BY client_id
 HAVING total_sales > 500 AND number_of_invoices > 5;
 
 
-
----------Aggregate functions WITH ROLLUP-----------
+```
+### Aggregate functions WITH ROLLUP
+```sql
 SELECT 
 client_id,
 SUM(invoice_total) as total_sales
 FROM invoices
 GROUP BY client_id WITH ROLLUP;
----------Aggregate functions WITH ROLLUP and COALESCE it will return Total instead of NULL-----------
+```
+### Aggregate functions WITH ROLLUP and JOIN
+```sql
 SELECT 
-COALESCE(client_id,'Grand Total') AS Total,
-SUM(invoice_total)  AS Total_Sales
-FROM invoices
-GROUP BY client_id WITH ROLLUP;
+state,
+city,
+SUM(invoice_total) as total_sales
+FROM invoices i
+JOIN clients c USING(client_id)
+GROUP BY state, city WITH ROLLUP;
+```
 
----------Aggregate functions WITH ROLLUP and JOIN-----------
-SELECT 
-COALESCE(client_id,'Grand Total') AS 'Client ID',
-SUM(invoice_total)  AS Total_Sales
-FROM invoices
-GROUP BY client_id WITH ROLLUP;
-
-
----------Write more about subqueries-----------
--- find products that are more
--- expensive than lettuce (id = 3)
--- MySQL first execute innersubquery than pass it to out query
+### Write more about subqueries
+- expensive than lettuce (id = 3)
+- MySQL first execute innersubquery than pass it to out query
+```sql
 SELECT * 
 FROM products 
 WHERE unit_price > (
@@ -559,37 +634,41 @@ SELECT unit_price
 FROM products
 WHERE product_id = 3
 );
-
----------Write more about subqueries-----------
--- In Sql_hr database
--- find employees who earn more than average 
+```
+### Write more about subqueries
+- In Sql_hr database
+- find employees who earn more than average 
+```sql
 SELECT * FROM
 employees WHERE salary > (
 SELECT AVG(salary)
     FROM employees
 );
-
----------Write more about subqueries using IN operator-----------
--- find that product that have never been ordered 
+```
+### Write more about subqueries using IN operator
+- find that product that have never been ordered 
+```sql
 SELECT * FROM products
 WHERE product_id NOT IN (
 SELECT DISTINCT product_id
 FROM order_items
 );
-
----------Write more about subqueries using IN operator-----------
--- find clients without invoices
+```
+### Write more about subqueries using IN operator
+- find clients without invoices
+```sql
 SELECT * 
 FROM clients 
 WHERE client_id NOT IN (
 SELECT DISTINCT client_id
 FROM invoices
 );
-
----------join vs sub query-----------
-----------using subqueries-----------
--- find customer who have ordered lettuce
--- select customer_id , first_name, last_name
+```
+## join vs sub query
+### using subqueries
+- find customer who have ordered lettuce
+- select customer_id , first_name, last_name
+```sql
 SELECT customer_id,
 first_name,
 last_name
@@ -600,8 +679,9 @@ FROM order_items oi
 JOIN orders o USING (order_id)
     WHERE product_id = 3
 );
-
-----------using JOIN-----------
+```
+### using JOIN
+```sql
 SELECT DISTINCT customer_id,
 first_name,
 last_name
@@ -609,9 +689,10 @@ FROM customers c
 JOIN orders o USING(customer_id)
 JOIN order_items oi USING(order_id)
 WHERE oi.product_id = 3;
-
-----------without ALL keyword-----------
--- select invoices larger than all invoices of client 3
+```
+### without ALL keyword
+- select invoices larger than all invoices of client 3
+```sql
 SELECT *
 FROM invoices 
 WHERE invoice_total >(
@@ -619,8 +700,9 @@ SELECT MAX(invoice_total)
     FROM invoices
     WHERE client_id = 3 
 );
-
-----------ALL keyword-----------
+```
+### ALL keyword
+```sql
 SELECT *
 FROM invoices 
 WHERE invoice_total > ALL(
@@ -628,11 +710,12 @@ SELECT invoice_total
     FROM invoices
     WHERE client_id = 3 
 );
-
-----------Correlated subqueries-----------
--- For each employe
--- calculate the avg salary for employee.office
--- return the employee if salary > avg
+```
+### Correlated subqueries
+- For each employe
+- calculate the avg salary for employee.office
+- return the employee if salary > avg
+```sql
 SELECT * 
 FROM employees e 
 WHERE salary > (
@@ -641,18 +724,21 @@ WHERE salary > (
     WHERE office_id = e.office_id
 );
 
+```
+### The EXISTS operator
+- Select client that have an invoice
 
-----------The EXISTS operator-----------
--- Select client that have an invoice
-
--- one method 
+- one method 
+```sql
 Select *
 FROM clients
 WHERE client_id IN (
     select DISTINCT client_id
     FROM invoices
 );
--- second method 
+```
+- second method
+```sql
 SELECT *
 FROM clients
 INNER JOIN (
@@ -660,8 +746,9 @@ INNER JOIN (
     FROM invoices
 ) AS distinct_clients
 ON clients.client_id = distinct_clients.client_id;
-
--- third method 
+```
+- third method
+```sql
 Select *
 FROM clients c
 WHERE EXISTS (
@@ -669,22 +756,25 @@ WHERE EXISTS (
     FROM invoices
     WHERE client_id = c.client_id
 );
-
-----------Date Functions to check dynamically current Year orders-----------
+```
+### Date Functions to check dynamically current Year orders
+```sql
 SELECT *
 FROM orders
 WHERE YEAR(order_date) = YEAR(NOW());
-
-----------FORMAT_DATE Function-----------
+```
+### FORMAT_DATE Function
+```sql
 SELECT DATE_FORMAT(order_date,'%D %M %Y')
 FROM orders;
-
-----------ADDING DATE Function-----------
+```
+### ADDING DATE Function
+```sql
 SELECT DATE_ADD(order_date, INTERVAL 1 YEAR)
 FROM orders;
-
-----------IFNULL Function-----------
-
+```
+### IFNULL Function
+```sql
 SELECT 
 order_id,
 shipper_id
@@ -694,8 +784,9 @@ SELECT
 order_id,
 IFNULL(shipper_id,'Not Assigned') AS shipper
 FROM orders;
-
-----------COALESCE Function-----------
+```
+### COALESCE Function
+```sql
 SELECT 
 order_id,
 COALESCE(shipper_id,comments,'Not Assigned') AS shipper
@@ -706,16 +797,18 @@ order_id,
 IFNULL(shipper_id,'...') AS shipperID,
 COALESCE(shipper_id,comments,'Not Assigned') AS shipper
 FROM orders;
-
-----------IF Function-----------
+```
+### IF Function
+```sql
 SELECT 
     order_id,
     order_date,
     IF(YEAR(order_date) = YEAR(NOW()), 'Active', 'Archived') AS order_status
 FROM orders;
+```
 
-
-----------CASE  Operator-----------
+### CASE  Operator
+```sql
 SELECT 
     order_id,
     CASE
@@ -725,9 +818,10 @@ SELECT
     ELSE 'Future'
     END AS Category
 FROM orders;
+```
 
-
-----------Practice-----------
+### Practice
+```sql
 SELECT 
 CONCAT(first_name,' ',last_name) AS Customer,
 points,
@@ -737,8 +831,9 @@ CASE
 	ELSE 'Bronze Customer'
     END AS category
 FROM customers;
-
-----------Creating View-----------
+```
+### Creating View
+```sql
 CREATE VIEW sales_by_client AS 
 SELECT 
 c.client_id,
@@ -747,18 +842,19 @@ SUM(invoice_total) AS total_sales
 FROM clients c
 JOIN invoices i USING(client_id)
 GROUP BY client_id, name;
-
-----------Drop View-----------
+```
+### Drop View
+```sql
 DROP VIEW invoices_with_balance;
-
-----------Updatable View-----------
--- DISTINCT
--- Aggregate functions (MIN , MAX, SUM) etc
--- GROUP BY / HAVING
--- UNION
--- If we dont have these in mention above
--- than our view is Updatable view
-
+```
+### Updatable View
+- DISTINCT
+- Aggregate functions (MIN , MAX, SUM) etc
+- GROUP BY / HAVING
+- UNION
+- If we dont have these in mention above
+- than our view is Updatable view
+``` sql
 CREATE OR REPLACE VIEW invoices_with_balance AS
 	SELECT 
 	invoice_id,
@@ -775,10 +871,10 @@ CREATE OR REPLACE VIEW invoices_with_balance AS
 
 DELETE FROM invoices_with_balance
 WHERE invoice_id = 1;
-
--- prevent view as only read-only 
--- add WITH check OPTION;
-
+```
+- prevent view as only read-only 
+- add WITH check OPTION;
+```sql
 CREATE OR REPLACE VIEW invoices_with_balance AS
 	SELECT 
 	invoice_id,
@@ -794,47 +890,56 @@ CREATE OR REPLACE VIEW invoices_with_balance AS
     WHERE (invoice_total-payment_total) > 0
     WITH check OPTION;
 
-
-----------Creating Store Procedure-----------
+```
+### Creating Store Procedure
+```sql
 DELIMITER $$
 CREATE PROCEDURE get_clients()
 BEGIN
 	SELECT * FROM clients;
 END$$
 DELIMITER ;
-
-----------Select Procedure-----------
+```
+### Select Procedure
+```sql
 CALL get_clients()
-
-----------Dropping Procedure-----------
+```
+### Dropping Procedure
+```sql
 DROP Procedure IF EXISTS get_clients;
-
-----------Parameters in Procedure-----------
+```
+### Parameters in Procedure
+```sql
+CALL get_clients()
+```
+### Dropping Procedure
+DROP Procedure IF EXISTS get_clients;
+```
+### Parameters in Procedure
 DROP PROCEDURE IF EXISTS get_clients_by_states;
 DELIMITER $$
-CREATE PROCEDURE get_clients_by_states()
+CREATE PROCEDURE get_clients_by_states
 	(
         state CHAR(2)
-    )
+	)
 	BEGIN
     SELECT * FROM clients c
     WHERE c.state = state;
 	END$$
 DELIMITER ;
 
-
 CALL get_clients_by_states('CA');
-
-
-----------Parameters with defaults values in Procedure-----------
+```
+### Parameters with defaults values in Procedure
+```sql
 DELIMITER $$
-CREATE PROCEDURE get_clients_by_default_states()
+CREATE PROCEDURE get_clients_by_default_states
 	(
         state CHAR(2)
-    )
+    	)
 	BEGIN
     IF state IS NULL THEN
-        state = 'CA';
+       SET state = 'CA';
     END IF;
     SELECT * FROM clients c
     WHERE c.state = state;
@@ -844,13 +949,14 @@ DELIMITER ;
 
 CALL get_clients_by_default_states(NULL)
 
-
-----------Parameters with IF ELSE  in Procedure-----------
+```
+### Parameters with IF ELSE  in Procedure
+```sql
 DELIMITER $$
-CREATE PROCEDURE get_clients_by_default_states()
+CREATE PROCEDURE get_clients_by_default_states
 	(
         state CHAR(2)
-    )
+        )
 	BEGIN
     IF state IS NULL THEN
         select * from clients;
@@ -864,16 +970,16 @@ DELIMITER ;
 
 CALL get_clients_by_default_states(NULL)
 CALL get_clients_by_default_states('CA')
+```
 
-
-----------Practice Procedure-----------
--- Write a stored procedure call  get_payments
--- with two Parameters
--- client_id => id(5)
--- payment_method_id => TINYINT(1) 0-255
-
+### Practice Procedure
+- Write a stored procedure call  get_payments
+- with two Parameters
+- client_id => id(5)
+- payment_method_id => TINYINT(1) 0-255
+```sql
 DELIMITER $$
-CREATE PROCEDURE get_payments()
+CREATE PROCEDURE get_payments
     (
         client_id INT,
         payment_method_id TINYINT(1)
@@ -884,7 +990,7 @@ BEGIN
     WHERE 
     p.client_id = IFNULL(client_id, p.client_id) AND
     p.payment_method = IFNULL(payment_method_id,p.payment_method);
-END
+END$$
 DELIMITER ;
 
 
@@ -893,10 +999,11 @@ CALL get_payments(5,NULL);
 CALL get_payments(5,2);
 CALL get_payments(NULL,2);
 
-
-----------Update in  Procedure-----------
+```
+### Update in  Procedure
+```sql
 DELIMITER $$
-CREATE PROCEDURE make_payments()
+CREATE PROCEDURE make_payments
     (
         invoice_id INT,
         payment_total DECIMAL(8,2),
@@ -914,12 +1021,13 @@ DELIMITER ;
 
 CALL make_payments(2,2223.823,'2023-01-07');
 
-
-----------Update with validation  in  Procedure-----------
--- Error Code link
--- https://www.ibm.com/docs/en/db2-for-zos/11?topic=codes-sqlstate-values-common-error
+```
+### Update with validation  in  Procedure
+- Error Code link
+- https://www.ibm.com/docs/en/db2-for-zos/11?topic=codes-sqlstate-values-common-error
+```sql
 DELIMITER $$
-CREATE PROCEDURE make_validate_payments()
+CREATE PROCEDURE make_validate_payments
     (
         invoice_id INT,
         payment_total DECIMAL(8,2),
@@ -939,14 +1047,15 @@ END$$
 DELIMITER ;
 
 CALL make_validate_payments(2,-2223.823,'2023-01-07');
+```
 
-
-----------Output Parameters  in  Procedure-----------
+### Output Parameters  in  Procedure
+```sql
 DELIMITER $$
-CREATE PROCEDURE get_unpaid_invoices_for_clients()
+CREATE PROCEDURE get_unpaid_invoices_for_clients
 	(
       client_id INT   
-    )
+        )
 BEGIN
 	SELECT COUNT(*) ,
     SUM(invoice_total)
@@ -957,23 +1066,25 @@ END$$
 DELIMITER ;
 
 CALL get_unpaid_invoices_for_clients(3);
--- we get this
+```
+- we get this
+```sql
 -----------------------------------
 |   COUNT(*)   SUM(invoice_total) |
 |   2          286.08             |
 -----------------------------------
-
--- We can also recieves these values through Parameters 2, 286.08
--- we can specific OUT to identify Output Parameters
--- also copy this using INTO
-
+```
+- We can also recieves these values through Parameters 2, 286.08
+- we can specific OUT to identify Output Parameters
+- also copy this using INTO
+```sql
 DELIMITER $$
-CREATE PROCEDURE get_unpaid_invoices_for_clients()
+CREATE PROCEDURE get_unpaid_invoices_for_clients
 	(
       client_id INT,
       OUT invoices_count INT,
       OUT invoices_total DECIMAL(9,2)
-    )
+	)
 BEGIN
 	SELECT COUNT(*), SUM(invoice_total)
     INTO invoices_count, invoices_total
@@ -984,26 +1095,30 @@ END$$
 DELIMITER ;
 
 CALL get_unpaid_invoices_for_clients(3)
-
--- we get some output Parameters in the form of variables which is hard to read
--- sometime we avoid 
+```
+- we get some output Parameters in the form of variables which is hard to read
+- sometime we avoid
+```sql
 SET @p0='3'; SET @p1=''; SET @p2=''; 
 CALL `get_unpaid_invoices_for_clients`(@p0, @p1, @p2); 
 SELECT @p1 AS `invoices_count`, @p2 AS `invoices_total`;
+```
+```sql
 -----------------------------------
 |   COUNT(*)   SUM(invoice_total) |
 |   2          286.08             |
 -----------------------------------
-
-----------Local variables  in  Procedure-----------
--- risk_factor = invoices_total / invoices_count * 5
--- these are all local variables
--- we get data from table and pass these data to local variables finally we select
--- local variables will die when procedure were finished
+```
+### Local variables  in  Procedure
+- risk_factor = invoices_total / invoices_count * 5
+- these are all local variables
+- we get data from table and pass these data to local variables finally we select
+- local variables will die when procedure were finished
+```sql
 DELIMITER $$
 CREATE PROCEDURE get_risk_factor()
 BEGIN
-	DECLARE risk_factor DECIMAL(9,2) DEFAULT 0;
+    DECLARE risk_factor DECIMAL(9,2) DEFAULT 0;
     DECLARE invoices_total DECIMAL(9,2);
     DECLARE invoices_count INT;
 	SELECT COUNT(*), SUM(invoice_total)
@@ -1015,14 +1130,16 @@ END$$
 DELIMITER ;
 
 CALL get_risk_factor();
-
+```
+```sql
 ----------------
 |  risk_factor |
 |   777.75     |
 ----------------
 
-
-----------Functions-----------
+```
+### Functions
+```sql
 DELIMITER $$
 CREATE FUNCTION get_risk_factor_for_client
 	(
@@ -1050,7 +1167,8 @@ client_id,
 name,
 get_risk_factor_for_client(client_id)
 FROM clients;
-
+```
+```sql
 ---------------------------------------------------------------------------------
 |   client_id              name          get_risk_factor_for_client(client_id)  |       
 |   1                      Vinte                           803                  |
@@ -1059,7 +1177,8 @@ FROM clients;
 |   4                      kwidea                          NULL                 |
 |   5                      Topiclounge                     817                  |
 ---------------------------------------------------------------------------------
-
+```
+```sql
 DELIMITER $$
 CREATE FUNCTION get_risk_factor_for_client
 	(
@@ -1081,7 +1200,8 @@ BEGIN
     RETURN IFNULL(risk_factor,0);
 END$$
 DELIMITER ;
-
+```
+```sql
 ---------------------------------------------------------------------------------
 |   client_id              name          get_risk_factor_for_client(client_id)  |       
 |   1                      Vinte                           803                  |
@@ -1090,16 +1210,16 @@ DELIMITER ;
 |   4                      kwidea                          0                    |
 |   5                      Topiclounge                     817                  |
 ---------------------------------------------------------------------------------
+```
+### Drop Functions
+- DROP FUNCTION get_unpaid_invoices_for_clients;
 
-----------Drop Functions-----------
-DROP FUNCTION get_unpaid_invoices_for_clients;
 
-
-----------TRIGGER-----------
-----------Update TRIGGER Example-----------
--- A block of code that automatically get executed
--- before or after an insert, Update or Delete statement
-
+## TRIGGER
+### Update TRIGGER Example
+- A block of code that automatically get executed
+- before or after an insert, Update or Delete statement
+```sql
 DELIMITER $$
 CREATE TRIGGER payment_after_insert
 	AFTER INSERT ON payments
@@ -1113,8 +1233,9 @@ DELIMITER ;
 
 INSERT INTO payments 
 VALUES (DEFAULT,5,3,'2023-09-01',10,1);
-
-----------Delete TRIGGER Example-----------
+```
+### Delete TRIGGER Example
+```sql
 DELIMITER $$
 
 CREATE TRIGGER payment_after_delete
@@ -1128,15 +1249,18 @@ END $$
 DELIMITER ;
 
 DELETE FROM payments WHERE payment_id = 10;
-
-----------SHOWING TRIGGERS-----------
+```
+### SHOWING TRIGGERS
+```sql
 SHOW TRIGGERS;
 SHOW TRIGGERS LIKE 'payments%';
-
-----------DROP TRIGGERS-----------
+```
+### DROP TRIGGERS
+```sql
 DROP TRIGGER IF EXISTS payment_after_insert;
-
-----------USING TRIGGERS FOR AUDITING-----------
+```
+### USING TRIGGERS FOR AUDITING
+```sql
 USE sql_invoicing;
 
 CREATE TABLE payments_audit
@@ -1184,48 +1308,54 @@ DELIMITER ;
 INSERT INTO payments 
 VALUES (DEFAULT,5,3,'2023-09-01',10,1);
 
-
-----------TRANSACTIONS-----------
--- A group of sql statements that
--- represent a Single unit of work
+```
+### TRANSACTIONS
+- A group of sql statements that
+- represent a Single unit of work
+```sql
 START TRANSACTION;
 INSERT INTO orders(customer_id,order_date,status)
 VALUES(1,'2024-01-09',1);
 INSERT INTO order_items()
 VALUES(LAST_INSERT_ID(),1,1,1);
 COMMIT;
-
-----------Concurrency and dead locking-----------
--- run this script line by line in to different script box 
--- query box 1
+```
+### Concurrency and dead locking
+- run this script line by line in to different script box 
+- query box 1
+```sql
 START TRANSACTION;
 UPDATE customers
 SET points = points + 10
 WHERE customer_id = 1;
 COMMIT;
-
--- query box 2
+```
+- query box 2
+```sql
 START TRANSACTION;
 UPDATE customers
 SET points = points + 10
 WHERE customer_id = 1;
 COMMIT;
-
-----------TRANSACTION Isolation-----------
+```
+### TRANSACTION Isolation
+```sql
 SHOW VARIABLES LIKE 'transaction_isolation';
 SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+```
+## READ UNCOMMITTED Isolation level
+### Dirty Read Transactions
 
-----------READ UNCOMMITTED Isolation level-----------
-----------Dirty Read Transactions-----------
-
--- Session 1
+- Session 1
+```sql
 USE sql_store; --1
 SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED; --2
 select points -- 6 Read UNCOMMITTED data 
 FROM customers
 WHERE customer_id = 1;
-
--- Session 2
+```
+- Session 2
+```sql
 Use  sql_store; -- 3
 START TRANSACTION; -- 4
 Update customers -- 5
@@ -1233,77 +1363,84 @@ SET points = 20
 WHERE customer_id = 1;
 COMMIT;
 
-
-----------READ COMMITTED Isolation level-----------
--- Session 1
+```
+### READ COMMITTED Isolation level
+- Session 1
+```sql
 USE sql_store;
 SET TRANSACTION ISOLATION LEVEL READ COMMITTED; -- 1
 START TRANSACTION; -- 2
 select points  FROM customers WHERE customer_id = 1; -- 3
 select points  FROM customers WHERE customer_id = 1; -- 6
 COMMIT; -- *
-
--- Session 2
+```
+- Session 2
+```sql
 Use  sql_store;
 START TRANSACTION; 
 Update customers 
 SET points = 30 -- 4
 WHERE customer_id = 1;
 COMMIT; -- 5
-
-----------REPEATABLE READ Isolation Level-----------
--- Session 1
+```
+### REPEATABLE READ Isolation Level
+- Session 1
+```sql
 USE sql_store;
 SET TRANSACTION ISOLATION LEVEL REPEATABLE READ; -- 1
 START TRANSACTION; -- 2
 select points  FROM customers WHERE customer_id = 1; -- 3
 select points  FROM customers WHERE customer_id = 1; -- 5
 COMMIT;
-
- -- Session 2
+```
+- Session 2
+```sql
 Use  sql_store;
 START TRANSACTION; 
 Update customers 
 SET points = 30 
 WHERE customer_id = 1;
 COMMIT; -- 4
+```
 
-
--- in this Isolation we see phanton Read problem
+- in this Isolation we see phanton Read problem
+```sql
 USE sql_store;
 SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
 START TRANSACTION; -- 1 
 select *  FROM customers WHERE state = 'VA'; -- we give a special discount -- 3 -- 5
 COMMIT;
-
- -- Session 2
+```
+- Session 2
+```sql
 Use  sql_store;
 START TRANSACTION; 
 Update customers -- 2
 SET state = 'VA'
 WHERE customer_id = 1;
 COMMIT; -- 4
+```
 
-
-----------SERIALIZABLE Isolation Level-----------
--- provide Highest level of Isolation
--- solve all Concurrency problems
-
+### SERIALIZABLE Isolation Level
+- provide Highest level of Isolation
+- solve all Concurrency problems
+```sql
 USE sql_store;
-SET TRANSACTION ISOLATION LEVEL SERIALIZABLE READ; -- 1
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE; -- 1
 START TRANSACTION; -- 2
 select *  FROM customers WHERE state = 'VA'; -- 5
 COMMIT;
-
- -- Session 2
+```
+- Session 2
+```sql
 Use  sql_store;
 START TRANSACTION; -- 3
 Update customers -- 4
 SET state = 'VA'
 WHERE customer_id = 3;
 COMMIT; -- 6
-
-----------MYSQL Datatypes-----------
+```
+### MYSQL Datatypes
 1. String datatypes
 2. Integer datatypes
 3. Fixed point and Floating datatypes
@@ -1313,28 +1450,30 @@ COMMIT; -- 6
 7. Blob datatypes --we also avoid to use binary data bcz its slow down our database backup
 8. JSON datatypes
 
-----------String Datatypes-----------
--- CHAR(x)  -- fixed-length like abbreviation of state 'VA'
--- VARCHAR(x) -- variable-length like storing usernames, passwords, email addresses and so on
+### String Datatypes
+- CHAR(x)  -- fixed-length like abbreviation of state 'VA'
+- VARCHAR(x) -- variable-length like storing usernames, passwords, email addresses and so on
 
--- Recommended 
--- VARCHAR(50)  -- for short strings like usernames and passwords
--- VARCHAR(255) -- for medium-length strings like addresses
+- Recommended 
+- VARCHAR(50)   for short strings like usernames and passwords
+- VARCHAR(255)  for medium-length strings like addresses
 
---Maximum Length
--- CHAR(x)     --  
--- VARCHAR(x)  -- max : 65,535 characters (64KB) 
--- MEDIUMTEXT  -- max : 16MB              16,777,216    characters --JSON objects, CSV and short medium length book
--- LONGTEXT    -- max : 4GB               4,294,967,296 characters Long Text books
--- TINYTEXT    -- max : 255Bytes          255           characters
--- Text        -- max : 65,535 characters (64KB) 
+- Maximum Length
+```sql
+- CHAR(x)     --  
+- VARCHAR(x)  -- max : 65,535 characters (64KB) 
+- MEDIUMTEXT  -- max : 16MB              16,777,216    characters --JSON objects, CSV and short medium length book
+- LONGTEXT    -- max : 4GB               4,294,967,296 characters Long Text books
+- TINYTEXT    -- max : 255Bytes          255           characters
+- Text        -- max : 65,535 characters (64KB) 
+```
+- Mostly we use VARCHAR type, bcz it uses indexes to speedup queries.
 
--- Mostly we use VARCHAR type, bcz it uses indexes to speedup queries.
 
-
-----------Integer Datatypes-----------
--- we store whole numbers that don't have decimal points.
---Maximum Length
+### Integer Datatypes
+- we store whole numbers that don't have decimal points.
+- Maximum Length
+```sql
 -------------------------------------------------------------------------------------------------------------------------------------
 |   Type	    Storage (Bytes)	    Minimum Value Signed	Minimum Value Unsigned	Maximum Value Signed	Maximum Value Unsigned  |
 |   TINYINT 	1	                -128	                        0	                    127	                    255             |
@@ -1343,29 +1482,31 @@ COMMIT; -- 6
 |   INT        	4	                -2147483648	                    0	                    2147483647	            4294967295      |
 |   BIGINT  	8	                -2^63	                        0	                    2^63-1	                2^64-1          |
 -------------------------------------------------------------------------------------------------------------------------------------
-
--- ZEROFILL
+```
+- ZEROFILL
+```sql
 INT(4) => 0001
+```
+### Fixed point and Floating Datatypes
+- DECIMAL(p,s) precision,scale --> DECIMAL(9,2) => 1234567.89
+- DEC, NUMERIC, FIXED are exactly same as decimal
+- FLOAT 4bytes, 8bytes, DOUBLE -- used for scientific calculation and are approximately values
 
-----------Fixed point and Floating Datatypes-----------
--- DECIMAL(p,s) precision,scale --> DECIMAL(9,2) => 1234567.89
--- DEC, NUMERIC, FIXED are exactly same as decimal
--- FLOAT 4bytes, 8bytes, DOUBLE -- used for scientific calculation and are approximately values
+### Boolean datatypes
+- BOOLEAN -- TRUE or FALSE 
+- BOOL    -- 1 or 0
 
-----------Boolean datatypes-----------
--- BOOLEAN -- TRUE or FALSE 
--- BOOL    -- 1 or 0
-
-----------Date and Time types datatypes-----------
--- DATE             -- storing date without time component
--- Time             -- time for storing time value
--- DATETIME         -- 8bytes 
--- TIMESTAMP        -- 4bytes (0 upto 2038) -- track of a row when inserted to last updated
--- YEAR             -- year for storing 4 digit year
+### Date and Time types datatypes
+- DATE              storing date without time component
+- Time              time for storing time value
+- DATETIME          8bytes 
+- TIMESTAMP         4bytes (0 upto 2038) -- track of a row when inserted to last updated
+- YEAR              year for storing 4 digit year
 
 
-----------Json datatypes-----------
--- Method 1
+### Json datatypes
+- Method 1
+```sql
 UPDATE products
 SET properties = 
 '
@@ -1378,8 +1519,9 @@ SET properties =
 }
 '
 WHERE product_id = 1 ;
-
--- Method 2
+```
+- Method 2
+```sql
 UPDATE products
 SET properties = JSON_OBJECT(
 'weight',10,
@@ -1387,35 +1529,40 @@ SET properties = JSON_OBJECT(
 'manufacturer',JSON_OBJECT('name','Abdullah')
 )
 WHERE product_id = 2;
-
--- Selection specific property
+```
+- Selection specific property
+```sql
 SELECT 
 product_id,
 JSON_EXTRACT(properties,'$.weight')
 FROM products
 WHERE product_id IN (1,2) ;
-
-----------Creating Database, Tables and one to one Relationship-----------
--- Create the School database
+```
+### Creating Database, Tables and one to one Relationship
+- Create the School database
+```sql
 CREATE DATABASE IF NOT EXISTS School;
 USE School;
-
--- Create the Student table
+```
+- Create the Student table
+```sql
 CREATE TABLE IF NOT EXISTS Student (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
     course VARCHAR(20),
     age INT
 );
-
--- Insert data into the Student table
+```
+- Insert data into the Student table
+```sql
 INSERT INTO Student (name, course, age)
 VALUES 
     ('Abdullah Khokar', 'Python', 19),
     ('Ahmed Raheem', 'Python', 22),
     ('Mowahid Ali', 'Python', 20);
-
--- Create the Address table
+```
+- Create the Address table
+```sql
 CREATE TABLE IF NOT EXISTS Address (
     AddressId INT PRIMARY KEY AUTO_INCREMENT,
     Address VARCHAR(100) NOT NULL,
@@ -1424,20 +1571,22 @@ CREATE TABLE IF NOT EXISTS Address (
     ON UPDATE CASCADE
     ON DELETE RESTRICT
 );
-
--- Insert data into the Address table
+```
+- Insert data into the Address table
+```sql
 INSERT INTO Address (Address, StudentId)
 VALUES
     ('Satellite Town Rawalpindi', 1),
     ('Azad Chaiwala Institute', 2),
     ('Murree Road Faizabad', 3);
-
-----------Creating Database, Tables and one to Many Relationship-----------
-
+```
+### Creating Database, Tables and one to Many Relationship
+```sql
 CREATE DATABASE Company;
 USE Company;
-
--- Create Employees Table
+```
+- Create Employees Table
+```sql
 CREATE TABLE Employee (
     Id INT PRIMARY KEY,
     Name VARCHAR(45) NOT NULL,
@@ -1447,8 +1596,9 @@ CREATE TABLE Employee (
     Age INT NOT NULL,
     City VARCHAR(45) NOT NULL
 );
-
--- Populate the Employee Table with test data
+```
+- Populate the Employee Table with test data
+```sql
 INSERT INTO Employee VALUES (1001, 'John', 'IT', 35000, 'Male', 25, 'London');
 INSERT INTO Employee VALUES (1002, 'Smith', 'HR', 45000, 'Female', 27, 'London');
 INSERT INTO Employee VALUES (1003, 'James', 'Finance', 50000, 'Male', 28, 'London');
@@ -1459,8 +1609,9 @@ INSERT INTO Employee VALUES (1007, 'Priyanla', 'HR', 45000, 'Female', 27, 'Mumba
 INSERT INTO Employee VALUES (1008, 'Sambit', 'IT', 50000, 'Male', 28, 'Mumbai');
 INSERT INTO Employee VALUES (1009, 'Pranaya', 'IT', 50000, 'Male', 28, 'Mumbai');
 INSERT INTO Employee VALUES (1010, 'Hina', 'HR', 75000, 'Female', 26, 'Mumbai');
-
--- Create Projects Table
+```
+- Create Projects Table
+```sql
 CREATE TABLE Projects (
     ProjectId INT PRIMARY KEY,
     Title VARCHAR(200) NOT NULL,
@@ -1473,8 +1624,9 @@ CREATE TABLE Projects (
     ON DELETE RESTRICT 
     ON UPDATE CASCADE
 );
-
--- Populate the Projects Table with test data
+```
+- Populate the Projects Table with test data
+```sql
 INSERT INTO Projects VALUES (1, 'Develop e-commerce website from scratch', 1, 1003, NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY));
 INSERT INTO Projects VALUES (2, 'WordPress website for our company', 1, 1002, NOW(), DATE_ADD(NOW(), INTERVAL 45 DAY));
 INSERT INTO Projects VALUES (3, 'Manage our company servers', 2, 1007, NOW(), DATE_ADD(NOW(), INTERVAL 45 DAY));
@@ -1486,4 +1638,389 @@ INSERT INTO Projects VALUES (8, 'Android Application development', 4, 1004, NOW(
 INSERT INTO Projects VALUES (9, 'Hosting account is not working', 3, 1001, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY));
 INSERT INTO Projects VALUES (10, 'MySQL database for my desktop application', 4, 1008, NOW(), DATE_ADD(NOW(), INTERVAL 15 DAY));
 INSERT INTO Projects VALUES (11, 'Develop new WordPress plugin for my business website', 2, 1007, NOW(), DATE_ADD(NOW(), INTERVAL 10 DAY));
+```
+### Creating Database, Tables and Many to Many Relationship
+-- Create the database
+CREATE DATABASE IF NOT EXISTS Library;
+USE Library;
+```sql
+-- Create the Authors table
+CREATE TABLE IF NOT EXISTS Authors (
+    AuthorId INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(100) NOT NULL
+);
+```
+-- Create the Books table
+```sql
+CREATE TABLE IF NOT EXISTS Books (
+    BookId INT PRIMARY KEY AUTO_INCREMENT,
+    Title VARCHAR(255) NOT NULL,
+    ISBN VARCHAR(20) NOT NULL
+);
+```
+-- Create the BookAuthors junction table
+```sql
+CREATE TABLE IF NOT EXISTS BookAuthors (
+    BookId INT,
+    AuthorId INT,
+    PRIMARY KEY (BookId, AuthorId),
+    FOREIGN KEY (BookId) REFERENCES Books(BookId) ON DELETE CASCADE,
+    FOREIGN KEY (AuthorId) REFERENCES Authors(AuthorId) ON DELETE CASCADE
+);
+```
+-- Insert data into Authors table
+```sql
+INSERT INTO Authors (Name) VALUES
+    ('J.K. Rowling'),
+    ('Stephen King'),
+    ('George R.R. Martin');
+```
+-- Insert data into Books table
+```sql
+INSERT INTO Books (Title, ISBN) VALUES
+    ('Harry Potter and the Philosopher''s Stone', '978-0747532743'),
+    ('The Shining', '978-0307743657'),
+    ('A Game of Thrones', '978-0553381689');
+```
+-- Insert data into BookAuthors table to represent the many-to-many relationship
+```sql
+INSERT INTO BookAuthors (BookId, AuthorId) VALUES
+    (1, 1), -- Harry Potter and the Philosopher's Stone by J.K. Rowling
+    (2, 2), -- The Shining by Stephen King
+    (3, 3); -- A Game of Thrones by George R.R. Martin
+```
+### CURRENT_TIMESTAMP Field
+```sql
+CREATE TABLE your_table_name (
+    enroll_at TIMESTAMP -- when we update a record than record time will updated atomatically everytime  
+    admission_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+### What are Indexes?
+Indexes are special data structures associated with MySQL tables that significantly accelerate data retrieval operations. They function like an organized filing system, enabling the database to locate specific rows efficiently.
+
+### Importance of Indexes in Relational Databases
+Relational databases store massive amounts of data, often organized into tables with numerous columns. When you execute a query that filters or retrieves data based on particular values, MySQL must scan the entire table by default. This can become extremely slow, especially for large datasets.
+
+Indexes come to the rescue by providing a sorted and structured representation of specific columns. When a query references indexed columns, MySQL can leverage these indexes to quickly pinpoint the relevant data blocks, leading to a dramatic performance boost.
+
+### Data Structures for Fast Querying
+MySQL primarily employs Binary-Tree data structures to implement indexes. B-Trees are self-balancing search trees optimized for fast searches and insertions. They resemble a hierarchical index card system, where each level guides the search towards the target data:
+
+<img src="https://raw.githubusercontent.com/HashimThePassionate/Introduction-to-MySQL/main/images/B_Tree.png" alt="Binary Search Tree" width="100%">
+
+-   **Root Node:** The topmost level, containing pointers to the most selective child nodes.
+-   **Intermediate Nodes:** Each intermediate node holds references to its child nodes, further narrowing down the search based on indexed column values.
+-   **Leaf Nodes:** The bottommost level, where actual data row pointers or the data rows themselves are stored.
+
+####    Benefits of Using Indexes:
+-   **Enhanced Query Performance:** Indexes significantly accelerate SELECT queries filtering or sorting based on indexed columns.
+-   **Improved Efficiency of JOINs:** Indexes can optimize JOIN operations when involved columns are indexed.
+-   **Enforced Uniqueness (Unique Indexes):** Unique indexes guarantee that no duplicate values exist in a column, ensuring data integrity.
+-   **Faster ORDER BY Operations:** Sorting operations can leverage indexes to efficiently order results based on indexed columns.
+
+##  Disadvantages of Indexes:
+**Increased Storage Space:**
+*   Indexes require additional disk space to store the sorted data structures. This additional space can be a small percentage of the actual table size, but it's a factor to keep in mind, especially for very large tables.
+*   The space consumption is particularly noticeable for string-based indexes, as they need to store both the string value and its length.
+**Slower Write Operations:**
+*   When you perform INSERT, UPDATE, or DELETE operations, the database needs to update the indexes in addition to modifying the actual table data. This can introduce a slight performance overhead for write-heavy workloads.
+
+**Helpfull Suggestion in indexes:**
+*   Analyze query patterns: Focus on indexing columns frequently used in WHERE clauses or ORDER BY clauses.
+*   Balance read vs. write performance: If your workload is mostly read-heavy, the benefits of faster queries may outweigh the slowdown for write operations.
+*   Monitor and adjust: As your database grows and query patterns evolve, review indexing strategies and adjust them for optimal performance.
+
+
+### Example Query (Before Indexing):
+```sql
+EXPLAIN SELECT customer_id FROM customer where state = 'CA';
+```
+Now look to find the customer whose state is CA, mysql reads all the records
+we can see using **Explain** keyword before select statement...
+
+#### Now lets Create Indexe for fast searching:
+```sql
+CREATE INDEX idx_state ON customer (state);
+EXPLAIN SELECT customer_id FROM customer where state = 'CA';
+```
+
+### Viewing Indexes:
+```sql
+CREATE INDEX idx_state ON customers (state);
+EXPLAIN SELECT customer_id FROM customer where state = 'CA';
+```
+
+### Prefix Indexes:
+In MySQL, a prefix index is an index type that indexes only a portion of a column's values rather than the entire value. This can be particularly useful when indexing columns with long string values, such as VARCHAR or TEXT columns, where indexing the entire value might not be necessary or efficient.
+
+By specifying a prefix length when creating an index on a column, MySQL will only index the specified number of characters from the beginning of each value in that column. This can save disk space and improve query performance, especially for columns with long values where indexing the entire value would be unnecessary.
+
+```sql
+SELECT * FROM sql_inventory.customer;
+USE sql_inventory;
+CREATE INDEX idx_last_name ON customer(last_name(20));
+SELECT 
+  COUNT(DISTINCT LEFT(last_name, 1)) ,
+  COUNT(DISTINCT LEFT(last_name, 5)) ,
+  COUNT(DISTINCT LEFT(last_name, 10)) ,
+  COUNT(DISTINCT LEFT(last_name, 20)) 
+FROM customer;
+```
+1.   **CREATE INDEX:** 
+*   The first statement **CREATE INDEX idx_last_name ON customer(last_name(20))** creates an index named **idx_last_name** on the last_name column of the **customer** table.
+*   The **(20)** part specifies that the index will only consider the first 20 characters of the **last_name** for indexing. This creates a prefix index.
+2.   **SELECT STATEMENT:** 
+*   The second statement is a **SELECT** query that retrieves three counts from the **customer** table.
+*   It uses the **COUNT(DISTINCT ...)** function four times to count the number of distinct values for different prefixes of the **last_name** column.
+*   **Specifically, it counts:**
+    1.  **COUNT(DISTINCT LEFT(last_name, 1))** counts the number of distinct values considering only the first character of the **last_name** column.
+    2.   **COUNT(DISTINCT LEFT(last_name, 5))** counts the number of distinct values considering only the first five characters of the **last_name** column.
+    3.   **COUNT(DISTINCT LEFT(last_name, 10))** counts the number of distinct values considering only the first ten characters of the **last_name** column.
+    4.   **COUNT(DISTINCT LEFT(last_name, 20))** The number of distinct values considering the entire last_name (up to 20 characters).
+
+
+## FULL TEXT SEARCH:
+A full-text index is a special type of index used in database systems to enable efficient searching of text within large columns of textual data, such as VARCHAR or TEXT columns. Unlike traditional indexes that work well for exact matches or range queries, full-text indexes are optimized for natural language search queries where users might search for words or phrases within a text.
+```sql
+USE sql_blog;
+SELECT * FROM posts;
+```
+*   Lets look we want to search 'react redux' in post and title field how can we do?
+```sql
+USE sql_blog;
+SELECT * FROM posts
+WHERE title LIKE '%react redux%' OR body LIKE '%react redux%';
+```
+*   Is it works? nope
+lets create full text indexes and then search
+```sql
+CREATE FULLTEXT INDEX idx_title_body ON posts (title,body);
+```
+Now search react and redux
+```sql
+SELECT * 
+FROM posts 
+WHERE MATCH(title,body) AGAINST ('react redux');
+
+SELECT * 
+FROM posts 
+WHERE MATCH(title,body) AGAINST ('react -redux' IN BOOLEAN MODE);
+
+SELECT * 
+FROM posts 
+WHERE MATCH(title,body) AGAINST ('react -redux +Form' IN BOOLEAN MODE);
+
+SELECT * 
+FROM posts 
+WHERE MATCH(title,body) AGAINST ('handling a form, IN BOOLEAN MODE');
+```
+##  Composite Index:
+
+A composite index, also known as a compound index, is an index created on multiple columns in a database table. Unlike a single-column index that indexes values from a single column, a composite index indexes values from multiple columns concatenated together. This allows queries to efficiently filter, sort, and search based on combinations of values from these columns
+
+```sql
+use sql_store;
+CREATE INDEX id_points ON customers(points);
+SHOW INDEXES IN customers;
+CREATE INDEX idx_state_points ON customers (state,points);
+EXPLAIN SELECT customer_id FROM customers
+WHERE state = 'CA' and points> 1000;
+DROP INDEX idx_state_points ON customers;
+```
+
+## Order of Composite:
+**Two rules of composite indexes:**
+1. Put the most frequently used columns first 
+2. Put the columns with a higher cardinality first cardinality means unique values
+```sql
+SELECT customer_id 
+FROM customers WHERE state = 'CA' 
+AND last_name LIKE 'A%';
+```
+To Count how many unique values in each column 
+```sql
+SELECT 
+COUNT(DISTINCT state), 
+COUNT(DISTINCT last_name) 
+FROM customers;
+```
+lets First we follow cardinality Rule **Note** cardinality rule not always work
+```sql
+CREATE INDEX idx_lastname_state ON customers (last_name, state); --Create index if not created
+EXPLAIN SELECT customer_id 
+FROM customers 
+WHERE state = 'CA' 
+AND 
+last_name LIKE 'A%';
+```
+Now we reverse the order we put state than last_name
+```sql
+CREATE INDEX idx_state_lastname ON customers (state,last_name); --Create index if not created
+EXPLAIN 
+SELECT customer_id 
+FROM customers 
+WHERE state = 'CA' 
+AND 
+last_name LIKE 'A%';
+```
+To force mysql to use different index we use
+```sql
+EXPLAIN 
+SELECT customer_id 
+FROM customers 
+USE INDEX (idex_lastname_state) 
+WHERE state = 'CA' 
+AND 
+last_name LIKE 'A%';
+```
+
+##  When indexes are ignored??:
+```sql
+EXPLAIN 
+SELECT customer_id 
+FROM customers 
+WHERE state = 'CA' 
+OR 
+points > 1000;
+```
+How to optimize this query? lets create a separte index and than apply union
+```sql
+CREATE INDEX idx_points ON customers(points);
+```
+Now apply again:
+```sql
+EXPLAIN 
+SELECT customer_id 
+FROM customers 
+WHERE state = 'CA' 
+UNION 
+EXPLAIN 
+SELECT customer_id 
+FROM customers 
+WHERE points > 1000;
+```
+Another Example:
+```sql
+EXPLAIN 
+SELECT customer_id 
+FROM customers 
+WHERE points + 10 > 2010;
+```
+This is searching FULL indexes so to fix,
+```sql
+EXPLAIN 
+SELECT customer_id 
+FROM customers 
+WHERE points > 2000;
+```
+
+##  Using Indexes For Sorting:
+lets check the indexes and then sort by ASC
+```sql
+SHOW INDEXES IN customers;
+EXPLAIN 
+SELECT customer_id 
+FROM customers 
+ORDER BY state; 
+SHOW STATUS LIKE 'last_query_cost';
+```
+Lets check the cost of previous query!
+
+Now lets check first_name which is not in indexes
+```sql
+EXPLAIN 
+SELECT customer_id 
+FROM customers 
+ORDER BY first_name; 
+SHOW STATUS LIKE 'last_query_cost';
+```
+Why cost is so high? because first_name is not indexes, when we put a column in indexes, mysql will automatically sort it in ASC and store it parmanent.
+Now first_name is not in indexes so why mysql find? mysql uses filesort algorithm  which is very expensive.
+**Here's how it works:**
+*   Query Execution: When a query is executed, MySQL first retrieves the rows that match the WHERE clause.
+*   Sorting: If the query has an ORDER BY clause and there's no suitable index to perform the sorting efficiently, MySQL resorts to the filesort algorithm. It sorts the result set based on the specified columns.
+*   Temporary File: As MySQL sorts the result set, it may need to write intermediate results to a temporary file on disk if the result set is too large to fit into memory. This temporary file is used to store portions of the result set that can't be held in memory at once.
+*   Merging: Once all the rows are sorted and stored in the temporary file, MySQL performs a merge operation to combine the sorted portions into a single sorted result set.
+*   Final Result: After merging, MySQL returns the sorted result set to the client.
+```sql
+EXPLAIN 
+SELECT customer_id 
+FROM customers 
+ORDER BY state , points DESC; 
+SHOW STATUS LIKE 'last_query_cost';
+```
+Why cost decreases again? because both were in indexes.
+```sql
+EXPLAIN 
+SELECT customer_id 
+FROM customers 
+ORDER BY state ,first_name, points; 
+SHOW STATUS LIKE 'last_query_cost';
+
+-- --------------------------------------------------------
+EXPLAIN 
+SELECT customer_id 
+FROM customers 
+ORDER BY state DESC , points DESC; 
+SHOW STATUS LIKE 'last_query_cost';
+```
+## Creating A User
+To create a user in MySQL, you can use the CREATE USER statement. Here's a basic example of how to 
+```sql
+    CREATE USER 'hashim'@'localhost' IDENTIFIED BY '*******';
+```
+
+This command creates a user with the username 'username' and password 'password', and allows connections only from the local machine ('localhost'). If you want to allow connections for specific
+
+```sql
+    CREATE USER hashim@codewithhashim.com IDENTIFIED BY '*********************';
+```
+
+for subdomain
+```sql
+    CREATE USER hashim@'%codewithhashim.com' IDENTIFIED BY '*********************';
+```
+
+For simplicity we can sue
+```sql
+    CREATE USER hashim IDENTIFIED BY '*******';
+```
+
+## Viewing A User:
+```sql
+    SELECT * FROM mysql.user;
+```
+
+## Dropping A User:
+```sql
+    DROP USER hashim
+```
+
+## Changing Password For A User:
+```sql
+    SET PASSWORD FOR hashim = '*************';
+```
+
+## Changing Password For Current Login User:
+```sql
+    SET PASSWORD  = '*************';
+```
+
+##  Lets Create A New User And Grant privileges:
+```sql
+    CREATE USER farooq IDENTIFIED BY '******'
+    GRANT SELECT, INSERT 
+    ON sql_store.*
+    To farooq
+```
+For Admin
+```sql
+    GRANT ALL ON *.*
+    TO farooq
+```
+
+
+
+
 
