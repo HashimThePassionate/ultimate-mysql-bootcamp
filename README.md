@@ -1950,6 +1950,7 @@ we can see using **Explain** keyword before select statement...
 CREATE INDEX idx_state ON customer (state);
 EXPLAIN SELECT customer_id FROM customer where state = 'CA';
 ```
+
 ### Viewing Indexes:
 ```sql
 CREATE INDEX idx_state ON customers (state);
