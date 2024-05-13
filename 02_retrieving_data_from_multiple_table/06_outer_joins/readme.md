@@ -7,7 +7,7 @@
 - There are three main types of outer joins: `LEFT OUTER JOIN`, `RIGHT OUTER JOIN`, and `FULL OUTER JOIN`. 
 
 
-1. **LEFT OUTER JOIN**:
+**1. LEFT OUTER JOIN**:
 - Returns all rows from the left table (the first table specified in the JOIN clause), and the matched rows from the right table (the second table specified in the JOIN clause).
 - If there's no match, NULL values are returned for columns from the right table.
 
