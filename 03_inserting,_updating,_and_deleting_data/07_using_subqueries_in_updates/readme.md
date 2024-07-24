@@ -52,6 +52,7 @@ WHERE customer_id IN (SELECT customer_id FROM temp_customers);
 
 Finally, drop the temporary table after the update is complete.
 
+
 ```sql
 DROP TEMPORARY TABLE temp_customers;
 ```
@@ -72,3 +73,19 @@ Consider a scenario where you want to update the `points` column for customers w
 2. Update the `points` column in the `customers` table to 50 for those customers.
 3. Drop the temporary table to clean up.
 
+#### Complete Code
+```sql
+-- Step 1: Create a temporary table
+CREATE TEMPORARY TABLE temp_customers AS
+SELECT customer_id
+FROM customers
+WHERE points = 0;
+
+-- Step 2: Update the customers table using the temporary table
+UPDATE customers
+SET points = 50
+WHERE customer_id IN (SELECT customer_id FROM temp_customers);
+
+-- Step 3: Drop the temporary table
+DROP TEMPORARY TABLE temp_customers;
+```
