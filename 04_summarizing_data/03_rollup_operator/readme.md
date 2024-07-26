@@ -24,3 +24,42 @@ GROUP BY client_id WITH ROLLUP;
 <img src= './assets/roll-up.gif'>
 
 <hr>
+
+
+
+## Introduction
+The `IFNULL` function to handle `NULL` values in the `client_id` column and calculates the total sales for each client. The query also utilizes the `ROLLUP` operator to include a summary row with the total sales for all clients.
+
+## Query
+
+```sql
+SELECT
+    IFNULL(client_id, 'Total Sales') as client_id,
+    SUM(invoice_total) as total_sales
+FROM invoices
+GROUP BY client_id WITH ROLLUP;
+```
+
+## Explanation
+
+### SELECT Clause
+
+- **IFNULL(client_id, 'Total Sales') as client_id**: 
+  - The `IFNULL` function is used to replace `NULL` values in the `client_id` column with the string `'Total Sales'`.
+  - This ensures that the summary row created by the `ROLLUP` operator is labeled as `'Total Sales'` instead of showing `NULL`.
+  - The result is aliased as `client_id`.
+
+- **SUM(invoice_total) as total_sales**: 
+  - The `SUM` function calculates the total of the `invoice_total` column for each `client_id`.
+  - The result is aliased as `total_sales`.
+
+### FROM Clause
+
+- **FROM invoices**:
+  - Specifies the `invoices` table as the source of the data for the query.
+
+### GROUP BY Clause
+
+- **GROUP BY client_id WITH ROLLUP**:
+  - The `GROUP BY` clause groups the results by `client_id`, meaning that the `SUM(invoice_total)` calculation is performed for each unique `client_id`.
+  - The `WITH ROLLUP` operator adds an extra row to the result set that contains the total sum of `invoice_total` for all `client_id` groups. This summary row helps in understanding the overall total sales.
