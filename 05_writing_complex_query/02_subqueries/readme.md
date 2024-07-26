@@ -23,13 +23,18 @@ In this syntax:
 
 
 ```sql
-
-DELETE FROM orders
-WHERE c_id = (
-			SELECT customer_id
-			FROM customers
-			WHERE first_name = "Delano"
-			 );
+DELETE FROM customers 
+WHERE
+    customer_id IN (SELECT 
+        customer_id
+    FROM
+        (SELECT 
+            customer_id
+        FROM
+            customers
+        
+        WHERE
+            first_name = 'junaid') AS temp_table);
 ```
 
 
