@@ -32,14 +32,20 @@ MySQL string functions can be broadly categorized into:
 ## Example:
 ```sql
 SELECT 
-CONCAT(first_name,' ',last_name) AS Customer,
-points,
-CASE
-	WHEN points > 3000 THEN 'Gold Customer'
-    WHEN points >= 2000 THEN 'Silver Customer'
-	ELSE 'Bronze Customer'
-    END AS category
-FROM customers;
+    customer_id,
+    first_name,
+    last_name,
+    CONCAT(first_name, '  ', last_name) AS full_name,
+    birth_date,
+    phone,
+    address,
+    city,
+    state,
+    ABS(points) AS 'Points'
+FROM
+    customers
+WHERE
+    customer_id IN (2 , 5, 11);
 ```
 
 2. **SUBSTRING()**
