@@ -1,64 +1,93 @@
-# Correlated Subqueries in MySQL
+# Correlated Subqueries
 
-## Overview
+A correlated subquery is a subquery that uses values from the outer query. It is evaluated once for each row processed by the outer query, making it different from a regular subquery, which is evaluated only once.
 
-Welcome to the documentation on correlated subqueries in MySQL! Correlated subqueries are a powerful feature in SQL that allow you to reference columns from the outer query within the subquery. This guide will explain what correlated subqueries are, how they work, and how you can use them effectively in your MySQL queries.
-
-
-## What are Correlated Subqueries?
-
-A correlated subquery, also known as a synchronized subquery, is a subquery that references one or more columns from the outer query. Unlike non-correlated subqueries, which can be executed independently of the outer query, correlated subqueries are executed for each row processed by the outer query.
-
-
-## Syntax
-The syntax for a correlated subquery in MySQL is as follows:
+#### Example: Employee Salaries Compared to Average Office Salaries
 
 ```sql
-
-SELECT column_name(s)
-FROM table_name outer_table
-WHERE condition_operator (
-    SELECT column_name(s)
-    FROM inner_table
-    WHERE inner_table.column_name = outer_table.column_name
-);
-```
-Here, the condition_operator can be any comparison operator such as =, >, <, >=, <=, or <>.
-
-
-## Example
-
-* For each employe
-* calculate the avg salary for employee.office
-* return the employee if salary > avg
-
-```sql
-SELECT * 
-FROM employees e 
+SELECT *
+FROM employees e
 WHERE salary > (
-	SELECT AVG(salary)
-    FROM employees 
+	SELECT avg(salary)
+    FROM employees
     WHERE office_id = e.office_id
 );
 ```
 
+**Explanation:**
 
-## Benefits of Correlated Subqueries
+- **Correlated Subquery:** The subquery inside the `WHERE` clause references columns from the outer query. Specifically, `e.office_id` from the outer query is used in the subquery.
+- **SELECT \***: Selects all columns from the `employees` table.
+- **FROM employees e:** The `employees` table is aliased as `e` for easier reference.
+- **WHERE salary > (SELECT avg(salary) FROM employees WHERE office_id = e.office_id):** This condition compares each employee's salary to the average salary of their respective office. 
 
-* **Dynamic Filtering**: Correlated subqueries allow for dynamic filtering based on values from the outer query, enabling more complex and precise data retrieval.
-* **Simplicity**: Correlated subqueries provide a straightforward way to reference columns from the outer query without the need for explicit joins.
-* **Flexibility**: Correlated subqueries can be used in various scenarios, such as filtering, aggregating, or performing calculations based on related data.
+In this query, for each employee, the subquery calculates the average salary for the employees in the same office (`WHERE office_id = e.office_id`). The outer query then returns those employees whose salary is greater than the calculated average salary.
 
+**Output:**
 
-## Considerations
+| employee_id | first_name | last_name | job_title            | salary | reports | office_id |
+|-------------|------------|-----------|----------------------|--------|---------|-----------|
+| 37851       | Sayer      | Matterson | Statistician III     | 98926  | 37270   | 1         |
+| 40448       | Mindy      | Crissil   | Staff Scientist      | 94860  | 37270   | 1         |
+| 56274       | Keriann    | Alloisi   | VP Marketing         | 110150 | 37270   | 1         |
+| 67009       | North      | de Clerc  | VP Product Management| 114257 | 37270   | 2         |
+| 67370       | Elladine   | Rising    | Social Worker        | 96767  | 37270   | 2         |
+| 72540       | Guthrey    | Iacopetti | Office Assistant I   | 117690 | 37270   | 3         |
+| 76196       | Mirilla    | Janowski  | Cost Accountant      | 119241 | 37270   | 3         |
+| 84791       | Hazel      | Tarbert   | General Manager      | 93760  | 37270   | 4         |
+| 95213       | Cole       | Kesterton | Pharmacist           | 86119  | 37270   | 4         |
+| 98374       | Estrellita | Daleman   | Staff Accountant IV  | 70187  | 37270   | 5         |
+| 115357      | Ivy        | Fearey    | Structural Engineer  | 92710  | 37270   | 5         |
 
-* **Performance**: Correlated subqueries can be less efficient than non-correlated subqueries or joins, especially when dealing with large datasets. Careful indexing and query optimization may be necessary to improve performance.
-* **Complexity**: Correlated subqueries can make SQL statements more complex and harder to understand, particularly when dealing with multiple levels of correlation or nesting.
+### Why Use Correlated Subqueries?
 
+Correlated subqueries are used when the subquery needs to refer to values from the outer query to function correctly. They are useful for scenarios where you need to perform a row-by-row comparison or calculation, based on values from the outer query.
 
-## Conclusion
+**Benefits:**
 
-Correlated subqueries in MySQL are a powerful feature for referencing columns from the outer query within a subquery. Whether you need to filter, aggregate, or perform calculations based on related data, correlated subqueries provide a flexible and dynamic approach to querying your database. By understanding how to use correlated subqueries effectively, you can write more complex and precise MySQL queries to meet your specific requirements.
+1. **Dynamic Filtering:** Allows for more complex and dynamic filtering conditions that can adapt based on the values of each row in the outer query.
+2. **Context-Aware Calculation:** Enables context-aware calculations, such as comparing an employee's salary to the average salary within their office, as shown in the example.
+3. **Specificity:** Useful for obtaining precise results that require specific conditions and comparisons.
 
+### Tables Representation
 
+#### Table: Employees Data
 
+| employee_id | first_name  | last_name   | job_title                | salary | reports | office_id |
+|-------------|-------------|-------------|--------------------------|--------|---------|-----------|
+| 33391       | D'arcy      | Nortunen    | Account Executive        | 62871  | 37270   | 1         |
+| 37270       | Yovonnda    | Magrannell  | Executive Secretary      | 63996  |         | 10        |
+| 37851       | Sayer       | Matterson   | Statistician III         | 98926  | 37270   | 1         |
+| 40448       | Mindy       | Crissil     | Staff Scientist          | 94860  | 37270   | 1         |
+| 56274       | Keriann     | Alloisi     | VP Marketing             | 110150 | 37270   | 1         |
+| 63196       | Alaster     | Scutchin    | Assistant Professor      | 32179  | 37270   | 2         |
+| 67009       | North       | de Clerc    | VP Product Management    | 114257 | 37270   | 2         |
+| 67370       | Elladine    | Rising      | Social Worker            | 96767  | 37270   | 2         |
+| 68249       | Nisse       | Voysey      | Financial Advisor        | 52832  | 37270   | 2         |
+| 72540       | Guthrey     | Iacopetti   | Office Assistant I       | 117690 | 37270   | 3         |
+| 72913       | Kass        | Hefferan    | Computer Systems Analyst | 96401  | 37270   | 3         |
+| 75900       | Virge       | Goodrum     | Information Systems Mgr  | 54578  | 37270   | 3         |
+| 76196       | Mirilla     | Janowski    | Cost Accountant          | 119241 | 37270   | 3         |
+| 80529       | Lynde       | Aronson     | Junior Executive         | 77182  | 37270   | 4         |
+| 80679       | Mildrid     | Sokale      | Geologist II             | 67987  | 37270   | 4         |
+| 84791       | Hazel       | Tarbert     | General Manager          | 93760  | 37270   | 4         |
+| 95213       | Cole        | Kesterton   | Pharmacist               | 86119  | 37270   | 4         |
+| 96513       | Theresa     | Binney      | Food Chemist             | 47354  | 37270   | 5         |
+| 98374       | Estrellita  | Daleman     | Staff Accountant IV      | 70187  | 37270   | 5         |
+| 115357      | Ivy         | Fearey      | Structural Engineer      | 92710  | 37270   | 5         |
+
+#### Table: Employees with Salary Greater than Office Average
+
+| employee_id | first_name  | last_name   | job_title                | salary | reports | office_id |
+|-------------|-------------|-------------|--------------------------|--------|---------|-----------|
+| 37851       | Sayer       | Matterson   | Statistician III         | 98926  | 37270   | 1         |
+| 40448       | Mindy       | Crissil     | Staff Scientist          | 94860  | 37270   | 1         |
+| 56274       | Keriann     | Alloisi     | VP Marketing             | 110150 | 37270   | 1         |
+| 67009       | North       | de Clerc    | VP Product Management    | 114257 | 37270   | 2         |
+| 67370       | Elladine    | Rising      | Social Worker            | 96767  | 37270   | 2         |
+| 72540       | Guthrey     | Iacopetti   | Office Assistant I       | 117690 | 37270   | 3         |
+| 76196       | Mirilla     | Janowski    | Cost Accountant          | 119241 | 37270   | 3         |
+| 84791       | Hazel       | Tarbert     | General Manager          | 93760  | 37270   | 4         |
+| 95213       | Cole        | Kesterton   | Pharmacist               | 86119  | 37270   | 4         |
+| 98374       | Estrellita  | Daleman     | Staff Accountant IV      | 70187  | 37270   | 5         |
+| 115357      | Ivy         | Fearey      | Structural Engineer      | 92710  | 37270   | 5         |
