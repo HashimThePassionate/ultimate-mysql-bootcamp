@@ -1,4 +1,11 @@
-### ALL Keyword
+# ALL Keyword
+## Why Use the ALL Keyword?
+
+The `ALL` keyword is used in SQL to compare a value to all values in a list or subquery. This ensures that a condition must hold true for every value returned by the subquery. It is useful when you need to confirm that a comparison meets a criterion for all elements in a specified set.
+
+In the given example, `invoice_total > ALL (SELECT invoice_total FROM invoices WHERE client_id = 3)`, the query checks if the `invoice_total` is greater than every `invoice_total` of client 3, thus filtering out only those invoices that surpass all invoice totals for that specific client.
+
+Using `ALL` helps in scenarios where we need to validate against a comprehensive set of conditions, ensuring stricter and more precise filtering of data.
 
 #### Example 1: Finding the Maximum Invoice Total for a Specific Client
 
@@ -94,13 +101,6 @@ WHERE
 | 9          | 77-593-0081  | 5         | 172.17        | 0.00         | 2019-07-09 | 2019-07-29   |              |
 | 18         | 52-269-9803  | 5         | 180.17        | 42.77        | 2019-05-23 | 2019-06-12   | 2019-01-08   |
 
-### Why Use the ALL Keyword?
-
-The `ALL` keyword is used in SQL to compare a value to all values in a list or subquery. This ensures that a condition must hold true for every value returned by the subquery. It is useful when you need to confirm that a comparison meets a criterion for all elements in a specified set.
-
-In the given example, `invoice_total > ALL (SELECT invoice_total FROM invoices WHERE client_id = 3)`, the query checks if the `invoice_total` is greater than every `invoice_total` of client 3, thus filtering out only those invoices that surpass all invoice totals for that specific client.
-
-Using `ALL` helps in scenarios where we need to validate against a comprehensive set of conditions, ensuring stricter and more precise filtering of data.
 
 ### Tables Representation
 
