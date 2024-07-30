@@ -1,54 +1,131 @@
-# The ALL Keyword in MySQL
+### ALL Keyword
 
-## Overview
-
-Welcome to the documentation on the ALL keyword in MySQL! The ALL keyword is a powerful tool used in conjunction with comparison operators to compare a value to all values returned by a subquery. This guide will explain what the ALL keyword is, how it works, and how you can use it effectively in your MySQL queries.
-
-## What is the ALL Keyword?
-
-The ALL keyword in MySQL is used to compare a value to all values returned by a subquery. It is typically used in combination with comparison operators such as >, <, >=, <=, =, or <>.
-
-
-## Syntax
-The syntax for using the ALL keyword in MySQL is as follows:
-
-```scss
-
-SELECT column_name(s)
-FROM table_name
-WHERE column_name operator ALL (subquery);
-
-```
-
-Here, 'operator' can be any comparison operator, and 'subquery' is a SELECT statement that returns multiple values.
-
-## Example
-
-Suppose you have a table named products with a column named price. You want to retrieve all products whose price is greater than all prices of products in a certain category. You can use the ALL keyword as follows:
+#### Example 1: Finding the Maximum Invoice Total for a Specific Client
 
 ```sql
-
-SELECT *
-FROM products
-WHERE price > ALL (SELECT price FROM products WHERE category = 'any');
-
+SELECT 
+    MAX(invoice_total)
+FROM
+    invoices
+WHERE
+    client_id = 3;
 ```
 
-## Benefits of Using the ALL Keyword
+**Explanation:**
 
-* **Precision**: The ALL keyword allows for precise comparisons by comparing a value to all values returned by a subquery.
-* **Flexibility**: The ALL keyword can be used with various comparison operators to meet different comparison requirements.
-* **Efficiency**: Using the ALL keyword can often result in more efficient queries compared to alternative approaches.
+- **SELECT:** Used to specify the columns to retrieve data from the database.
+- **MAX:** An aggregate function that returns the highest value in a set of values.
+- **invoice_total:** The column from which the maximum value is to be found.
+- **FROM:** Specifies the table to retrieve data from.
+- **invoices:** The name of the table containing the data.
+- **WHERE:** Used to filter records based on a specified condition.
+- **client_id = 3:** The condition to filter records where the client_id is 3.
 
-## Considerations
+**Output:**
 
-* **Subquery Results**: Ensure that the subquery returns the expected results, as the ALL keyword compares the value to all values returned by the subquery.
-* **Performance**: While the ALL keyword can improve query precision, it's essential to consider its impact on query performance, especially with large datasets.
+| MAX(invoice_total) |
+|--------------------|
+| 167.29             |
 
+#### Example 2: Selecting Invoices Larger than the Maximum Invoice Total of Client 3
 
-## Conclusion
+```sql
+USE sql_invoicing;
 
-The ALL keyword in MySQL is a valuable tool for comparing a value to all values returned by a subquery. Whether you need to find the maximum or minimum value, or perform other precise comparisons, the ALL keyword provides a powerful mechanism to achieve your desired results. By understanding how to use the ALL keyword effectively, you can write more precise and efficient MySQL queries in your projects.
+SELECT 
+    *
+FROM
+    invoices
+WHERE
+    invoice_total > (SELECT 
+        MAX(invoice_total)
+    FROM
+        invoices
+    WHERE
+        client_id = 3);
+```
 
+**Explanation:**
 
+- **USE sql_invoicing:** Switches to the database named `sql_invoicing`.
+- **SELECT \***: Selects all columns from the table.
+- **invoice_total > (SELECT MAX(invoice_total) FROM invoices WHERE client_id = 3):** Subquery to find invoices where the total is greater than the maximum invoice total of client 3.
 
+**Output:**
+
+| invoice_id | number       | client_id | payment_total | invoice_date | due_date   | payment_date |
+|------------|--------------|-----------|---------------|--------------|------------|--------------|
+| 2          | 03-898-6735  | 5         | 175.32        | 8.18         | 2019-06-11 | 2019-07-01   | 2019-02-12   |
+| 5          | 87-052-3121  | 5         | 169.36        | 0.00         | 2019-07-18 | 2019-08-07   |              |
+| 8          | 78-145-1093  | 1         | 189.12        | 0.00         | 2019-05-20 | 2019-06-09   |              |
+| 9          | 77-593-0081  | 5         | 172.17        | 0.00         | 2019-07-09 | 2019-07-29   |              |
+| 18         | 52-269-9803  | 5         | 180.17        | 42.77        | 2019-05-23 | 2019-06-12   | 2019-01-08   |
+
+#### Example 3: Using the ALL Keyword
+
+```sql
+USE sql_invoicing;
+
+SELECT 
+    *
+FROM
+    invoices
+WHERE
+    invoice_total > ALL (SELECT 
+        invoice_total
+    FROM
+        invoices
+    WHERE
+        client_id = 3);
+```
+
+**Explanation:**
+
+- **ALL:** Compares a value to all values in another set of values. It ensures the condition is true for all values returned by the subquery.
+- **invoice_total > ALL (SELECT invoice_total FROM invoices WHERE client_id = 3):** Checks if the invoice_total is greater than every invoice_total for client 3.
+
+**Output:**
+
+| invoice_id | number       | client_id | payment_total | invoice_date | due_date   | payment_date |
+|------------|--------------|-----------|---------------|--------------|------------|--------------|
+| 2          | 03-898-6735  | 5         | 175.32        | 8.18         | 2019-06-11 | 2019-07-01   | 2019-02-12   |
+| 5          | 87-052-3121  | 5         | 169.36        | 0.00         | 2019-07-18 | 2019-08-07   |              |
+| 8          | 78-145-1093  | 1         | 189.12        | 0.00         | 2019-05-20 | 2019-06-09   |              |
+| 9          | 77-593-0081  | 5         | 172.17        | 0.00         | 2019-07-09 | 2019-07-29   |              |
+| 18         | 52-269-9803  | 5         | 180.17        | 42.77        | 2019-05-23 | 2019-06-12   | 2019-01-08   |
+
+### Why Use the ALL Keyword?
+
+The `ALL` keyword is used in SQL to compare a value to all values in a list or subquery. This ensures that a condition must hold true for every value returned by the subquery. It is useful when you need to confirm that a comparison meets a criterion for all elements in a specified set.
+
+In the given example, `invoice_total > ALL (SELECT invoice_total FROM invoices WHERE client_id = 3)`, the query checks if the `invoice_total` is greater than every `invoice_total` of client 3, thus filtering out only those invoices that surpass all invoice totals for that specific client.
+
+Using `ALL` helps in scenarios where we need to validate against a comprehensive set of conditions, ensuring stricter and more precise filtering of data.
+
+### Tables Representation
+
+#### Table 1: Maximum Invoice Total for Client 3
+
+| MAX(invoice_total) |
+|--------------------|
+| 167.29             |
+
+#### Table 2: Invoices Larger than the Maximum Invoice Total of Client 3
+
+| invoice_id | number       | client_id | payment_total | invoice_date | due_date   | payment_date |
+|------------|--------------|-----------|---------------|--------------|------------|--------------|
+| 2          | 03-898-6735  | 5         | 175.32        | 8.18         | 2019-06-11 | 2019-07-01   | 2019-02-12   |
+| 5          | 87-052-3121  | 5         | 169.36        | 0.00         | 2019-07-18 | 2019-08-07   |              |
+| 8          | 78-145-1093  | 1         | 189.12        | 0.00         | 2019-05-20 | 2019-06-09   |              |
+| 9          | 77-593-0081  | 5         | 172.17        | 0.00         | 2019-07-09 | 2019-07-29   |              |
+| 18         | 52-269-9803  | 5         | 180.17        | 42.77        | 2019-05-23 | 2019-06-12   | 2019-01-08   |
+
+#### Table 3: Invoices Larger than All Invoices of Client 3 (Using ALL)
+
+| invoice_id | number       | client_id | payment_total | invoice_date | due_date   | payment_date |
+|------------|--------------|-----------|---------------|--------------|------------|--------------|
+| 2          | 03-898-6735  | 5         | 175.32        | 8.18         | 2019-06-11 | 2019-07-01   | 2019-02-12   |
+| 5          | 87-052-3121  | 5         | 169.36        | 0.00         | 2019-07-18 | 2019-08-07   |              |
+| 8          | 78-145-1093  | 1         | 189.12        | 0.00         | 2019-05-20 | 2019-06-09   |              |
+| 9          | 77-593-0081  | 5         | 172.17        | 0.00         | 2019-07-09 | 2019-07-29   |              |
+| 18         | 52-269-9803  | 5         | 180.17        | 42.77        | 2019-05-23 | 2019-06-12   | 2019-01-08   |
