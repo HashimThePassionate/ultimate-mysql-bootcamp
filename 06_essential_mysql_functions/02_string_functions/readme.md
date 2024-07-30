@@ -149,20 +149,5 @@ SELECT CHAR(65) AS Character;
 * In this example, we're passing the ASCII value 65 to CHAR().
 * The result will be the character corresponding to ASCII value 65, which is 'A'.
 
-4. **REPEAT()**
-## Example:
-```sql
-SELECT REPEAT('=', 5) AS Separator;
-```
-
-## Explanation:
-* **REPEAT()**: This function repeats a string a specified number of times.
-* Here, we're repeating the string '=' five times using REPEAT().
-* The result will be '=====', a string consisting of five '=' characters.
-* These examples demonstrate how information functions like CHAR_LENGTH(), ASCII(), CHAR(), and REPEAT() can be used to obtain information about strings in MySQL queries.
-
-## Usage
-Provide examples demonstrating the usage of each string function listed above. Include sample queries and their results to illustrate how each function works.
-
 ## Conclusion
 This README covers the most commonly used string functions in MySQL. Understanding these functions will enable efficient manipulation and analysis of string data within MySQL databases.
