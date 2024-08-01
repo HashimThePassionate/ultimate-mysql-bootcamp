@@ -35,11 +35,11 @@ CREATE TABLE orders (
 );
 ```
 
-**Adding Foreign Keys to Existing Tables**
+**Creating New Field Customer_id in orders and add that column to foreign key**
 Foreign keys can be added to existing tables using the ALTER TABLE statement.
 
 ```sql
-ALTER TABLE orders ADD CONSTRAINT fk_orders_customers FOREIGN KEY (customer_id) REFERENCES customers(customer_id);
+ALTER TABLE orders  ADD COLUMN customer_id INT, ADD CONSTRAINT fk_orders_customers  FOREIGN KEY (customer_id) REFERENCES customers(customer_id);
 ```
 
 
