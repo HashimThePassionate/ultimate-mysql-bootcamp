@@ -39,7 +39,7 @@ CREATE TABLE orders (
 Foreign keys can be added to existing tables using the ALTER TABLE statement.
 
 ```sql
-ALTER TABLE orders ADD CONSTRAINT fk_customer FOREIGN KEY (customer_id) REFERENCES customers(customer_id);
+ALTER TABLE orders ADD CONSTRAINT fk_orders_customers FOREIGN KEY (customer_id) REFERENCES customers(customer_id);
 ```
 
 
