@@ -48,7 +48,9 @@ ALTER TABLE orders  ADD COLUMN customer_id INT, ADD CONSTRAINT fk_orders_custome
 This option allows automatic deletion of rows in the child table when the corresponding row in the parent table is deleted.
 
 ```sql
-FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ON DELETE CASCADE;
+ALTER TABLE orders  DROP CONSTRAINT fk_orders_customers;
+ALTER TABLE orders ADD CONSTRAINT fk_orders_customers FOREIGN KEY (customer_id) REFERENCES customers(customer_id) 
+ON DELETE CASCADE ON UPDATE CASCADE;
 ```
 
 **ON UPDATE CASCADE**
