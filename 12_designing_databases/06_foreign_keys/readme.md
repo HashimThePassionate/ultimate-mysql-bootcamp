@@ -24,14 +24,13 @@ Foreign keys are defined using the FOREIGN KEY constraint within the CREATE TABL
 
 ```sql
 CREATE TABLE orders (
-    order_id INT(11) AUTO_INCREMENT,
+    order_id INT(11)  PRIMARY KEY AUTO_INCREMENT,
     customer_id INT(11),
     order_date DATE,
     status TINYINT(4),
     comments VARCHAR(2000),
     shipped_date DATE,
     shipper_id SMALLINT(6),
-    PRIMARY KEY (order_id),
     FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 );
 ```
