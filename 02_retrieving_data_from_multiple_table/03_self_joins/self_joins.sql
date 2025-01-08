@@ -1,9 +1,8 @@
+USE sql_hr;
 SELECT 
-    c.customer_id,
-    c.first_name,
-    c.last_name,
-    e.first_name,
-    e.last_name
-FROM customers c
-JOIN customers e 
-ON c.customer_id = e.customer_id;
+    e.employee_id,
+    e.first_name AS Employee_Name,
+    m.first_name AS Manager_Name
+FROM employees m
+JOIN employees e
+ON e.reports_to = m.employee_id;
